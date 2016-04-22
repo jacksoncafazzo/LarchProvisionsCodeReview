@@ -21,7 +21,7 @@ namespace LarchProvisionsWebsite.Models
         [ForeignKey("Menu")]
         public int MenuId { get; set; }
 
-        public int Servings { get; set; }
+        public int OrderSize { get; set; }
 
         public virtual Menu Menu { get; set; }
         public virtual Recipe Recipe { get; set; }

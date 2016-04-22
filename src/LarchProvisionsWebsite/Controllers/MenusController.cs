@@ -34,6 +34,12 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
+            menu.Recipes = _context.Recipes.Join(
+                _context.Servings.Where(
+                s => s.MenuId == id).ToList(),
+                s => s.RecipeId,
+                s => s.RecipeId,
+                (o, i) => o).ToList();
 
             return View(menu);
         }
@@ -73,24 +79,26 @@ namespace LarchProvisionsWebsite.Controllers
             }
             menu.Recipes = _context.Recipes.Join(
                 _context.Servings.Where(
-                    s => s.MenuId == id).ToList(),
+                s => s.MenuId == id).ToList(),
                 s => s.RecipeId,
                 s => s.RecipeId,
                 (o, i) => o).ToList();
-
-            menu.Servings = _context.Servings.Where(s => s.MenuId == id).ToList();
-            menu.Orders = _context.Orders.Where(o => o.MenuId == id).ToList();
             ViewBag.Recipes = _context.Recipes.ToList().Except(menu.Recipes);
+
+            menu.Orders = _context.Orders.Where(o => o.MenuId == id).ToList();
             ViewBag.Orders = _context.Orders.ToList().Except(menu.Orders);
+
             ViewData["ReturnUrl"] = "/Menus/Edit/" + id;
             return View(menu);
         }
 
+        // POST: Menus/ServeRecipe
         public IActionResult ServeRecipe(int menuId, int recipeId)
         {
             Serving serving = new Serving();
             serving.RecipeId = recipeId;
             serving.MenuId = menuId;
+            _context.Servings.Add(serving);
             _context.SaveChanges();
             return RedirectToAction("Edit", new { id = menuId });
         }

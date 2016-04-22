@@ -1,6 +1,6 @@
 ﻿// Write your Javascript code.
 $(document).ready(function () {
-    $('.slider').slider({ full_width: true });
+    $(".slider").slider({ full_width: true });
     $(".button-collapse").sideNav();
-    $('.carousel').carousel();
+    $(".carousel").carousel();
 });

@@ -8,8 +8,8 @@
     <h2>Edit</h2>
 </div>
 <div class="row">
-    <form asp-action="Edit">
-        <div class="col m6 l6 s12">
+    <div class="col m6 l6 s12">
+        <form asp-action="Edit">
             <div class="form-horizontal">
                 <h4>Menu</h4>
                 <hr />
@@ -42,78 +42,78 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
-        <div class="col m6 l6 s12">
-            <div class="row">
-                <h5>Menu #@Model.MenuId</h5>
-                <div class="col m6 l6 s12">
-                    <ul>
-                        @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
+    <div class="col m6 l6 s12">
+        <div class="row">
+            <h5>Menu #@Model.MenuId</h5>
+            <div class="col m6 l6 s12">
+                <ul>
+                    @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.MenuId)
+                        <li><h4>Recipes Served</h4></li>
+
+                        @foreach (var recipe in Model.Recipes)
                         {
-                            @Html.HiddenFor(m => m.MenuId)
-                            <li><h4>Recipes</h4></li>
+                            @Html.DisplayFor(e => recipe, "list-recipes-admin")
 
-                            @foreach (var recipe in Model.Recipes)
-                            {
-                                @Html.DisplayFor(e => recipe, "list-recipes-admin")
-
-                            }
                         }
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul>
-                        @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
-                        {
-                            @Html.HiddenFor(m => m.MenuId)
-                            <li><h4>Orders</h4></li>
-                            @foreach (var order in Model.Orders)
-                            {
-
-                                @Html.DisplayFor(e => order, "list-orders-admin")
-
-                            }
-                        }
-                    </ul>
-                </div>
+                    }
+                </ul>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul>
-                        @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
+            <div class="col-md-6">
+                <ul>
+                    @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.MenuId)
+                        <li><h4>Orders Made</h4></li>
+                        @foreach (var order in Model.Orders)
                         {
 
-                            @Html.HiddenFor(m => m.MenuId)
-                            <li><h3>Add Recipes</h3></li>
-                            @foreach (var recipe in ViewBag.Recipes)
-                            {
-                                @Html.DisplayFor(model => recipe, "add-recipe")
-                            }
+                            @Html.DisplayFor(e => order, "list-orders-admin")
+
                         }
-                    </ul>
-                    @Html.ActionLink("Create New Recipe", "Create", "Recipes", new { returnUrl = ViewData["ReturnUrl"] })
-                </div>
-                <div class="col-md-6">
-                    <ul>
-                        @using (Html.BeginForm("AddOrder", "Menus", FormMethod.Post))
-                        {
-                            @Html.HiddenFor(m => m.MenuId)
-                            <li><h3>Add Orders</h3></li>
-                            @foreach (var order in ViewBag.Orders)
-                            {
-                                @Html.DisplayFor(model => order, "add-order")
-                            }
-                        }
-                    </ul>
-                    @Html.ActionLink("Create New Order", "Create", "Orders", new { returnUrl = ViewData["ReturnUrl"] })
-                </div>
+                    }
+                </ul>
             </div>
         </div>
-        <div class="col l12 m12 s12">
-            <a asp-action="Index">Back to List</a>
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
+                    {
+
+                        @Html.HiddenFor(m => m.MenuId)
+                        <li><h3>Add Recipes</h3></li>
+                        @foreach (var recipe in ViewBag.Recipes)
+                        {
+                            @Html.DisplayFor(model => recipe, "add-recipe")
+                        }
+                    }
+                </ul>
+                @Html.ActionLink("Create New Recipe", "Create", "Recipes", new { returnUrl = ViewData["ReturnUrl"] })
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    @using (Html.BeginForm("AddOrder", "Menus", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.MenuId)
+                        <li><h3>Add Orders</h3></li>
+                        @foreach (var order in ViewBag.Orders)
+                        {
+                            @Html.DisplayFor(model => order, "add-order")
+                        }
+                    }
+                </ul>
+                @Html.ActionLink("Create New Order", "Create", "Orders", new { returnUrl = ViewData["ReturnUrl"] })
+            </div>
         </div>
-    </form>
+    </div>
+    <div class="col l12 m12 s12">
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {

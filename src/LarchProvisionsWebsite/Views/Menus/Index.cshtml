@@ -4,41 +4,73 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="menu-content-main">
+    <h3>Larch Provisions provides freshly prepared meal service weekly</h3> <h3>Emily Cafazzo &amp; Ryan Domingo</h3>
+    <p>We cook healthy, balanced meals using as many local, organic &amp; seasonal ingredients as possible; showcasing the bounty of the Pacific Northwest.</p>
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="img/menu-cover3.jpg">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Ordering Information<i class="material-icons right">more_vert</i></span>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Ordering Information<i class="material-icons right">close</i></span>
+            <ul>
+                <li>Orders must be placed by noon on Sunday! for pickup the following Tuesday</li>
+                <li>
+                    Pickup of pre-ordered meals is from 3-7pm on Tuesday at
+                    36333 E Historic Columbia River Hwy Corbett, OR 97019
+                </li>
+                <li>We accept Cash &amp; Check &amp; now Paypal! </li>
+                <li>Weekly emails with weekly menu options will be sent the previous Thursday</li>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PickupTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PickupTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.MenuId">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.MenuId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.MenuId">Delete</a>
-        </td>
-    </tr>
-}
-</table>
+                <li>Please let us know all dietary restrictions in advance</li>
+                <li>Meals come prepackaged in microwaveable (reusable) containers packaged per serving</li>
+                <li>Consider bringing a bag if you order more than 3 servings for ease of transport</li>
+                <li>We love to reuse clean containers! Just remove stickers from lids BEFORE washing or microwaving or after the dry again. </li>
+                <li>*Prices below are a suggested donation. Everyone deserves access to good food</li>
+                <li>Enjoy! </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container menu-content-body">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PickupTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PickupTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MenuId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MenuId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MenuId">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

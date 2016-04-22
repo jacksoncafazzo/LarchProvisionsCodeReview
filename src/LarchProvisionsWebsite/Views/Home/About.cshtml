@@ -1,7 +1,55 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewBag.Title = "About Larch Provisions";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class="about-content container-fluid">
+    <div class="row about-title">
+        <div class="col l6 m6 s12 about-column1">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="~/img/emily-cake.png">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">EMILY CAFAZZO<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Emily Cafazzo<i class="material-icons right">close</i></span>
+                    <p><strong>Emily</strong> is an Oregon native and professional chef, with 12 years experience cooking in some of Portland and New York’s best kitchens (Beast, Toro Bravo, Roberta’s and Blanca). Raised in Corvallis, Emily grew up working closely with her mother Kathy at a wholesale plant nursery in nearby Albany. It was there at the nursery, and in her family’s home garden that Emily came to understand delicious food as a product of quality ingredients. As an adolescent, her love for travel and dining introduced her to new food cultures and exotic cuisines around the globe, where she fell deeply in love with restaurants and hospitality at a young age. From Western Culinary Institute graduate (2003) to Iron Chef America contestant (Beast, 2010) - Emily’s culinary trajectory has found her leading the kitchens of some of Portland’s best chefs and restaurateurs; including Gabe Rucker and Naomi Pomeroy, Tommy Habetz, John Gorham, Troy McClarty, and more. Emily is currently finishing her last days of employment as the Chef de Cuisine at Cyril’s at Clay Pigeon Winery. She is inspired by local ingredients, seasonal vegetables and farm produce, and specializes in pastry, pies, and cakes.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col l6 s12 about-column2">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="~/img/ryan-pasta.png">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">RYAN DOMINGO<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">RYAN DOMINGO<i class="material-icons right">close</i></span>
+                    <p><strong>Ryan</strong> is a restaurant operations manager and chef, with experience in retail management, marketing and advertising. In 2004 he earned a degree in Marketing and Management from the University of Portland, where he also lettered four years as a member of the university’s Men’s Varsity Soccer Team. Ryan managed retail stores for Adidas and worked as an advertising account executive for Nike in his early 20’s. His love for food, cooking and dining inspired him to find work in restaurants in 2007. With 8 years experience in restaurant management, most notably as general manager of Andy Ricker’s Pok Pok Ny in Brooklyn, New York; Ryan has become an expert in restaurant systems, communication and team building, staff management, and guest relations. Ryan is currently employed as the Operations Manager of Ned Ludd and Elder Hall. In his spare time he is an avid forager and celebrates the bounty of the Pacific Northwest by the gathering of the seasons’ wild edibles. He is also the chef of a private, monthly Filipino supper club in Northeast Portland.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col l6 m6 s12 about-column1">
+
+            <!-- SnapWidget -->
+            <h2 class="e-instagram">
+                e.cafazzo
+                <a href="https://www.instagram.com/e.cafazzo/">
+                    <img src="~/img/Instagram.png" />
+                </a>
+            </h2>
+            <script src="http://snapwidget.com/js/snapwidget.js"></script>
+            <iframe src="http://snapwidget.com/in/?u=ZS5jYWZhenpvfGlufDc1fDF8MjB8fHllc3w1fG5vbmV8b25TdGFydHx5ZXN8eWVz&ve=140316" title="Instagram Widget" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+        </div>
+        <div class="col l6 m6 s6 about-column2">
+
+            <a class="twitter-timeline" href="https://twitter.com/ryandomingo" data-widget-id="709631348592365568">Tweets by ryandomingo</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+        </div>
+    </div>
+</div>

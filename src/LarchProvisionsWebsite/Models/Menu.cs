@@ -19,11 +19,13 @@ namespace LarchProvisionsWebsite.Models
         public virtual ICollection<Recipe> Recipes { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Serving> Servings { get; set; }
 
         public Menu()
         {
             Recipes = new HashSet<Recipe>();
             Orders = new HashSet<Order>();
+            Servings = new HashSet<Serving>();
         }
     }
 }

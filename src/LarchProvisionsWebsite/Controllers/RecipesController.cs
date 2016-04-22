@@ -1,8 +1,8 @@
-using System.Linq;
+using LarchProvisionsWebsite.Models;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using LarchProvisionsWebsite.Models;
+using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -12,13 +12,13 @@ namespace LarchProvisionsWebsite.Controllers
 
         public RecipesController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Recipes
         public IActionResult Index()
         {
-            var applicationDbContext = _context.Recipes.Include(r => r.Menu);
+            var applicationDbContext = _context.Recipes.Include(r => r.Ingredients);
             return View(applicationDbContext.ToList());
         }
 
@@ -40,24 +40,32 @@ namespace LarchProvisionsWebsite.Controllers
         }
 
         // GET: Recipes/Create
-        public IActionResult Create()
+        public IActionResult Create(string returnUrl = null)
         {
-            ViewData["MenuId"] = new SelectList(_context.Menus, "MenuId", "Menu");
+            if (returnUrl == null)
+            {
+                returnUrl = "/Recipes/";
+            }
+            ViewData["MenuId"] = returnUrl.Remove(0, 12);
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
 
         // POST: Recipes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Recipe recipe)
+        public IActionResult Create(Recipe recipe, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
                 _context.Recipes.Add(recipe);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                if (returnUrl == null)
+                    return RedirectToAction("Index");
+                else if (Url.IsLocalUrl(returnUrl))
+                    return Redirect(returnUrl);
             }
-            ViewData["MenuId"] = new SelectList(_context.Menus, "MenuId", "Menu", recipe.MenuId);
+
             return View(recipe);
         }
 
@@ -74,7 +82,6 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["MenuId"] = new SelectList(_context.Menus, "MenuId", "Menu", recipe.MenuId);
             return View(recipe);
         }
 
@@ -89,7 +96,6 @@ namespace LarchProvisionsWebsite.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewData["MenuId"] = new SelectList(_context.Menus, "MenuId", "Menu", recipe.MenuId);
             return View(recipe);
         }
 

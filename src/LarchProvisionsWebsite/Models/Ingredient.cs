@@ -35,7 +35,7 @@ namespace LarchProvisionsWebsite.Models
             {
                 //Recipe recipe = db.Recipe.Find(RecipeId);
 
-                double singleServing = this.Amount / Recipe.Servings;
+                double singleServing = this.Amount / Recipe.ServingSize;
                 return singleServing;
             }
             else

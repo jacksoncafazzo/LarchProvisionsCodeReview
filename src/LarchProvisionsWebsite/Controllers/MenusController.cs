@@ -1,8 +1,8 @@
-using System.Linq;
+using LarchProvisionsWebsite.Models;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using LarchProvisionsWebsite.Models;
+using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -12,7 +12,7 @@ namespace LarchProvisionsWebsite.Controllers
 
         public MenusController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Menus
@@ -29,7 +29,7 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Menu menu = _context.Menus.Single(m => m.MenuId == id);
+            Menu menu = _context.Menus.FirstOrDefault(m => m.MenuId == id);
             if (menu == null)
             {
                 return HttpNotFound();
@@ -66,12 +66,41 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Menu menu = _context.Menus.Single(m => m.MenuId == id);
+            Menu menu = _context.Menus.FirstOrDefault(m => m.MenuId == id);
             if (menu == null)
             {
                 return HttpNotFound();
             }
+            menu.Recipes = _context.Recipes.Join(
+                _context.Servings.Where(
+                    s => s.MenuId == id).ToList(),
+                s => s.RecipeId,
+                s => s.RecipeId,
+                (o, i) => o).ToList();
+
+            menu.Servings = _context.Servings.Where(s => s.MenuId == id).ToList();
+            menu.Orders = _context.Orders.Where(o => o.MenuId == id).ToList();
+            ViewBag.Recipes = _context.Recipes.ToList().Except(menu.Recipes);
+            ViewBag.Orders = _context.Orders.ToList().Except(menu.Orders);
+            ViewData["ReturnUrl"] = "/Menus/Edit/" + id;
             return View(menu);
+        }
+
+        public IActionResult ServeRecipe(int menuId, int recipeId)
+        {
+            Serving serving = new Serving();
+            serving.RecipeId = recipeId;
+            serving.MenuId = menuId;
+            _context.SaveChanges();
+            return RedirectToAction("Edit", new { id = menuId });
+        }
+
+        public IActionResult RemoveRecipe(int menuId, int recipeId)
+        {
+            Serving serving = _context.Servings.FirstOrDefault(s => s.MenuId == menuId && s.RecipeId == recipeId);
+            _context.Servings.Remove(serving);
+            _context.SaveChanges();
+            return RedirectToAction("Edit", new { id = menuId });
         }
 
         // POST: Menus/Edit/5

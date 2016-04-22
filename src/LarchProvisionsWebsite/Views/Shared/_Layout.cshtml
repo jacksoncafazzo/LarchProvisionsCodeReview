@@ -36,6 +36,11 @@
                     <li>@Html.ActionLink("Menu", "Menu", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @{ 
+                        if (User.IsInRole("chef")) {
+                            <li>@Html.ActionLink("Recipes","Index", "Recipes")</li>
+                        }
+                    }
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                 </ul>
             </div>

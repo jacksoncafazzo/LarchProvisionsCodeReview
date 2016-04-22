@@ -10,20 +10,22 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int RecipeId { get; set; }
 
-        [ForeignKey("Menu")]
-        public int MenuId { get; set; }
+        public ICollection<Serving> Servings { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
 
         public string Notes { get; set; }
-        public int Price { get; set; }
-        public virtual Menu Menu { get; set; }
-        public int Servings { get; set; }
+        public int CustPrice { get; set; }
 
-        //[NotMapped]
+        //public virtual Menu Menu { get; set; }
+        public int ServingSize { get; set; }
+
         public virtual ICollection<Ingredient> Ingredients { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<Menu> Menus { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 
@@ -31,6 +33,7 @@ namespace LarchProvisionsWebsite.Models
         {
             Ingredients = new HashSet<Ingredient>();
             Orders = new HashSet<Order>();
+            Menus = new HashSet<Menu>();
         }
     }
 }

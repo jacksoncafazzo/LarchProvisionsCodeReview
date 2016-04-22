@@ -1,0 +1,44 @@
+@model IEnumerable<LarchProvisionsWebsite.Models.Menu>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickupTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickupTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.MenuId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.MenuId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.MenuId">Delete</a>
+        </td>
+    </tr>
+}
+</table>

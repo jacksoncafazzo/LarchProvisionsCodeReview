@@ -30,8 +30,6 @@ namespace LarchProvisionsWebsite.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("LarchCustomerId");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -109,13 +107,15 @@ namespace LarchProvisionsWebsite.Migrations
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("LarchCustomerId");
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<int>("MenuId");
 
                     b.Property<int>("RecipeId");
 
                     b.Property<int>("Servings");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("OrderId");
 
@@ -244,8 +244,7 @@ namespace LarchProvisionsWebsite.Migrations
                 {
                     b.HasOne("LarchProvisionsWebsite.Models.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("LarchCustomerId")
-                        .HasPrincipalKey("LarchCustomerId");
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("LarchProvisionsWebsite.Models.Menu")
                         .WithMany()

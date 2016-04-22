@@ -1,34 +1,16 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿.nav-wrapper {
+  background-color: papayawhip; }
+  .nav-wrapper a {
+    font-size: 1.3em;
+    color: slategrey; }
+  .nav-wrapper a:hover {
+    color: #fafafa;
+    text-shadow: 0px -1px 2px black; }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+body, html {
+  color: color("black", "lighten-2");
+  font-family: "Franklin Gothic", sans-serif;
+  background-color: color("grey", "lighten-4"); }
+  body a, html a {
+    color: slategrey; }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-/* Carousel */
-.carousel-caption {
-    z-index: 10 !important;
-}
-
-    .carousel-caption p {
-        font-size: 20px;
-        line-height: 1.4;
-    }
-
-@media (min-width: 768px) {
-    .carousel-caption {
-        z-index: 10 !important;
-    }
-}

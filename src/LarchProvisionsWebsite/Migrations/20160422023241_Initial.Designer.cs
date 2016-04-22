@@ -8,7 +8,7 @@ using LarchProvisionsWebsite.Models;
 namespace LarchProvisionsWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160422014738_Initial")]
+    [Migration("20160422023241_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,8 +30,6 @@ namespace LarchProvisionsWebsite.Migrations
                         .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<int>("LarchCustomerId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -110,13 +108,15 @@ namespace LarchProvisionsWebsite.Migrations
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("LarchCustomerId");
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<int>("MenuId");
 
                     b.Property<int>("RecipeId");
 
                     b.Property<int>("Servings");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("OrderId");
 
@@ -245,8 +245,7 @@ namespace LarchProvisionsWebsite.Migrations
                 {
                     b.HasOne("LarchProvisionsWebsite.Models.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("LarchCustomerId")
-                        .HasPrincipalKey("LarchCustomerId");
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("LarchProvisionsWebsite.Models.Menu")
                         .WithMany()

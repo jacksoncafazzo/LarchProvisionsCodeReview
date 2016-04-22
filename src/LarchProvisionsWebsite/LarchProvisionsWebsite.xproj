@@ -19,5 +19,9 @@
     <DnxInvisibleContent Include=".bowerrc" />
     <DnxInvisibleContent Include="package.json" />
   </ItemGroup>
+  <ItemGroup>
+    <DnxInvisibleCompile Include="Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <DnxInvisibleCompile Include="Migrations\20160422015721_Initial.cs" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

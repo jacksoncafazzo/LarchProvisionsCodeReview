@@ -1,0 +1,11 @@
+﻿@import "base/variables";
+@import "layout/navbar";
+
+body, html {
+    color: $primary-color;
+    font-family: $primary-font;
+    background-color: $primary-bg-color;
+    a {
+        color: $primary-link-color;
+    }
+}

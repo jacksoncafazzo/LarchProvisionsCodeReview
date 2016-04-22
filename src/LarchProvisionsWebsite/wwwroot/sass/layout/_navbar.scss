@@ -1,0 +1,11 @@
+﻿.nav-wrapper {
+    background-color: papayawhip;
+    a {
+        font-size: 1.3em;
+        color: slategrey;
+    }
+        a:hover {
+            color: darken(white, 2);
+            text-shadow: 0px -1px 2px black;
+        }
+}

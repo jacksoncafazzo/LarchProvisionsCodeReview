@@ -1,0 +1,36 @@
+@model LarchProvisionsWebsite.Models.Menu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Menu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PickupTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PickupTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.MenuId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

@@ -1,1 +1,1 @@
-﻿<li>@Model.Name <button name="recipeId" value="@Model.RecipeId">Remove</button></li>
+﻿<li><a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">@Model.Name</a> <button name="recipeId" value="@Model.RecipeId">Remove</button></li>

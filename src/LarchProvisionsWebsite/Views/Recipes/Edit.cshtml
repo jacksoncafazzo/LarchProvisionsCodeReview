@@ -3,63 +3,96 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div class="container">
+    <div class="row">
 
-<h2>Edit</h2>
+        <h4>Edit Recipe</h4>
 
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>Recipe</h4>
-        <hr />
-        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="RecipeId" />
-        <div class="form-group">
-            <label asp-for="Description" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger" />
-            </div>
-        </div>
+        <form asp-action="Edit">
+            <div class="form-horizontal">
+                <h4>@Model.Name</h4>
+                <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="RecipeId" />
+                <div class="form-group">
+                    <label asp-for="Name" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger" />
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger" />
+               
+                <div class="form-group">
+                    <label asp-for="Notes" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Notes" class="form-control" />
+                        <span asp-validation-for="Notes" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CustPrice" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="CustPrice" class="form-control" />
+                        <span asp-validation-for="CustPrice" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ServingSize" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ServingSize" class="form-control" />
+                        <span asp-validation-for="ServingSize" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Notes" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Notes" class="form-control" />
-                <span asp-validation-for="Notes" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CustPrice" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CustPrice" class="form-control" />
-                <span asp-validation-for="CustPrice" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Servings" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Servings" class="form-control" />
-                <span asp-validation-for="Servings" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        </form>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
-</form>
+    <div class="row">
+        <div class="col l6 m6 s6">
+            @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.RecipeId)
+                <h5>Recipe Ingredients</h5>
+                <ul>
+                    @foreach (var ingredient in Model.Ingredients)
+                    {
+                        @Html.DisplayFor(i => ingredient, "list-ingredients-admin")
+                    }
+                </ul>
+            }
+        </div>
+        <div class="col l6 m6 s6">
+            <ul>
+                @using (Html.BeginForm("PrepIngredient", "Recipes", FormMethod.Post))
+                {
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                    @Html.HiddenFor(m => m.RecipeId)
+                    <li><h4>Add Ingredients</h4></li>
+                    @foreach (var ingredient in ViewBag.Ingredients)
+                    {
+                        @Html.DisplayFor(model => ingredient, "add-ingredients")
+                    }
+                }
+            </ul>
+            @Html.ActionLink("Create New Ingredient", "Create", "Ingredients", new { returnUrl = ViewData["ReturnUrl"] })
+        </div>
+    </div>
 </div>
-
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

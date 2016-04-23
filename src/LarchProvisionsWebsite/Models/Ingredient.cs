@@ -23,25 +23,16 @@ namespace LarchProvisionsWebsite.Models
 
         public string Unit { get; set; }
 
-        [ForeignKey("Recipe")]
-        public int RecipeId { get; set; }
+        [NotMapped]
+        public virtual Prep Prep { get; set; }
 
         [NotMapped]
         public virtual Recipe Recipe { get; set; }
 
         public double SingleServing(int count)
         {
-            if (RecipeId != 0)
-            {
-                //Recipe recipe = db.Recipe.Find(RecipeId);
-
-                double singleServing = this.Amount / Recipe.ServingSize;
-                return singleServing;
-            }
-            else
-            {
-                return 0;
-            }
+            double singleServing = Amount / Recipe.ServingSize;
+            return singleServing;
         }
 
         /*Truncate the ingredient return amounts */

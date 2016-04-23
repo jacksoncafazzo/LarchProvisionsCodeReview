@@ -9,21 +9,26 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int OrderId { get; set; }
 
-        [ForeignKey("ApplicationUser")]
+        [ForeignKey("UserId")]
         public int UserId { get; set; }
 
         [NotMapped]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        [ForeignKey("Recipe")]
+        [ForeignKey("RecipeId")]
         public int RecipeId { get; set; }
 
-        [ForeignKey("Menu")]
+        [ForeignKey("MenuId")]
         public int MenuId { get; set; }
 
         public int OrderSize { get; set; }
 
         public virtual Menu Menu { get; set; }
+
+        [NotMapped]
         public virtual Recipe Recipe { get; set; }
+
+        [NotMapped]
+        public virtual ApplicationUser User { get; set; }
     }
 }

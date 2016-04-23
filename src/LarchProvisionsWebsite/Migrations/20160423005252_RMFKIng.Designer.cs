@@ -8,9 +8,10 @@ using LarchProvisionsWebsite.Models;
 namespace LarchProvisionsWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160423005252_RMFKIng")]
+    partial class RMFKIng
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -120,20 +121,6 @@ namespace LarchProvisionsWebsite.Migrations
                     b.HasKey("OrderId");
 
                     b.HasAnnotation("Relational:TableName", "Orders");
-                });
-
-            modelBuilder.Entity("LarchProvisionsWebsite.Models.Prep", b =>
-                {
-                    b.Property<int>("PrepId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("IngredientId");
-
-                    b.Property<int>("RecipeId");
-
-                    b.HasKey("PrepId");
-
-                    b.HasAnnotation("Relational:TableName", "Preps");
                 });
 
             modelBuilder.Entity("LarchProvisionsWebsite.Models.Recipe", b =>
@@ -281,17 +268,6 @@ namespace LarchProvisionsWebsite.Migrations
                     b.HasOne("LarchProvisionsWebsite.Models.Recipe")
                         .WithMany()
                         .HasForeignKey("RecipeId");
-                });
-
-            modelBuilder.Entity("LarchProvisionsWebsite.Models.Prep", b =>
-                {
-                    b.HasOne("LarchProvisionsWebsite.Models.Ingredient")
-                        .WithMany()
-                        .HasForeignKey("IngredientId");
-
-                    b.HasOne("LarchProvisionsWebsite.Models.Recipe")
-                        .WithOne()
-                        .HasForeignKey("LarchProvisionsWebsite.Models.Prep", "RecipeId");
                 });
 
             modelBuilder.Entity("LarchProvisionsWebsite.Models.Recipe", b =>

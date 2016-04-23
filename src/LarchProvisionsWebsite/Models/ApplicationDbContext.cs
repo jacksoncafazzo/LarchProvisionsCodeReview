@@ -15,6 +15,7 @@ namespace LarchProvisionsWebsite.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Serving> Servings { get; set; }
+        public DbSet<Prep> Preps { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

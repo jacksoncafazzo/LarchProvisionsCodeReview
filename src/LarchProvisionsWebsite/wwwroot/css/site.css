@@ -82,6 +82,13 @@
     text-align: center;
     max-width: 100%; }
 
+.menu-display .caption h3, .menu-display .caption h5 {
+  color: #f6f6f6;
+  text-shadow: 1px 1px 1px black; }
+
+.contact .contact-photo img {
+  width: 100%; }
+
 body, html {
   color: color("black", "lighten-2");
   font-family: "Franklin Gothic", sans-serif;

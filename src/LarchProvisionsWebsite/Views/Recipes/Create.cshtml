@@ -12,6 +12,13 @@
             <hr />
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Name" class="col l8 m8 s7 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 
                 <label asp-for="Description" class="col l6 m12 s12 control-label"></label>
@@ -23,13 +30,7 @@
 
             <div class="col l4 m4 s5 control-label">@ViewData["MenuId"].ToString()</div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="col l8 m8 s7 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger" />
-                </div>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="Notes" class="col l6 m12 s12 control-label"></label>
                 <div class="col-md-10">
@@ -45,10 +46,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Servings" class="col l6 m6 s6 control-label"></label>
+                <label asp-for="ServingSize" class="col l6 m6 s6 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Servings" class="form-control" />
-                    <span asp-validation-for="Servings" class="text-danger" />
+                    <input asp-for="ServingSize" class="form-control" />
+                    <span asp-validation-for="ServingSize" class="text-danger" />
                 </div>
             </div>
             <div class="form-group">

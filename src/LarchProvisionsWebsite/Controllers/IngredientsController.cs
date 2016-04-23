@@ -1,8 +1,8 @@
-using System.Linq;
+using LarchProvisionsWebsite.Models;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using LarchProvisionsWebsite.Models;
+using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -12,7 +12,7 @@ namespace LarchProvisionsWebsite.Controllers
 
         public IngredientsController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Ingredients
@@ -29,7 +29,7 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Ingredient ingredient = _context.Ingredients.Single(m => m.IngredientId == id);
+            Ingredient ingredient = _context.Ingredients.FirstOrDefault(m => m.IngredientId == id);
             if (ingredient == null)
             {
                 return HttpNotFound();
@@ -39,20 +39,30 @@ namespace LarchProvisionsWebsite.Controllers
         }
 
         // GET: Ingredients/Create
-        public IActionResult Create()
+        public IActionResult Create(string returnUrl = null)
         {
+            if (returnUrl == null)
+            {
+                returnUrl = "/Ingredients/";
+            }
+            ViewData["RecipeId"] = returnUrl.Remove(0, 8);
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
 
         // POST: Ingredients/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Ingredient ingredient)
+        public IActionResult Create(Ingredient ingredient, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
                 _context.Ingredients.Add(ingredient);
                 _context.SaveChanges();
+                if (returnUrl == null)
+                    return RedirectToAction("Index");
+                else if (Url.IsLocalUrl(returnUrl))
+                    return Redirect(returnUrl);
                 return RedirectToAction("Index");
             }
             return View(ingredient);

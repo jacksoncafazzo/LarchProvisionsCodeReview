@@ -10,6 +10,8 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int RecipeId { get; set; }
 
+        public virtual Prep Prep { get; set; }
+
         public ICollection<Serving> Servings { get; set; }
 
         public string Name { get; set; }

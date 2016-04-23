@@ -2,6 +2,7 @@ using LarchProvisionsWebsite.Models;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
@@ -35,6 +36,11 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
+            recipe.Ingredients = _context.Ingredients.Where(i => i.Recipe.RecipeId == id).ToList();
+            recipe.Menus = _context.Menus.Join(_context.Servings.Where(s => s.RecipeId == id).ToList(),
+            m => m.MenuId,
+            s => s.MenuId,
+            (o, i) => o).ToList();
 
             return View(recipe);
         }
@@ -77,26 +83,62 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Recipe recipe = _context.Recipes.Single(m => m.RecipeId == id);
+            Recipe recipe = _context.Recipes.FirstOrDefault(m => m.RecipeId == id);
             if (recipe == null)
             {
                 return HttpNotFound();
             }
+            recipe.Ingredients = _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == recipe.RecipeId).ToList(),
+                i => i.IngredientId,
+                p => p.IngredientId,
+                (o, i) => o).ToList();
+            recipe.Menus = _context.Menus.Join(_context.Servings.Where(s => s.RecipeId == id).ToList(),
+            m => m.MenuId,
+            s => s.MenuId,
+            (o, i) => o).ToList();
+            ViewBag.Ingredients = _context.Ingredients.ToList().Except(recipe.Ingredients);
             return View(recipe);
         }
 
         // POST: Recipes/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Recipe recipe)
+        public IActionResult Edit(Recipe recipe, string returnUrl = null)
         {
+            if (returnUrl == null)
+            {
+                returnUrl = "/Recipes/";
+            }
+            ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
             {
                 _context.Update(recipe);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", recipe);
             }
             return View(recipe);
+        }
+
+        //Post: Recipes/PrepIngredient
+        public IActionResult PrepIngredient(Recipe recipe, int ingredientId)
+        {
+            Prep prep = new Prep();
+            prep.IngredientId = ingredientId;
+            prep.RecipeId = recipe.RecipeId;
+            _context.Preps.Add(prep);
+            _context.SaveChanges();
+            ViewBag.Ingredients = _context.Ingredients.ToList();
+
+            return RedirectToAction("Edit", "Recipes", new { id = recipe.RecipeId });
+        }
+
+        public IActionResult RemoveIngredient(Recipe recipe, int ingredientId)
+        {
+            Prep prep = _context.Preps.FirstOrDefault(p => p.IngredientId == ingredientId);
+            _context.Preps.Remove(prep);
+            _context.SaveChanges();
+            ViewBag.Ingredients = _context.Ingredients.ToList();
+
+            return RedirectToAction("Edit", "Recipes", new { id = recipe.RecipeId });
         }
 
         // GET: Recipes/Delete/5

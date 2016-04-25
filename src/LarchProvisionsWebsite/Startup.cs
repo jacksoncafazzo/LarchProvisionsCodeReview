@@ -69,11 +69,11 @@ namespace LarchProvisionsWebsite
 
             app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseFacebookAuthentication(options =>
-            {
-                options.AppId = Configuration["Authentication:Facebook:AppId"];
-                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
+            //app.UseFacebookAuthentication(options =>
+            //{
+            //    options.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //});
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();

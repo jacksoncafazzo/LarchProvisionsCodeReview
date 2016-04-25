@@ -32,10 +32,10 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li><a href="#" data-activates="collapse-menu" class="button-collapse" materialize="sidenav"><i class="material-icons">menu</i></a></li>
+                    <li>@await Html.PartialAsync("_LoginPartial")</li>
                 </ul>
 
                 <ul class="side-nav right-align" id="collapse-menu">
-                    <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

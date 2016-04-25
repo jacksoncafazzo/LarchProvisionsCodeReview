@@ -102,3 +102,10 @@ body, html {
   body a, html a {
     color: slategrey; }
 
+.caption h4, .caption h5 {
+  background-color: #767676;
+  display: inline;
+  line-height: 1.5em;
+  box-shadow: 10px 0 0 #767676, -10px 0 0 #767676;
+  opacity: .75; }
+

@@ -15,9 +15,10 @@ body, html {
     }
 }
 
-.caption h4 {
-      
-        opacity: 1;
-        color: red;
-    
+.caption h4, .caption h5 {
+    background-color: darken(grey, 4);
+    display:inline;
+    line-height:1.5em;
+    box-shadow:10px 0 0 darken(grey, 4), -10px 0 0 darken(grey, 4);
+    opacity:.75;
 }

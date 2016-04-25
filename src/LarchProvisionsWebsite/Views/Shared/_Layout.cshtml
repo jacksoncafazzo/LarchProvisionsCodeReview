@@ -23,26 +23,30 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo waves-effect waves-light left">Larch Provisions</a>
-                <a href="#" data-activates="collapse-menu" class="button-collapse" materialize="sidenav"><i class="material-icons">menu</i></a>
+                <a href="/" class="brand-logo waves-effect waves-light left">
+                    <img src="~/img/lil-larch.png" />
+                </a>
+                
                 <ul id="nav-mobile" class="right hide-on-small-and-down waves-effect waves-light">
                     <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@await Html.PartialAsync("_LoginPartial")</li>
+                    <li><a href="#" data-activates="collapse-menu" class="button-collapse" materialize="sidenav"><i class="material-icons">menu</i></a></li>
                 </ul>
 
-                <ul class="side-nav" id="collapse-menu">
-                    <li>@Html.ActionLink("Menu", "Menu", "Home")</li>
+                <ul class="side-nav right-align" id="collapse-menu">
+                    <li>@await Html.PartialAsync("_LoginPartial")</li>
+                    <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @{ 
-                        if (User.IsInRole("chef")) {
-                            <li>@Html.ActionLink("Recipes","Index", "Recipes")</li>
+                    @{
+                        if (User.IsInRole("chef"))
+                        {
+                            <li>@Html.ActionLink("Recipes", "Index", "Recipes")</li>
                         }
                     }
-                    <li>@await Html.PartialAsync("_LoginPartial")</li>
                 </ul>
+
             </div>
         </nav>
     </div>

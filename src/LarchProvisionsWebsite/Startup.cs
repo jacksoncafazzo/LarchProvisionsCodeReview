@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LarchProvisionsWebsite.Models;
+using LarchProvisionsWebsite.Services;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -9,8 +7,10 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using LarchProvisionsWebsite.Models;
-using LarchProvisionsWebsite.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite
 {
@@ -69,6 +69,11 @@ namespace LarchProvisionsWebsite
 
             app.UseApplicationInsightsRequestTelemetry();
 
+            app.UseFacebookAuthentication(options =>
+            {
+                options.AppId = Configuration["Authentication:Facebook:AppId"];
+                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();

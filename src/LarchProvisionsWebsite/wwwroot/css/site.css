@@ -1,4 +1,5 @@
-﻿.nav-wrapper {
+﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic);
+.nav-wrapper {
   background-color: #F6F6F6; }
   .nav-wrapper a {
     font-size: 1.3em;
@@ -6,6 +7,8 @@
   .nav-wrapper a:hover {
     color: #fafafa;
     text-shadow: 0px -1px 2px black; }
+  .nav-wrapper .brand-logo img {
+    height: 75px; }
 
 .menu-cover {
   width: 100%;
@@ -68,8 +71,11 @@
     width: 50%;
     padding-left: 0px; }
   .about-content .about-column1 {
+    text-align: left;
     padding-right: 0px;
     width: 50%; }
+    .about-content .about-column1 .card .card-reveal {
+      text-align: justify; }
   .about-content .about {
     padding: 0px;
     margin: 0px;
@@ -91,8 +97,8 @@
 
 body, html {
   color: color("black", "lighten-2");
-  font-family: "Franklin Gothic", sans-serif;
-  background-color: color("grey", "lighten-4"); }
+  background-color: color("grey", "lighten-4");
+  font-family: "Open Sans Condensed", sans-serif; }
   body a, html a {
     color: slategrey; }
 

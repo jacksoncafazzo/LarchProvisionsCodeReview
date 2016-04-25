@@ -4,12 +4,12 @@
 @import "layout/about";
 @import "layout/menu-display";
 @import "layout/contact";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic);
 
 body, html {
     color: $primary-color;
-    font-family: $primary-font;
     background-color: $primary-bg-color;
-
+    font-family: $primary-font-family;
     a {
         color: $primary-link-color;
     }

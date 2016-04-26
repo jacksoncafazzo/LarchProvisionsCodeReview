@@ -37,7 +37,7 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 _context.Roles.Add(new IdentityRole()
                 {
-                    Name = Request.Form["role-name"]
+                    Name = Request.Form["RoleName"]
                 });
                 _context.SaveChanges();
                 ViewBag.ResultMessage = "Role created like a boss!";
@@ -49,12 +49,17 @@ namespace LarchProvisionsWebsite.Controllers
             }
         }
 
-        public IActionResult Delete(string RoleName)
+        [HttpPost]
+        public ActionResult Delete(string RoleName)
         {
-            var thisRole = _context.Roles.FirstOrDefault(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase));
-            _context.Roles.Remove(thisRole);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            if (RoleName != null)
+            {
+                var thisRole = _context.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                _context.Roles.Remove(thisRole);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

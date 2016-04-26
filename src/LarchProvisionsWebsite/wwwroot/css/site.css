@@ -98,7 +98,7 @@
 body, html {
   color: color("black", "lighten-2");
   background-color: color("grey", "lighten-4");
-  font-family: "Open Sans Condensed", sans-serif; }
+  font-family: "Open Sans", sans-serif; }
   body a, html a {
     color: slategrey; }
 

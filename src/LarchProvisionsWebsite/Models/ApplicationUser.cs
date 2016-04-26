@@ -10,11 +10,9 @@ namespace LarchProvisionsWebsite.Models
     public class ApplicationUser : IdentityUser
     {
         public ICollection<Order> Orders { get; set; }
-        public ICollection<Menu> Menus { get; set; }
 
         public ApplicationUser()
         {
-            Menus = new HashSet<Menu>();
             Orders = new HashSet<Order>();
         }
     }

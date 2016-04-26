@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C9926A2E-4AD2-49C1-9A57-CD1688170EFB}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		src\LarchProvisionsWebsite\Project_Readme.html = src\LarchProvisionsWebsite\Project_Readme.html
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LarchProvisionsWebsite", "src\LarchProvisionsWebsite\LarchProvisionsWebsite.xproj", "{AD29C716-F4C0-43F6-B8A0-BC5A7C5836D1}"

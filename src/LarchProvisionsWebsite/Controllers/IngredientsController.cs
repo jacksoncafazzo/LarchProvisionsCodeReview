@@ -8,9 +8,9 @@ namespace LarchProvisionsWebsite.Controllers
 {
     public class IngredientsController : Controller
     {
-        private ApplicationDbContext _context;
+        private LarchKitchenDbContext _context;
 
-        public IngredientsController(ApplicationDbContext context)
+        public IngredientsController(LarchKitchenDbContext context)
         {
             _context = context;
         }

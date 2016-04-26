@@ -8,9 +8,9 @@ namespace LarchProvisionsWebsite.Controllers
 {
     public class MenusController : Controller
     {
-        private ApplicationDbContext _context;
+        private LarchKitchenDbContext _context;
 
-        public MenusController(ApplicationDbContext context)
+        public MenusController(LarchKitchenDbContext context)
         {
             _context = context;
         }

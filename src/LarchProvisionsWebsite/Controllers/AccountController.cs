@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using LarchProvisionsWebsite.Models;
+using LarchProvisionsWebsite.Services;
+using LarchProvisionsWebsite.ViewModels.Account;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
-using LarchProvisionsWebsite.Models;
-using LarchProvisionsWebsite.Services;
-using LarchProvisionsWebsite.ViewModels.Account;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -462,6 +462,6 @@ namespace LarchProvisionsWebsite.Controllers
             }
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

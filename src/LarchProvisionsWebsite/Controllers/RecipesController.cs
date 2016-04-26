@@ -9,9 +9,9 @@ namespace LarchProvisionsWebsite.Controllers
 {
     public class RecipesController : Controller
     {
-        private ApplicationDbContext _context;
+        private LarchKitchenDbContext _context;
 
-        public RecipesController(ApplicationDbContext context)
+        public RecipesController(LarchKitchenDbContext context)
         {
             _context = context;
         }
@@ -19,8 +19,7 @@ namespace LarchProvisionsWebsite.Controllers
         // GET: Recipes
         public IActionResult Index()
         {
-            var applicationDbContext = _context.Recipes.Include(r => r.Ingredients);
-            return View(applicationDbContext.ToList());
+            return View(_context.Recipes.Include(r => r.Ingredients));
         }
 
         // GET: Recipes/Details/5

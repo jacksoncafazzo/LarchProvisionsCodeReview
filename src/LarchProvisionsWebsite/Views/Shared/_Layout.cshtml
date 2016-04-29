@@ -28,7 +28,7 @@
                 </a>
 
                 <ul id="nav-mobile" class="right hide-on-small-and-down waves-effect waves-light">
-                    <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
+                    <li>@Html.ActionLink("Menu", "CurrentMenu", "Menus")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li><a href="#" data-activates="collapse-menu" class="button-collapse" materialize="sidenav"><i class="material-icons">menu</i></a></li>
@@ -36,14 +36,20 @@
 
                 <ul class="side-nav right-align" id="collapse-menu">
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
-                    <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
+                    <li>@Html.ActionLink("Menu", "CurrentMenu", "Menus")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Admin"))
                     {
+                        <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                    }
+                    @if (User.IsInRole("Chef"))
+                    {
+                        <li>@Html.ActionLink("Menu List", "Index", "Menus")</li>
+                        <li>@Html.ActionLink("Recipe List", "Index", "Recipes")</li>
+                        <li>@Html.ActionLink("Ingredient List", "Index", "Ingredients")</li>
 
                     }
-                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
 
                     @{
                         if (User.IsInRole("chef"))

@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 <div class="row">
-    <form asp-action="Create">
+    <form asp-action="Create" enctype="multipart/form-data">
         <div class="form-horizontal">
             <h4>Recipe</h4>
             <hr />
@@ -45,6 +45,15 @@
                 <div class="col l3 m3 s3">
                     <input asp-for="ServingSize" class="form-control" />
                     <span asp-validation-for="ServingSize" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group file-field">
+                <div class="btn">
+                    <span>Add Photo</span>
+                    <input type="file" name="file" />
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" />
                 </div>
             </div>
             <div class="form-group">

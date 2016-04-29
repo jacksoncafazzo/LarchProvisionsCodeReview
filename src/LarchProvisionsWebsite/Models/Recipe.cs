@@ -21,6 +21,8 @@ namespace LarchProvisionsWebsite.Models
         public string Notes { get; set; }
         public int CustPrice { get; set; }
 
+        public string Image { get; set; }
+
         //public virtual Menu Menu { get; set; }
         public int ServingSize { get; set; }
 

@@ -37,9 +37,10 @@
     <div class="row">
         <h4>Edit Recipe</h4>
 
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div class="form-horizontal">
                 <h4>@Model.Name</h4>
+                <img src="@Model.Image" style="width:300px;"/>
                 <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="RecipeId" />
                 <div class="form-group">
@@ -57,7 +58,6 @@
                     </div>
                 </div>
 
-               
                 <div class="form-group">
                     <label asp-for="Notes" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
@@ -79,6 +79,17 @@
                         <span asp-validation-for="ServingSize" class="text-danger" />
                     </div>
                 </div>
+
+                <div class="form-group file-field">
+                    <div class="btn">
+                        <span>Add Photo</span>
+                        <input type="file" name="file" />
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" />
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Save" class="btn btn-default" />
@@ -91,7 +102,6 @@
             <a asp-action="Index">Back to List</a>
         </div>
     </div>
-    
 </div>
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

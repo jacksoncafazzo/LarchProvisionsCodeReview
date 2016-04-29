@@ -1,9 +1,11 @@
 using LarchProvisionsWebsite.Models;
 using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
@@ -61,10 +63,18 @@ namespace LarchProvisionsWebsite.Controllers
         // POST: Recipes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Recipe recipe, string returnUrl = null)
+        public IActionResult Create(Recipe recipe, string returnUrl = null, IFormFile file = null)
         {
             if (ModelState.IsValid)
             {
+                if (file == null)
+                {
+                    recipe.Image = "~/img/larch-id.png";
+                }
+                if (file != null)
+                {
+                    recipe = this.savePhoto(recipe, file);
+                }
                 _context.Recipes.Add(recipe);
                 _context.SaveChanges();
                 if (returnUrl == null)
@@ -103,7 +113,7 @@ namespace LarchProvisionsWebsite.Controllers
 
         // POST: Recipes/Edit/5
         [HttpPost]
-        public IActionResult Edit(Recipe recipe, string returnUrl = null)
+        public IActionResult Edit(Recipe recipe, string returnUrl = null, IFormFile file = null)
         {
             if (returnUrl == null)
             {
@@ -112,6 +122,14 @@ namespace LarchProvisionsWebsite.Controllers
             ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
             {
+                if (file == null)
+                {
+                    recipe.Image = "~/img/larch-id.png";
+                }
+                if (file != null)
+                {
+                    recipe = this.savePhoto(recipe, file);
+                }
                 _context.Update(recipe);
                 _context.SaveChanges();
                 return RedirectToAction("Edit", recipe);
@@ -169,6 +187,15 @@ namespace LarchProvisionsWebsite.Controllers
             _context.Recipes.Remove(recipe);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        public Recipe savePhoto(Recipe recipe, IFormFile file)
+        {
+            recipe.Image = Path.Combine("img/recipes", recipe.Name + recipe.RecipeId + ".jpg");
+            file.SaveAs(recipe.Image);
+            recipe.Image = "~/" + recipe.Image;
+            return recipe;
         }
     }
 }

@@ -21,6 +21,19 @@ namespace LarchProvisionsWebsite.Controllers
             return View(_context.Menus.ToList());
         }
 
+        //Get: Menus/CurrentMenu
+        public IActionResult CurrentMenu()
+        {
+            var menu = _context.Menus.Last();
+            menu.Recipes = _context.Recipes.Join(
+                _context.Servings.Where(
+                s => s.MenuId == menu.MenuId).ToList(),
+                s => s.RecipeId,
+                s => s.RecipeId,
+                (o, i) => o).ToList();
+            return View("Details", menu);
+        }
+
         // GET: Menus/Details/5
         public IActionResult Details(int? id)
         {
@@ -123,6 +136,17 @@ namespace LarchProvisionsWebsite.Controllers
                 return RedirectToAction("Index");
             }
             return View(menu);
+        }
+
+        //Get: Menus/Order/1/3
+        public IActionResult Order(int menuId, int recipeId)
+        {
+            var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
+            var order = new Order();
+            order.MenuId = menuId;
+            order.RecipeId = recipeId;
+            //save it blahblhb
+            return View("Details", menu);
         }
 
         // GET: Menus/Delete/5

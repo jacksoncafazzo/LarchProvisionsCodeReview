@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["title"] = "Role Management";
+    Layout = "_Layout";
+}
+<div class="container">
+    @using System.Runtime.InteropServices.ComTypes
+    <h2>Manage Roles</h2>
+    <h1>@ViewData["message"]</h1>
+
+    @Html.ActionLink("Role Management Home", "Index", "Admin") |
+    @Html.ActionLink("Create a Role", "CreateRole", "Admin")
+    | @Html.ActionLink("Assign Roles", "Assign", "Admin")
+
+    @RenderBody()
+</div>

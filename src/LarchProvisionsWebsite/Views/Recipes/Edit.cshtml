@@ -5,7 +5,36 @@
 }
 <div class="container">
     <div class="row">
+        <div class="col l6 m6 s6">
+            @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.RecipeId)
+                <h5>Recipe Ingredients</h5>
+                <ul>
+                    @foreach (var ingredient in Model.Ingredients)
+                    {
+                        @Html.DisplayFor(i => ingredient, "list-ingredients-admin")
+                    }
+                </ul>
+            }
+        </div>
+        <div class="col l6 m6 s6">
+            <ul>
+                @using (Html.BeginForm("PrepIngredient", "Recipes", FormMethod.Post))
+                {
 
+                    @Html.HiddenFor(m => m.RecipeId)
+                    <li><h4>Add Ingredients</h4></li>
+                    @foreach (var ingredient in ViewBag.Ingredients)
+                    {
+                        @Html.DisplayFor(model => ingredient, "add-ingredients")
+                    }
+                }
+            </ul>
+            @Html.ActionLink("Create New Ingredient", "Create", "Ingredients", new { returnUrl = ViewData["ReturnUrl"] })
+        </div>
+    </div>
+    <div class="row">
         <h4>Edit Recipe</h4>
 
         <form asp-action="Edit">
@@ -62,36 +91,7 @@
             <a asp-action="Index">Back to List</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col l6 m6 s6">
-            @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
-            {
-                @Html.HiddenFor(m => m.RecipeId)
-                <h5>Recipe Ingredients</h5>
-                <ul>
-                    @foreach (var ingredient in Model.Ingredients)
-                    {
-                        @Html.DisplayFor(i => ingredient, "list-ingredients-admin")
-                    }
-                </ul>
-            }
-        </div>
-        <div class="col l6 m6 s6">
-            <ul>
-                @using (Html.BeginForm("PrepIngredient", "Recipes", FormMethod.Post))
-                {
-
-                    @Html.HiddenFor(m => m.RecipeId)
-                    <li><h4>Add Ingredients</h4></li>
-                    @foreach (var ingredient in ViewBag.Ingredients)
-                    {
-                        @Html.DisplayFor(model => ingredient, "add-ingredients")
-                    }
-                }
-            </ul>
-            @Html.ActionLink("Create New Ingredient", "Create", "Ingredients", new { returnUrl = ViewData["ReturnUrl"] })
-        </div>
-    </div>
+    
 </div>
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -12,56 +12,53 @@
             <hr />
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="col l8 m8 s7 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Name" class="form-control" />
+                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+                <label asp-for="Name" class="col l4 m4 s4 control-label"></label>
+                <div class="col l8 m8">
+                    <input asp-for="Name" class="form-control waves-input-wrapper" />
                     <span asp-validation-for="Name" class="text-danger" />
                 </div>
             </div>
             <div class="form-group">
-                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-
-                <label asp-for="Description" class="col l6 m12 s12 control-label"></label>
-                <div class="col">
+                <label asp-for="Description" class="col l4 m4 s4 control-label"></label>
+                <div class="col l8 m8 s8">
                     <input asp-for="Description" class="form-control" />
                     <span asp-validation-for="Description" class="text-danger" />
                 </div>
             </div>
-
-            <div class="col l4 m4 s5 control-label">@ViewData["MenuId"].ToString()</div>
-
-            
             <div class="form-group">
-                <label asp-for="Notes" class="col l6 m12 s12 control-label"></label>
-                <div class="col-md-10">
+                <label asp-for="Notes" class="col l4 m4 s4 control-label"></label>
+                <div class="col l8 m8 s8">
                     <input asp-for="Notes" class="form-control" />
                     <span asp-validation-for="Notes" class="text-danger" />
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="CustPrice" class="col l6 m6 s6 control-label"></label>
-                <div class="col-md-10">
+                <label asp-for="CustPrice" class="col l3 m3 s3 control-label"></label>
+                <div class="col l3 m3 s3">
                     <input asp-for="CustPrice" class="form-control" />
                     <span asp-validation-for="CustPrice" class="text-danger" />
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="ServingSize" class="col l6 m6 s6 control-label"></label>
-                <div class="col-md-10">
+                <label asp-for="ServingSize" class="col l3 m3 s3"></label>
+                <div class="col l3 m3 s3">
                     <input asp-for="ServingSize" class="form-control" />
                     <span asp-validation-for="ServingSize" class="text-danger" />
                 </div>
             </div>
             <div class="form-group">
-                <div class="col l12 m12 s12">
+                <div class="col l12 m12 s12 center">
                     <input type="submit" value="Create" class="btn btn-default" />
+                    <br />
+                    <br />
+                    <a class="btn waves-effect waves-ripple" asp-action="Index">Recipe List</a>
                 </div>
             </div>
         </div>
     </form>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -23,15 +23,12 @@ namespace LarchProvisionsWebsite.Models
 
         public string Unit { get; set; }
 
-        [NotMapped]
-        public virtual Prep Prep { get; set; }
+        [ForeignKey("PrepId")]
+        public int PrepId { get; set; }
 
-        [NotMapped]
-        public virtual Recipe Recipe { get; set; }
-
-        public double SingleServing(int count)
+        public double SingleServing(int count, int servingSize)
         {
-            double singleServing = Amount / Recipe.ServingSize;
+            double singleServing = Amount / servingSize;
             return singleServing;
         }
 

@@ -10,8 +10,6 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int RecipeId { get; set; }
 
-        public virtual Prep Prep { get; set; }
-
         public ICollection<Serving> Servings { get; set; }
 
         public string Name { get; set; }
@@ -23,9 +21,10 @@ namespace LarchProvisionsWebsite.Models
 
         public string Image { get; set; }
 
-        //public virtual Menu Menu { get; set; }
         public int ServingSize { get; set; }
 
+        public virtual ICollection<Prep> Preps {get;set;}
+        
         public virtual ICollection<Ingredient> Ingredients { get; set; }
 
         [NotMapped]

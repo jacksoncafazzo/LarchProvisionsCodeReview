@@ -39,12 +39,15 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            recipe.Ingredients = _context.Ingredients.Where(i => i.Recipe.RecipeId == id).ToList();
+            recipe.Ingredients = _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == id).ToList(),
+            p => p.IngredientId,
+            i => i.IngredientId,
+            (o, i) => o).ToList();
             recipe.Menus = _context.Menus.Join(_context.Servings.Where(s => s.RecipeId == id).ToList(),
             m => m.MenuId,
             s => s.MenuId,
             (o, i) => o).ToList();
-
+            ViewBag.Preps = _context.Preps.Where(p => p.RecipeId == id);
             return View(recipe);
         }
 
@@ -108,6 +111,7 @@ namespace LarchProvisionsWebsite.Controllers
             s => s.MenuId,
             (o, i) => o).ToList();
             ViewBag.Ingredients = _context.Ingredients.ToList().Except(recipe.Ingredients);
+            recipe.Preps = _context.Preps.Where(p => p.RecipeId == id).ToList();
             return View(recipe);
         }
 

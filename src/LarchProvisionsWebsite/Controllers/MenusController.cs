@@ -90,12 +90,21 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            menu.Recipes = _context.Recipes.Join(
+            var recipes = _context.Recipes.Join(
                 _context.Servings.Where(
                 s => s.MenuId == id).ToList(),
                 s => s.RecipeId,
                 s => s.RecipeId,
                 (o, i) => o).ToList();
+            foreach (var recipe in recipes)
+            {
+                recipe.Preps = _context.Preps.Where(p => p.RecipeId == id).ToList();
+                recipe.Ingredients = _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == recipe.RecipeId).ToList(),
+                i => i.IngredientId,
+                p => p.IngredientId,
+                (o, i) => o).ToList();
+            }
+            menu.Recipes = recipes;
             ViewBag.Recipes = _context.Recipes.ToList().Except(menu.Recipes);
 
             menu.Orders = _context.Orders.Where(o => o.MenuId == id).ToList();

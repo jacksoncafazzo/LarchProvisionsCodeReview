@@ -1,1 +1,9 @@
-﻿<li><a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">@Model.Name</a> <button name="recipeId" value="@Model.RecipeId">Remove</button></li>
+﻿<li><a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">@Model.Name</a> Serving Size: @Model.ServingSize<button name="recipeId" value="@Model.RecipeId">Remove</button></li>
+
+@foreach (var ingredient in Model.Ingredients)
+{
+    <li>@ingredient.Amount @ingredient.Unit @ingredient.Name</li>
+
+}
+        
+ 

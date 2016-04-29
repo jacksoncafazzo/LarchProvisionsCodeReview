@@ -1,4 +1,5 @@
 ﻿using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Http.Internal;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -79,7 +81,7 @@ namespace LarchProvisionsWebsite.Controllers
         {
             var thisUser = GetUser(user);
             ViewBag.User = thisUser;
-            ViewBag.RolesForThisUser = _context.Roles.ToList();
+            ViewBag.RolesForThisUser = _userManager.GetRolesAsync(thisUser).Result;
             var allRoles = _context.Roles.ToList();
             var roles = new List<string>();
             foreach (var role in allRoles)

@@ -1,4 +1,5 @@
 using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
@@ -6,6 +7,7 @@ using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [Authorize(Roles = "Chef")]
     public class IngredientsController : Controller
     {
         private LarchKitchenDbContext _context;

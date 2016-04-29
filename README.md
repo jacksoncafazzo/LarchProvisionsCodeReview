@@ -13,7 +13,17 @@
     <li>Ingredients database</li>
     <li>Recipe database that consists of ingredients</li>
     <li>Menu database that consists of recipes</li>
-    <li>A weekly menu that can be created from recipes in the database.</li>
+    <li>A nice weekly menu display that can be created from recipes in the database.</li>
+    <li>User Accounts with Admin and Chef roles</li>
+    <li>Image upload for recipe image</li>
+  </ul>
+
+## Features I intend to add  
+  <ul>
+    <li>Ordering service for customers that shows their order total and creates a list of orders for the company</li>
+    <li>A "required ingredients" list corresponding to number of orders that is related to recipe requirements.</li>
+    <li>Use the Instagram API to display company posts in a styled way</li>
+    
   </ul>
 
 ##Installing 

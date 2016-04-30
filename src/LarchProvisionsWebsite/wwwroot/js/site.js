@@ -1,6 +1,10 @@
 ﻿// Write your Javascript code.
 $(document).ready(function () {
-    $(".slider").slider({ full_width: true });
+    $(".slider").slider({
+        full_width: true,
+        transition: 1000,
+        interval: 9999
+    });
     $(".button-collapse").sideNav({
         menuWidth: 300, // Default is 240
         edge: 'right', // Choose the horizontal origin

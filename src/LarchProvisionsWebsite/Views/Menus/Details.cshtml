@@ -5,26 +5,15 @@
 }
 
 <div class="container menu-display">
-    
-    <h4 class="center">THIS WEEK'S MENU</h4>
-    <div class="row center">
-        <div class="col l6 m6 s12">
-            <h5>Order by noon Sunday</h5><h5> @Model.OrderBy.Month/@Model.OrderBy.Day/@Model.OrderBy.Year</h5>
-        </div>
-        <div class="col l6 m6 s12">
 
-            <h5>
-                Pickup 3-7pm on Tuesday</h5><h5>@Model.PickupTime.Month/@Model.PickupTime.Day/@Model.PickupTime.Year 
-            </h5>
-        </div>
-    </div>
+    <h4 class="center">THIS WEEK'S MENU</h4>
+
     <h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
     @if (User.IsInRole("Chef"))
     {
         <h3 class="center">@Html.ActionLink("Edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
     }
-    
-    
+
     <div class="row">
 
         @foreach (var recipe in Model.Recipes)
@@ -37,20 +26,24 @@
                     <div class="card-content">
                         <span class"card-title activator">@recipe.Name<i class="material-icons right">more_vert</i></span>
                         <p>$@recipe.CustPrice per serving</p>
-                        @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
+
+                        @foreach (var o in recipe.Orders)
                         {
-                            @Html.HiddenFor(m => m.MenuId);
-                            foreach (var o in recipe.Orders)
-                            {
-                                <i class="material-icons">redeem</i>
-
-                            }
-                            <input hidden name="recipeId" value="@recipe.RecipeId" />                          
-                            <button class="btn waves-effect waves-ripple" type="submit">
-                                Order
-                            </button>
-
+                            <i class="material-icons">redeem</i>
                         }
+                        <div class="row">
+                            <div class="col l12 m12 s12 center">
+
+                                @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
+                                {
+                                    @Html.HiddenFor(m => m.MenuId);
+                                    <input hidden name="recipeId" value="@recipe.RecipeId" />
+                                    <button class="btn waves-effect waves-ripple" type="submit">
+                                        Add Order
+                                    </button>
+                                }
+                            </div>
+                        </div>
                     </div>
                     <div class="container recipe-description">
                     </div>
@@ -64,6 +57,44 @@
                 </div>
             </div>
         }
+    <div class="row container">
+        <h4>Your current orders total $@ViewData["CustTotal"]</h4>
+        <ul>
+            @foreach (var recipe in Model.Recipes)
+            {
+                @foreach (var order in recipe.Orders)
+                {
+                <li>@order.RecipeName: $@recipe.CustPrice</li>
+                <li>
+                    @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.MenuId);
+                        <input hidden name="recipeId" value="@recipe.RecipeId" />
+                                    <button class="btn waves-effect waves-ripple" type="submit">
+                                        Remove Order
+                                    </button>
+                    }
+                </li>
+
+                }
+
+            }
+        </ul>
+
+    </div>
+    </div>
+    <div class="row center">
+        <div class="col l6 m6 s12">
+            <h5>Order by noon Sunday</h5><h5> @Model.OrderBy.Month/@Model.OrderBy.Day/@Model.OrderBy.Year</h5>
+        </div>
+        <div class="col l6 m6 s12">
+
+            <h5>
+                Pickup 3-7pm on Tuesday
+            </h5><h5>
+                @Model.PickupTime.Month/@Model.PickupTime.Day/@Model.PickupTime.Year
+            </h5>
+        </div>
     </div>
 </div>
 <div class="menu-content-main">
@@ -79,9 +110,9 @@
         <span class="card-title activator grey-text text-darken-4">Ordering Information<i class="material-icons right">more_vert</i></span>
     </div>
     <div class="card-reveal">
-        
+
         <div class="row">
-            
+
             <div class="col l12 m12 s12">
                 <span class="card-title grey-text text-darken-4">Ordering Information<i class="material-icons right">close</i></span>
                 <ul>

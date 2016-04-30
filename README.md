@@ -21,10 +21,8 @@
 
 ## Features I intend to add  
   <ul>
-    
     <li>A "required ingredients" list corresponding to number of orders that is related to recipe requirements.</li>
     <li>Use the Instagram API to display company posts in a styled way</li>
-    
   </ul>
 
 ##Installing 

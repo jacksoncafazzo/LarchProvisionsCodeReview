@@ -3,8 +3,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -31,12 +33,24 @@ namespace LarchProvisionsWebsite.Controllers
         public IActionResult CurrentMenu()
         {
             var menu = _context.Menus.Last();
-            menu.Recipes = _context.Recipes.Join(
-                _context.Servings.Where(
-                s => s.MenuId == menu.MenuId).ToList(),
-                s => s.RecipeId,
-                s => s.RecipeId,
-                (o, i) => o).ToList();
+            if (menu == null)
+            {
+                return HttpNotFound();
+            }
+            var user = GetUser().Result;
+            var recipes = GetRecipes(menu.MenuId);
+
+            foreach (var recipe in recipes)
+            {
+                menu.Recipes.Remove(recipe);
+                menu.Recipes.Add(StackRecipe(recipe, menu));
+            }
+            ViewBag.AllRecipes = _context.Recipes.ToList().Except(recipes);
+
+            ViewBag.AllOrders = _context.Orders.ToList().Except(menu.Orders);
+
+            ViewData["ReturnUrl"] = "/Menus/Display/" + menu.MenuId;
+
             return View("Details", menu);
         }
 
@@ -86,19 +100,6 @@ namespace LarchProvisionsWebsite.Controllers
             return View("Details", menu);
         }
 
-        [NonAction]
-        public Order StackOrder(Order order, int menuId, int recipeId, ApplicationUser user, Menu menu)
-        {
-            order.MenuId = menuId;
-            order.RecipeId = recipeId;
-            order.Recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == recipeId);
-            order.UserId = User.GetUserId();
-            order.ApplicationUser = _userdb.Users.FirstOrDefaultAsync(u => u.Id == order.UserId).Result;
-            order.OrderSize = +1;
-            order.Menu = menu;
-            return order;
-        }
-
         // GET: Menus/Create
         public IActionResult Create()
         {
@@ -126,40 +127,88 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            var user = _userdb.Users.FirstOrDefaultAsync(u => u.Id == User.GetUserId()).Result;
             Menu menu = _context.Menus.FirstOrDefault(m => m.MenuId == id);
             if (menu == null)
             {
                 return HttpNotFound();
             }
-            var recipes = _context.Recipes.Join(
-                _context.Servings.Where(
-                s => s.MenuId == id).ToList(),
-                s => s.RecipeId,
-                s => s.RecipeId,
-                (o, i) => o).ToList();
+            var user = GetUser().Result;
+            var recipes = GetRecipes(menu.MenuId);
+
             foreach (var recipe in recipes)
             {
-                recipe.Preps = _context.Preps.Where(p => p.RecipeId == id).ToList();
-                recipe.Ingredients = _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == recipe.RecipeId).ToList(),
-                i => i.IngredientId,
-                p => p.IngredientId,
-                (o, i) => o).ToList();
-                var orders = _context.Orders.Where(o => o.RecipeId == recipe.RecipeId).ToList();
-                foreach (var o in orders)
-                {
-                    var stackedOrder = StackOrder(o, menu.MenuId, recipe.RecipeId, user, menu);
-                    recipe.Orders.Add(stackedOrder);
-                }
+                menu.Recipes.Remove(recipe);
+                menu.Recipes.Add(StackRecipe(recipe, menu));
             }
-            menu.Recipes = recipes;
-            ViewBag.Recipes = _context.Recipes.ToList().Except(menu.Recipes);
-            menu.Orders = _context.Orders.Where(o => o.MenuId == id).ToList();
+            ViewBag.AllRecipes = _context.Recipes.ToList().Except(recipes);
 
-            ViewBag.Orders = _context.Orders.ToList().Except(menu.Orders);
+            ViewBag.AllOrders = _context.Orders.ToList().Except(menu.Orders);
 
             ViewData["ReturnUrl"] = "/Menus/Edit/" + id;
             return View(menu);
+        }
+
+        [NonAction]
+        public async Task<ApplicationUser> GetUser()
+        {
+            return await _userdb.Users.FirstOrDefaultAsync(u => u.Id == User.GetUserId());
+        }
+
+        [NonAction]
+        public async Task<Order> GetOrder(int recipeId)
+        {
+            return await _context.Orders.FirstOrDefaultAsync(o => o.UserId == User.GetUserId() && o.RecipeId == recipeId);
+        }
+
+        [NonAction]
+        public ICollection<Order> GetOrders(int recipeId, ApplicationUser user)
+        {
+            return _context.Orders.Join(
+                _userdb.Users.Where(
+                u => u.Id == user.Id).ToList(),
+                o => o.UserId,
+                u => u.Id,
+                (o, i) => o).ToList();
+        }
+
+        [NonAction]
+        public ICollection<Recipe> GetRecipes(int menuId)
+        {
+            return _context.Recipes.Join(
+                _context.Servings.Where(
+                s => s.MenuId == menuId).ToList(),
+                r => r.RecipeId,
+                s => s.RecipeId,
+                (o, i) => o).ToList();
+        }
+
+        [NonAction]
+        public Recipe StackRecipe(Recipe recipe, Menu menu)
+        {
+            var user = GetUser();
+            recipe.Preps = _context.Preps.Where(p => p.RecipeId == recipe.RecipeId).ToList();
+            recipe.Ingredients = _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == recipe.RecipeId).ToList(),
+            i => i.IngredientId,
+            p => p.IngredientId,
+            (o, i) => o).ToList();
+            recipe.Orders = _context.Orders.Where(o => o.RecipeId == recipe.RecipeId).ToList();
+
+            return recipe;
+        }
+
+        [NonAction]
+        public Order StackOrder(Order order, int menuId, int recipeId, ApplicationUser user, Menu menu)
+        {
+            order.MenuId = menuId;
+            order.RecipeId = recipeId;
+            order.Recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == recipeId);
+            order.RecipeName = order.Recipe.Name;
+            order.UserId = User.GetUserId();
+            order.ApplicationUser = user;
+            order.OrderSize = +1;
+            order.Menu = menu;
+            order.UserName = User.GetUserName();
+            return order;
         }
 
         // POST: Menus/ServeRecipe
@@ -178,6 +227,7 @@ namespace LarchProvisionsWebsite.Controllers
             Serving serving = _context.Servings.FirstOrDefault(s => s.MenuId == menuId && s.RecipeId == recipeId);
             _context.Servings.Remove(serving);
             _context.SaveChanges();
+            var menu = _context.Menus.Where(m => m.MenuId == menuId);
             return RedirectToAction("Edit", new { id = menuId });
         }
 

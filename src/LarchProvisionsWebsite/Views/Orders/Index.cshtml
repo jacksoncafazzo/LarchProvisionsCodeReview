@@ -1,0 +1,14 @@
+﻿@model IEnumerable<LarchProvisionsWebsite.Models.Order>
+
+<ul>
+    @foreach (var o in Model)
+    {
+        <li>Menu Id: @o.MenuId</li>
+        <li>User: @o.UserName</li>
+        <li>Recipe: @o.RecipeName</li>
+        <li>Order size: @o.OrderSize</li>
+        <li>id: @o.OrderId</li>
+        <li><a asp-action="Edit" asp-route-id="@o.OrderId">Edit</a> |</li>
+
+    }
+</ul>

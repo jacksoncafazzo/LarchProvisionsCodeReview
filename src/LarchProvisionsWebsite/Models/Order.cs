@@ -12,11 +12,14 @@ namespace LarchProvisionsWebsite.Models
         [ForeignKey("UserId")]
         public string UserId { get; set; }
 
+        public string UserName { get; set; }
         [NotMapped]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [ForeignKey("RecipeId")]
         public int RecipeId { get; set; }
+
+        public string RecipeName { get; set; }
 
         [ForeignKey("MenuId")]
         public int MenuId { get; set; }

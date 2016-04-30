@@ -11,6 +11,7 @@
     <div class="col m12 l6 s12 edit-menu">
         <div class="row">
             <h5>Menu #@Model.MenuId</h5>
+            <h5 style="text-decoration: underline">@Model.Title</h5>
             <div class="col m6 l6 s12">
                 <ul>
                     @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
@@ -32,45 +33,37 @@
                     {
                         @Html.HiddenFor(m => m.MenuId)
                         <li><h4>Orders Made</h4></li>
-                        @foreach (var order in Model.Orders)
+                        @foreach (var recipe in Model.Recipes)
                         {
+                            @foreach (var order in recipe.Orders)
+                            {
 
-                            @Html.DisplayFor(e => order, "list-order-admin")
+                                @Html.DisplayFor(e => order, "list-order-admin")
 
+                            }
                         }
                     }
                 </ul>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col m12 l12 s12">
                 <ul>
                     @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
                     {
 
                         @Html.HiddenFor(m => m.MenuId)
                         <li><h3>Add Recipes</h3></li>
-                        @foreach (var recipe in ViewBag.Recipes)
+                        @if (ViewBag.AllRecipes != null)
                         {
-                            @Html.DisplayFor(model => recipe, "add-recipe")
+                            @foreach (var recipe in ViewBag.AllRecipes)
+                            {
+                                @Html.DisplayFor(model => recipe, "add-recipe")
+                            }
                         }
                     }
                 </ul>
                 @Html.ActionLink("Create New Recipe", "Create", "Recipes", new { returnUrl = ViewData["ReturnUrl"] })
-            </div>
-            <div class="col-md-6">
-                <ul>
-                    @using (Html.BeginForm("AddOrder", "Menus", FormMethod.Post))
-                    {
-                        @Html.HiddenFor(m => m.MenuId)
-                        <li><h3>Add Orders</h3></li>
-                        @foreach (var order in ViewBag.Orders)
-                        {
-                            @Html.DisplayFor(model => order, "add-order")
-                        }
-                    }
-                </ul>
-                @Html.ActionLink("Create New Order", "Create", "Orders", new { returnUrl = ViewData["ReturnUrl"] })
             </div>
         </div>
     </div>
@@ -80,21 +73,6 @@
                 <h4>@Model.Title</h4>
                 <hr />
                 <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="MenuId" />
-                <div class="form-group">
-                    <label asp-for="OrderBy" class="col m2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="OrderBy" class="form-control" />
-                        <span asp-validation-for="OrderBy" class="text-danger" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PickupTime" class="col m2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="PickupTime" class="form-control datepicker" />
-                        <span asp-validation-for="PickupTime" class="text-danger" />
-                    </div>
-                </div>
                 <div class="form-group">
                     <label asp-for="Title" class="col m2 control-label"></label>
                     <div class="col-md-10">
@@ -102,9 +80,25 @@
                         <span asp-validation-for="Title" class="text-danger" />
                     </div>
                 </div>
+                <input type="hidden" asp-for="MenuId" />
+                <div class="form-group">
+                    <label asp-for="OrderBy" class="col m2 control-label"></label>
+                    <div class="col-md-10">
+                        <input datepicker type="date" asp-for="OrderBy" class="form-control" />
+                        <span asp-validation-for="OrderBy" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label datepicker type="date" asp-for="PickupTime" class="col m2 control-label"></label>
+                    <div class="col-md-10">
+                        <input type="date" asp-for="PickupTime" class="form-control datepicker" />
+                        <span asp-validation-for="PickupTime" class="text-danger" />
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col m10">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                        <input type="submit" value="Update Menu" class="btn btn-default" />
                     </div>
                 </div>
             </div>

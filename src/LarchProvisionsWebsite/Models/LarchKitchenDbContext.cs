@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Entity;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace LarchProvisionsWebsite.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             //builder.Entity<Recipe>().HasOne(r => r.Menu)
             //    .WithMany(m => m.Recipes)
             //    .HasForeignKey(r => r.MenuId)

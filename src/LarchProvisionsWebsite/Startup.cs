@@ -51,7 +51,7 @@ namespace LarchProvisionsWebsite
                     options.UseSqlServer(Configuration["dbpass"]))
                 .AddDbContext<LarchKitchenDbContext>(options =>
                     options.UseSqlServer(Configuration["dbpass"]));
-            //options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            //options.UseSqlServer(c));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

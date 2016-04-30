@@ -58,7 +58,7 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 returnUrl = "/Recipes/";
             }
-            ViewData["MenuId"] = returnUrl.Remove(0, 12);
+            ViewData["MenuId"] = returnUrl.Remove(0, returnUrl.Length - 2);
             ViewBag.returnUrl = returnUrl;
             return View();
         }

@@ -28,7 +28,6 @@ namespace LarchProvisionsWebsite.Models
         [NotMapped]
         public virtual Recipe Recipe { get; set; }
 
-        [NotMapped]
-        public virtual ApplicationUser User { get; set; }
+        
     }
 }

@@ -83,10 +83,10 @@
                         @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
                         {
                             @Html.HiddenFor(m => m.MenuId);
-                            <input hidden name="recipeId" value="@recipe.RecipeId" />
-                            <div class="btn waves-effect waves-ripple" typeof="submit">
+                            <input hidden name="recipeId" value="@recipe.RecipeId" />                          
+                            <button class="btn waves-effect waves-ripple" type="submit">
                                 Order
-                            </div>
+                            </button>
 
                         }
                     </div>

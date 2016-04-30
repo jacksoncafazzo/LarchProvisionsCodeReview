@@ -1,18 +1,24 @@
 using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
 
 namespace LarchProvisionsWebsite.Controllers
 {
     public class MenusController : Controller
     {
         private LarchKitchenDbContext _context;
+        private ApplicationDbContext _userdb;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MenusController(LarchKitchenDbContext context)
+        public MenusController(LarchKitchenDbContext context, ApplicationDbContext userdb, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userdb = userdb;
+            _userManager = userManager;
         }
 
         // GET: Menus
@@ -57,6 +63,42 @@ namespace LarchProvisionsWebsite.Controllers
             return View(menu);
         }
 
+        //Post CurrentMenu/Order
+        public IActionResult Order(int menuId, int recipeId, ApplicationUser user)
+        {
+            var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
+            menu.Recipes = _context.Recipes.Join(
+                _context.Servings.Where(
+                s => s.MenuId == menuId).ToList(),
+                s => s.RecipeId,
+                s => s.RecipeId,
+                (o, i) => o).ToList();
+            var order = new Order();
+            order = StackOrder(order, menuId, recipeId, user, menu);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            var orders = _context.Orders.Where(o => o.MenuId == menuId).ToList();
+            foreach (var o in menu.Orders)
+            {
+                var stackedOrder = StackOrder(o, menuId, recipeId, user, menu);
+                menu.Orders.Add(stackedOrder);
+            }
+            return View("Details", menu);
+        }
+
+        [NonAction]
+        public Order StackOrder(Order order, int menuId, int recipeId, ApplicationUser user, Menu menu)
+        {
+            order.MenuId = menuId;
+            order.RecipeId = recipeId;
+            order.Recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == recipeId);
+            order.UserId = User.GetUserId();
+            order.ApplicationUser = _userdb.Users.FirstOrDefaultAsync(u => u.Id == order.UserId).Result;
+            order.OrderSize = +1;
+            order.Menu = menu;
+            return order;
+        }
+
         // GET: Menus/Create
         public IActionResult Create()
         {
@@ -84,7 +126,7 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-
+            var user = _userdb.Users.FirstOrDefaultAsync(u => u.Id == User.GetUserId()).Result;
             Menu menu = _context.Menus.FirstOrDefault(m => m.MenuId == id);
             if (menu == null)
             {
@@ -103,11 +145,17 @@ namespace LarchProvisionsWebsite.Controllers
                 i => i.IngredientId,
                 p => p.IngredientId,
                 (o, i) => o).ToList();
+                var orders = _context.Orders.Where(o => o.RecipeId == recipe.RecipeId).ToList();
+                foreach (var o in orders)
+                {
+                    var stackedOrder = StackOrder(o, menu.MenuId, recipe.RecipeId, user, menu);
+                    recipe.Orders.Add(stackedOrder);
+                }
             }
             menu.Recipes = recipes;
             ViewBag.Recipes = _context.Recipes.ToList().Except(menu.Recipes);
-
             menu.Orders = _context.Orders.Where(o => o.MenuId == id).ToList();
+
             ViewBag.Orders = _context.Orders.ToList().Except(menu.Orders);
 
             ViewData["ReturnUrl"] = "/Menus/Edit/" + id;
@@ -145,17 +193,6 @@ namespace LarchProvisionsWebsite.Controllers
                 return RedirectToAction("Index");
             }
             return View(menu);
-        }
-
-        //Get: Menus/Order/1/3
-        public IActionResult Order(int menuId, int recipeId)
-        {
-            var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
-            var order = new Order();
-            order.MenuId = menuId;
-            order.RecipeId = recipeId;
-            //save it blahblhb
-            return View("Details", menu);
         }
 
         // GET: Menus/Delete/5

@@ -1,12 +1,12 @@
-﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic);
-.nav-wrapper {
+﻿.nav-wrapper {
   background-color: #F6F6F6; }
   .nav-wrapper a {
-    font-size: 1.3em;
+    font-size: 1.5em;
     color: slategrey; }
   .nav-wrapper a:hover {
-    color: #fafafa;
-    text-shadow: 0px -1px 2px black; }
+    color: #892517;
+    text-shadow: 0px -1px 2px lightgray;
+    background-color: #F6F6F6; }
   .nav-wrapper .brand-logo img {
     height: 75px; }
   .nav-wrapper .button-collapse {
@@ -63,6 +63,8 @@
   flex-flow: column nowrap;
   width: 100%;
   padding: 0px; }
+  .about-content .card .card-reveal {
+    background-color: rgba(255, 255, 255, 0.85); }
   .about-content img {
     width: 100%; }
   .about-content .e-instagram img {
@@ -90,24 +92,103 @@
     text-align: center;
     max-width: 100%; }
 
+.menu-background {
+  background-image: url("../img/cheffin.png");
+  background-color: darkgrey; }
+
+.menu-display h2, .menu-display h3, .menu-display h4 {
+  color: lightgray;
+  text-shadow: 2px 2px 2px black; }
+
+.menu-display .card .balanced-meals {
+  position: absolute;
+  top: 100px;
+  padding-left: 25px;
+  padding-right: 25px;
+  text-align: center;
+  z-index: 5; }
+
 .menu-display .card h3, .menu-display .card h5 {
   color: #f6f6f6;
   text-shadow: 1px 1px 1px black; }
 
+.menu-display .card .card-reveal {
+  background-color: rgba(5, 0, 0, 0.8);
+  color: lightgray;
+  text-shadow: 1px 1px 1px black; }
+  .menu-display .card .card-reveal .card-title {
+    color: lightgray;
+    text-shadow: 2px 2px 2px black; }
+
+.menu-display .card .order-info {
+  background-color: rgba(5, 0, 0, 0.7); }
+
+.menu-display .orders-display ul {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  justify-content: space-between; }
+
 .contact .contact-photo img {
   width: 100%; }
+
+.contact .address {
+  position: absolute;
+  top: 80px;
+  right: 25px;
+  text-align: right;
+  color: lightgray;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.5em; }
+
+.contact .email {
+  position: absolute;
+  top: 300px;
+  right: 25px;
+  text-align: right;
+  color: lightgray;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.5em; }
+  .contact .email a {
+    color: lightgray;
+    text-shadow: #892517; }
+  .contact .email a:hover {
+    color: #892517;
+    text-shadow: 1px 1px 1px white; }
+
+.contact .order-form {
+  position: absolute;
+  top: 500px;
+  right: 25px;
+  text-align: right;
+  color: lightgray;
+  text-shadow: 1px 1px 1px black;
+  font-size: 2.5em; }
+  .contact .order-form a {
+    color: lightgray;
+    text-shadow: #892517; }
+  .contact .order-form a:hover {
+    color: #892517;
+    text-shadow: 1px 1px 1px white; }
+
+.provisions-display {
+  background-image: url(../img/couple-mountain.png);
+  background-size: cover; }
+
+@font-face {
+  font-family: orator;
+  src: url(../fonts/orator/ufonts.com_orator-regular.ttf); }
 
 body, html {
   color: color("black", "lighten-2");
   background-color: color("grey", "lighten-4");
-  font-family: "Open Sans", sans-serif; }
+  font-family: orator; }
   body a, html a {
     color: slategrey; }
 
 .caption h4, .caption h5 {
-  background-color: #767676;
+  background-color: rgba(7, 0, 0, 0.7);
   display: inline;
   line-height: 1.5em;
-  box-shadow: 10px 0 0 #767676, -10px 0 0 #767676;
   opacity: .75; }
 

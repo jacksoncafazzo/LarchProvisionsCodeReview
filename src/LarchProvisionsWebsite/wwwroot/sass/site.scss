@@ -4,21 +4,28 @@
 @import "layout/about";
 @import "layout/menu-display";
 @import "layout/contact";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic);
+@import "layout/provisions";
+
+@font-face {
+    font-family: orator;
+    src: url(../fonts/orator/ufonts.com_orator-regular.ttf);
+}
 
 body, html {
     color: $primary-color;
     background-color: $primary-bg-color;
-    font-family: $primary-font-family;
+    font-family: orator;
+    
     a {
         color: $primary-link-color;
     }
 }
 
 .caption h4, .caption h5 {
-    background-color: darken(grey, 4);
-    display:inline;
-    line-height:1.5em;
-    box-shadow:10px 0 0 darken(grey, 4), -10px 0 0 darken(grey, 4);
-    opacity:.75;
+    background-color: rgba(7,0,0,0.7);
+    display: inline;
+    line-height: 1.5em;
+    
+    opacity: .75;
 }
+

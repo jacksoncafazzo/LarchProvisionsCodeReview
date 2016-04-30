@@ -28,26 +28,27 @@
                 </a>
 
                 <ul id="nav-mobile" class="right hide-on-small-and-down waves-effect waves-light">
-                    <li>@Html.ActionLink("Menu", "CurrentMenu", "Menus")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
+                    <li>@Html.ActionLink("menu", "CurrentMenu", "Menus")</li>
+                    <li>@Html.ActionLink("about", "About", "Home")</li>
+                    <li>@Html.ActionLink("contact", "Contact", "Home")</li>
                     <li><a href="#" data-activates="collapse-menu" class="button-collapse" materialize="sidenav"><i class="material-icons">menu</i></a></li>
                 </ul>
 
                 <ul class="side-nav right-align" id="collapse-menu">
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
-                    <li>@Html.ActionLink("Menu", "CurrentMenu", "Menus")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("menu", "CurrentMenu", "Menus")</li>
+                    <li>@Html.ActionLink("about", "About", "Home")</li>
+                    <li>@Html.ActionLink("contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                        <li>@Html.ActionLink("admin", "Index", "Admin")</li>
                     }
                     @if (User.IsInRole("Chef"))
                     {
-                        <li>@Html.ActionLink("Menu List", "Index", "Menus")</li>
-                        <li>@Html.ActionLink("Recipe List", "Index", "Recipes")</li>
-                        <li>@Html.ActionLink("Ingredient List", "Index", "Ingredients")</li>
+                        <li>@Html.ActionLink("menu list", "Index", "Menus")</li>
+                        <li>@Html.ActionLink("recipe list", "Index", "Recipes")</li>
+                        <li>@Html.ActionLink("ingredient list", "Index", "Ingredients")</li>
 
                     }
 
@@ -63,9 +64,8 @@
     </div>
     <div class="container-fluid body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - LarchProvisionsWebsite</p>
+        <footer class="right">
+            <h5>&copy; 2016 - doctorjuno for Larch Provisions</h5>
         </footer>
     </div>
 

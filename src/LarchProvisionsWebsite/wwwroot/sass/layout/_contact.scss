@@ -2,4 +2,48 @@
     .contact-photo img {
         width: 100%;
     }
+    .address {
+        position: absolute;
+        top: 80px;
+        right: 25px;
+        text-align: right;
+        color: lightgray;
+        text-shadow: 1px 1px 1px black;
+        font-size: 1.5em;
+    }
+    .email {
+        position: absolute;
+        top: 300px;
+        right: 25px;
+        text-align: right;
+        color: lightgray;
+        text-shadow: 1px 1px 1px black;
+        font-size: 1.5em;
+        a {
+            color: lightgray;
+            text-shadow: #892517;
+        }
+        a:hover {
+            color: #892517;
+            text-shadow: 1px 1px 1px white;
+        }
+    }
+    .order-form {
+        position: absolute;
+        top: 500px;
+        right: 25px;
+        text-align: right;
+        color: lightgray;
+        text-shadow: 1px 1px 1px black;
+        font-size: 2.5em;
+        a {
+            color: lightgray;
+            text-shadow: #892517;
+        }
+        a:hover {
+            color: #892517;
+            text-shadow: 1px 1px 1px white;
+        }
+    }
+    
 }

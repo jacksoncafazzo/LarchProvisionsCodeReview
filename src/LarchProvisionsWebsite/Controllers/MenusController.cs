@@ -105,6 +105,13 @@ namespace LarchProvisionsWebsite.Controllers
                 var stackedOrder = StackOrder(o, menuId, recipeId, user, menu);
                 menu.Orders.Add(stackedOrder);
             }
+            var totalPrice = 0;
+            foreach (var recipe in menu.Recipes)
+            {
+                var monies = recipe.CustPrice * recipe.Orders.Count;
+                totalPrice = totalPrice + monies;
+            }
+            ViewData["CustTotal"] = totalPrice;
             return View("Details", menu);
         }
 
@@ -163,7 +170,7 @@ namespace LarchProvisionsWebsite.Controllers
             serving.MenuId = menuId;
             _context.Servings.Add(serving);
             _context.SaveChanges();
-            return RedirectToAction("CurrentMenu");
+            return RedirectToAction("Edit", new { id=menuId });
         }
 
         // Post: Menus/RemoveOrder

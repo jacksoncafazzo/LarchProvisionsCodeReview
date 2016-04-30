@@ -1,11 +1,55 @@
-﻿.menu-display {
+﻿.menu-background {
+    background-image: url("../img/cheffin.png");
+    background-color: darkgrey;
+}
+
+.menu-display {
+    h2, h3, h4 {
+        color: lightgray;
+        text-shadow: 2px 2px 2px black;
+    }
+
     .card {
+        .balanced-meals {
+            position: absolute;
+            top: 100px;
+            padding-left: 25px;
+            padding-right: 25px;
+            text-align: center;
+            z-index: 5;
+        }
+
         h3, h5 {
             color: #f6f6f6;
             text-shadow: 1px 1px 1px black;
         }
 
+        .card-reveal {
+            background-color: rgba(5,0,0,0.8);
+
+            .card-title {
+                color: lightgray;
+                text-shadow: 2px 2px 2px black;
+            }
+
+            color: lightgray;
+            text-shadow: 1px 1px 1px black;
+        }
+
         .card-content {
+        }
+
+        .order-info {
+            background-color: rgba(5,0,0,0.7);
+        }
+    }
+
+    .orders-display {
+        ul {
+            display: flex;
+            width: 100%;
+            flex-flow: row wrap;
+            justify-content: space-between;
         }
     }
 }

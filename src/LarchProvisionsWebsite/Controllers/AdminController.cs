@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
 {
-    public partial class LarchKitchen : Migration
+    public partial class InitialLarch : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,7 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CustPrice = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
                     MenuMenuId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
@@ -54,6 +55,7 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<double>(nullable: false),
                     Name = table.Column<string>(nullable: true),
+                    PrepId = table.Column<int>(nullable: false),
                     RecipeRecipeId = table.Column<int>(nullable: true),
                     Source = table.Column<string>(nullable: true),
                     Unit = table.Column<string>(nullable: true)
@@ -77,7 +79,9 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
                     MenuId = table.Column<int>(nullable: false),
                     OrderSize = table.Column<int>(nullable: false),
                     RecipeId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    RecipeName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,7 +131,8 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
                     PrepId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IngredientId = table.Column<int>(nullable: false),
-                    RecipeId = table.Column<int>(nullable: false)
+                    RecipeId = table.Column<int>(nullable: false),
+                    RecipeMeasurment = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

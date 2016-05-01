@@ -11,6 +11,8 @@
         <form asp-action="Create">
             <div class="form-horizontal">
                 <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
                 <div class="form-group col l6 m6 s6">
                     <label asp-for="Amount" class="col l12 m12 s12 control-label"></label>
                     <div class="col-md-10">
@@ -43,6 +45,7 @@
 
                 <div class="form-group">
                     <div class="col l12 m12 s12 center">
+
                         <input type="submit" value="Create" class="btn btn-large waves-effect waves-light" />
                     </div>
                 </div>

@@ -8,8 +8,8 @@ using LarchProvisionsWebsite.Models;
 namespace LarchProvisionsWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160422145614_ServingSize")]
-    partial class ServingSize
+    [Migration("20160501074736_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,7 +74,9 @@ namespace LarchProvisionsWebsite.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("RecipeId");
+                    b.Property<int>("PrepId");
+
+                    b.Property<int?>("RecipeRecipeId");
 
                     b.Property<string>("Source");
 
@@ -89,8 +91,6 @@ namespace LarchProvisionsWebsite.Migrations
                 {
                     b.Property<int>("MenuId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ApplicationUserId");
 
                     b.Property<DateTime>("OrderBy");
 
@@ -116,11 +116,31 @@ namespace LarchProvisionsWebsite.Migrations
 
                     b.Property<int>("RecipeId");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("RecipeName");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("OrderId");
 
                     b.HasAnnotation("Relational:TableName", "Orders");
+                });
+
+            modelBuilder.Entity("LarchProvisionsWebsite.Models.Prep", b =>
+                {
+                    b.Property<int>("PrepId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("IngredientId");
+
+                    b.Property<int>("RecipeId");
+
+                    b.Property<double>("RecipeMeasurment");
+
+                    b.HasKey("PrepId");
+
+                    b.HasAnnotation("Relational:TableName", "Preps");
                 });
 
             modelBuilder.Entity("LarchProvisionsWebsite.Models.Recipe", b =>
@@ -131,6 +151,8 @@ namespace LarchProvisionsWebsite.Migrations
                     b.Property<int>("CustPrice");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Image");
 
                     b.Property<int?>("MenuMenuId");
 
@@ -245,14 +267,7 @@ namespace LarchProvisionsWebsite.Migrations
                 {
                     b.HasOne("LarchProvisionsWebsite.Models.Recipe")
                         .WithMany()
-                        .HasForeignKey("RecipeId");
-                });
-
-            modelBuilder.Entity("LarchProvisionsWebsite.Models.Menu", b =>
-                {
-                    b.HasOne("LarchProvisionsWebsite.Models.ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("RecipeRecipeId");
                 });
 
             modelBuilder.Entity("LarchProvisionsWebsite.Models.Order", b =>
@@ -264,6 +279,17 @@ namespace LarchProvisionsWebsite.Migrations
                     b.HasOne("LarchProvisionsWebsite.Models.Menu")
                         .WithMany()
                         .HasForeignKey("MenuId");
+
+                    b.HasOne("LarchProvisionsWebsite.Models.Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId");
+                });
+
+            modelBuilder.Entity("LarchProvisionsWebsite.Models.Prep", b =>
+                {
+                    b.HasOne("LarchProvisionsWebsite.Models.Ingredient")
+                        .WithMany()
+                        .HasForeignKey("IngredientId");
 
                     b.HasOne("LarchProvisionsWebsite.Models.Recipe")
                         .WithMany()

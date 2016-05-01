@@ -9,6 +9,8 @@
     background-color: #F6F6F6; }
   .nav-wrapper .brand-logo img {
     height: 75px; }
+  .nav-wrapper .brand-logo:hover {
+    background-color: transparent; }
   .nav-wrapper .button-collapse {
     display: block !important; }
 
@@ -94,15 +96,30 @@
     text-align: center;
     max-width: 100%; }
 
-.menu-background {
+.menu-edit-wrapper .menu-background {
   background-image: url("../img/cheffin.png");
   background-color: darkgrey; }
 
-.menu-display h2, .menu-display h3, .menu-display h4 {
+.menu-edit-wrapper .edit-menu {
+  margin-left: 50px; }
+  .menu-edit-wrapper .edit-menu .recipe-calc li {
+    padding-left: 13%; }
+  .menu-edit-wrapper .edit-menu .served-recipes {
+    display: flex;
+    flex-flow: row wrap; }
+
+.menu-edit-wrapper .list-orders {
+  z-index: 2;
+  top: 125px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between; }
+
+.menu-edit-wrapper .menu-display h2, .menu-edit-wrapper .menu-display h3, .menu-edit-wrapper .menu-display h4 {
   color: lightgray;
   text-shadow: 2px 2px 2px black; }
 
-.menu-display .card .balanced-meals {
+.menu-edit-wrapper .menu-display .card .balanced-meals {
   position: absolute;
   top: 100px;
   padding-left: 25px;
@@ -110,26 +127,20 @@
   text-align: center;
   z-index: 5; }
 
-.menu-display .card h3, .menu-display .card h5 {
+.menu-edit-wrapper .menu-display .card h3, .menu-edit-wrapper .menu-display .card h5 {
   color: #f6f6f6;
   text-shadow: 1px 1px 1px black; }
 
-.menu-display .card .card-reveal {
+.menu-edit-wrapper .menu-display .card .card-reveal {
   background-color: rgba(5, 0, 0, 0.8);
   color: lightgray;
   text-shadow: 1px 1px 1px black; }
-  .menu-display .card .card-reveal .card-title {
+  .menu-edit-wrapper .menu-display .card .card-reveal .card-title {
     color: lightgray;
     text-shadow: 2px 2px 2px black; }
 
-.menu-display .card .order-info {
+.menu-edit-wrapper .menu-display .card .order-info {
   background-color: rgba(5, 0, 0, 0.7); }
-
-.menu-display .orders-display ul {
-  display: flex;
-  width: 100%;
-  flex-flow: row wrap;
-  justify-content: space-between; }
 
 .contact .contact-photo img {
   width: 100%; }
@@ -192,6 +203,15 @@
     padding-top: 500px; }
   .provisions-display .provisions-wrapper {
     padding-top: 10px; }
+
+.btn {
+  background-color: #cecece;
+  text-shadow: 2px 2px 2px black; }
+
+.btn:hover {
+  background-color: #c9c9c9;
+  color: #892517;
+  text-shadow: -2px -2px 2px white; }
 
 @font-face {
   font-family: orator;

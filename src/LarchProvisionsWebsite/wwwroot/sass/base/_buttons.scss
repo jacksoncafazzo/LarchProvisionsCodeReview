@@ -1,0 +1,10 @@
+﻿.btn {
+    background-color: darken(lightgray, 2);
+    text-shadow: 2px 2px 2px black;
+}
+
+.btn:hover {
+        background-color: darken(lightgray, 4);
+        color: #892517;
+        text-shadow: -2px -2px 2px white;
+}

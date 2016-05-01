@@ -1,8 +1,12 @@
-﻿<li>User: @Model.UserName</li>
-<li> Order Size @Model.OrderSize</li>
-<li>Recipe @Model.RecipeName</li>
-@using (Html.BeginForm())
-{
-<li> <button name="orderId" value="@Model.OrderId" validate>Remove</button></li>
-@Html.AntiForgeryToken()
-}
+﻿<div class="col l3 m3 s3">
+    <ul>
+        <li>User: @Model.UserName</li>
+        <li> Order Size @Model.OrderSize</li>
+        <li>Recipe @Model.RecipeName</li>
+        @using (Html.BeginForm())
+        {
+            <li> <button name="orderId" value="@Model.OrderId" validate>Remove</button></li>
+            @Html.AntiForgeryToken()
+        }
+    </ul>
+</div>

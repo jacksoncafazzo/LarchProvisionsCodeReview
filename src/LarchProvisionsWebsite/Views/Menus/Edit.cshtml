@@ -4,35 +4,72 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="row">
-    <h4>Edit Menu</h4>
-</div>
-<div class="row">
-    <div class="col m12 l6 s12 edit-menu">
-        <div class="row">
-            <h5>Menu #@Model.MenuId</h5>
-            <h5 style="text-decoration: underline">@Model.Title</h5>
-            <div class="col m6 l6 s12">
-                <ul>
-                    @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
-                    {
-                        @Html.HiddenFor(m => m.MenuId)
-                        <li><h4>Recipes Served</h4></li>
+<div class="menu-edit-wrapper">
+    <div class="row">
+        <div class="col m12 l6 s12 edit-menu">
+            <div class="row">
+                <h5>Menu #@Model.MenuId</h5>
+                <h5 style="text-decoration: underline">@Model.Title</h5>
+                <div class="col m6 l6 s12 served-recipes">
+                    <ul>
+                        @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(m => m.MenuId)
+                            <li><h4>recipes served</h4></li>
 
+                            @foreach (var recipe in Model.Recipes)
+                            {
+                                @Html.DisplayFor(e => recipe, "list-recipes-admin")
+
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="col m6 l6 s12 recipe-calc">
+                    <h4>this week's requirements</h4>
+                    <ul>
                         @foreach (var recipe in Model.Recipes)
                         {
-                            @Html.DisplayFor(e => recipe, "list-recipes-admin")
+                            var currentOrders = recipe.Orders.Count;
+                            @foreach (var ingredient in recipe.Ingredients)
+                            {
+                                <li>@(ingredient.Amount * currentOrders) @ingredient.Unit @ingredient.Name</li>
+
+                            }
 
                         }
-                    }
-                </ul>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-6">
-                <ul>
+            <div class="row">
+                <div class="col m6 l6 s12 serve-recipes">
+                    <ul>
+                        @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
+                        {
+
+                            @Html.HiddenFor(m => m.MenuId)
+                            <li><h3>add recipes</h3></li>
+                            @if (ViewBag.AllRecipes != null)
+                            {
+                                @foreach (var recipe in ViewBag.AllRecipes)
+                                {
+                                    @Html.DisplayFor(model => recipe, "add-recipe")
+                                }
+                            }
+                        }
+                    </ul>
+                    <h4>@Html.ActionLink("Create New Recipe", "Create", "Recipes", new { returnUrl = ViewData["ReturnUrl"] })</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col m12 l6 s12">
+            <div class="list-orders">
+                <div class="row">
+
                     @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
                     {
                         @Html.HiddenFor(m => m.MenuId)
-                        <li><h4>Orders Made</h4></li>
+                        <h4>orders placed</h4>
                         @foreach (var recipe in Model.Recipes)
                         {
                             @foreach (var order in recipe.Orders)
@@ -43,72 +80,50 @@
                             }
                         }
                     }
-                </ul>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col m12 l12 s12">
-                <ul>
-                    @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
-                    {
 
-                        @Html.HiddenFor(m => m.MenuId)
-                        <li><h3>Add Recipes</h3></li>
-                        @if (ViewBag.AllRecipes != null)
-                        {
-                            @foreach (var recipe in ViewBag.AllRecipes)
-                            {
-                                @Html.DisplayFor(model => recipe, "add-recipe")
-                            }
-                        }
-                    }
-                </ul>
-                @Html.ActionLink("Create New Recipe", "Create", "Recipes", new { returnUrl = ViewData["ReturnUrl"] })
-            </div>
-        </div>
-    </div>
-    <div class="col m12 l6 s12">
-        <form asp-action="Edit">
-            <div class="form-horizontal">
-                <h4>@Model.Title</h4>
-                <hr />
-                <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="col m2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Title" class="form-control datepicker" />
-                        <span asp-validation-for="Title" class="text-danger" />
+            <form asp-action="Edit">
+                <div class="form-horizontal">
+                    <h4>@Model.Title</h4>
+                    <hr />
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="col m2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Title" class="form-control datepicker" />
+                            <span asp-validation-for="Title" class="text-danger" />
+                        </div>
                     </div>
-                </div>
-                <input type="hidden" asp-for="MenuId" />
-                <div class="form-group">
-                    <label asp-for="OrderBy" class="col m2 control-label"></label>
-                    <div class="col-md-10">
-                        <input datepicker type="date" asp-for="OrderBy" class="form-control" />
-                        <span asp-validation-for="OrderBy" class="text-danger" />
+                    <input type="hidden" asp-for="MenuId" />
+                    <div class="form-group">
+                        <label asp-for="OrderBy" class="col m2 control-label"></label>
+                        <div class="col-md-10">
+                            <input datepicker type="date" asp-for="OrderBy" class="form-control" />
+                            <span asp-validation-for="OrderBy" class="text-danger" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label datepicker type="date" asp-for="PickupTime" class="col m2 control-label"></label>
-                    <div class="col-md-10">
-                        <input type="date" asp-for="PickupTime" class="form-control datepicker" />
-                        <span asp-validation-for="PickupTime" class="text-danger" />
+                    <div class="form-group">
+                        <label datepicker type="date" asp-for="PickupTime" class="col m2 control-label"></label>
+                        <div class="col-md-10">
+                            <input type="date" asp-for="PickupTime" class="form-control datepicker" />
+                            <span asp-validation-for="PickupTime" class="text-danger" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col m10">
-                        <input type="submit" value="Update Menu" class="btn btn-default" />
+                    <div class="form-group">
+                        <div class="col m10">
+                            <input type="submit" value="Update Menu" class="btn btn-default" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <div class="col l12 m12 s12">
-        <a asp-action="Index">Back to List</a>
+            </form>
+        </div>
+        <div class="col l12 m12 s12">
+            <a asp-action="Index">back to list</a>
+        </div>
     </div>
 </div>
-
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

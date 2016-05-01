@@ -8,8 +8,8 @@ using LarchProvisionsWebsite.Models;
 namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
 {
     [DbContext(typeof(LarchKitchenDbContext))]
-    [Migration("20160430005650_UserNameToOrder")]
-    partial class UserNameToOrder
+    [Migration("20160501080217_InitialLarch")]
+    partial class InitialLarch
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,8 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
                     b.Property<int>("OrderSize");
 
                     b.Property<int>("RecipeId");
+
+                    b.Property<string>("RecipeName");
 
                     b.Property<string>("UserId");
 

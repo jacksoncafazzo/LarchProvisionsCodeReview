@@ -1,0 +1,15 @@
+﻿.edit-recipe {
+    background-image: url("../img/cook-pasta.png");
+    background-size: contain;
+    width: 100%;
+    h2, h3, h4, h5, li {
+            color: lightgray;
+            text-shadow: 2px 2px 2px black;
+            button {
+                color: #892517;
+            }
+        }
+    li {
+        font-size: 1.3em;
+    }
+}

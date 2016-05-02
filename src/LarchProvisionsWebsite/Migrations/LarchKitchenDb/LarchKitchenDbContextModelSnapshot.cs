@@ -85,8 +85,6 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
 
                     b.Property<int>("RecipeId");
 
-                    b.Property<double>("RecipeMeasurment");
-
                     b.HasKey("PrepId");
 
                     b.HasAnnotation("Relational:TableName", "Preps");

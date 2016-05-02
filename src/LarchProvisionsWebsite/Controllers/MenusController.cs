@@ -43,7 +43,7 @@ namespace LarchProvisionsWebsite.Controllers
             foreach (var recipe in recipes)
             {
                 menu.Recipes.Remove(recipe);
-                menu.Recipes.Add(StackRecipe(recipe, menu));                
+                menu.Recipes.Add(StackRecipe(recipe, menu));
             }
             var totalPrice = 0;
 
@@ -97,13 +97,17 @@ namespace LarchProvisionsWebsite.Controllers
                 (o, i) => o).ToList();
             var order = new Order();
             order = StackOrder(order, menuId, recipeId, user, menu);
+
             _context.Orders.Add(order);
             _context.SaveChanges();
             var orders = _context.Orders.Where(o => o.MenuId == menuId).ToList();
-            foreach (var o in menu.Orders)
+            if (orders != null)
             {
-                var stackedOrder = StackOrder(o, menuId, recipeId, user, menu);
-                menu.Orders.Add(stackedOrder);
+                foreach (var o in orders)
+                {
+                    var stackedOrder = StackOrder(o, menuId, recipeId, user, menu);
+                    menu.Orders.Add(stackedOrder);
+                }
             }
             var totalPrice = 0;
             foreach (var recipe in menu.Recipes)
@@ -162,6 +166,7 @@ namespace LarchProvisionsWebsite.Controllers
             ViewData["ReturnUrl"] = "/Menus/Edit/" + id;
             return View(menu);
         }
+
         // POST: Menus/ServeRecipe
         public IActionResult ServeRecipe(int menuId, int recipeId)
         {
@@ -170,7 +175,7 @@ namespace LarchProvisionsWebsite.Controllers
             serving.MenuId = menuId;
             _context.Servings.Add(serving);
             _context.SaveChanges();
-            return RedirectToAction("Edit", new { id=menuId });
+            return RedirectToAction("Edit", new { id = menuId });
         }
 
         // Post: Menus/RemoveOrder
@@ -304,12 +309,10 @@ namespace LarchProvisionsWebsite.Controllers
             order.RecipeName = order.Recipe.Name;
             order.UserId = User.GetUserId();
             order.ApplicationUser = user;
-            order.OrderSize = +1;
+            order.OrderSize = 1;
             order.Menu = menu;
             order.UserName = User.GetUserName();
             return order;
         }
-
-        
     }
 }

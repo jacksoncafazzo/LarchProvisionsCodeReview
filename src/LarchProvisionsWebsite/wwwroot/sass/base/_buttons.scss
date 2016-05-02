@@ -1,10 +1,34 @@
-﻿.btn {
+﻿$strawberry: #892517 !default;
+
+.btn {
     background-color: darken(lightgray, 2);
     text-shadow: 2px 2px 2px black;
 }
 
 .btn:hover {
-        background-color: darken(lightgray, 4);
-        color: #892517;
-        text-shadow: -2px -2px 2px white;
+    background-color: darken(lightgray, 4);
+    color: $strawberry;
+    text-shadow: -2px -2px 2px white;
+}
+
+.btn:focus {
+    background-color: #f6f6f6;
+    box-shadow: rgba(137, 37, 23, .8) 10px 10px initial;
+    color: #892517;
+}
+
+.delete-button {
+    background-color: transparent;
+    width: 20px;
+    margin: 0px;
+    border: none;
+
+    :hover :focus {
+        background-color: #892517;
+    }
+
+    .delete-icon {
+        opacity: 1 !important;
+        margin-left: 0px;
+    }
 }

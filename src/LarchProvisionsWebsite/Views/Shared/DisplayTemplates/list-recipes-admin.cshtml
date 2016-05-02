@@ -1,10 +1,16 @@
-﻿<li><h5><a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">@Model.Name</a></h5></li>
-<li>Serving Size: @Model.ServingSize</li>
-<li>Customer Price: $@Model.CustPrice</li>
-<li><b>Ingredients</b></li>
-@foreach (var ingredient in Model.Ingredients)
-{
-    <li>@ingredient.Amount @ingredient.Unit @ingredient.Name</li>
+﻿<div class="collapsible-header">@Model.Name<a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId"><i class="material-icons">mode_edit</i></a> <button class="btn delete-button waves-effect waves-ripple  right" name="recipeId" value="@Model.RecipeId"><i class="material-icons">delete</i></button>
+</div>
+<div class="collapsible-body">
+    <p>
+        Customer Price: $@Model.CustPrice
+        
+        <ul>
+            @foreach (var ingredient in Model.Ingredients)
+            {
+                <li>@ingredient.Amount @ingredient.Unit @ingredient.Name</li>
 
-}
-<button class="btn waves-effect waves-ripple" name="recipeId" value="@Model.RecipeId">Remove Recipe</button>
+            }
+        </ul>
+    </p>
+
+</div>

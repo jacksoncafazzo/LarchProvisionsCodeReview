@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "file": "recipe.css",
+  "sources": ["_recipe.scss"],
+  "names": [],
+  "mappings": "AAAA,aACI,iBAAkB,6BAClB,gBAAiB,QACjB,MAAO,MAAX,aAAa,GAAI,aAAa,GAAI,aAAa,GAAI,aAAa,GAAI,aAAa,GAErE,MAAO,UACP,YAAa,mBAAzB,aAAa,GAAG,OAAQ,aAAa,GAAG,OAAQ,aAAa,GAAG,OAAQ,aAAa,GAAG,OAAQ,aAAa,GAAG,OAEhG,MAAO,SAEvB,aAAa,GAEL,UAAW"
+}

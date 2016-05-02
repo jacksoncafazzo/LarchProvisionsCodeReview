@@ -1,33 +1,9 @@
-﻿.menu-edit-wrapper {
-    .menu-background {
-        background-image: url("../img/cheffin.png");
-        background-color: darkgrey;
-    }
-
-    .edit-menu {
-        margin-left: 50px;
-
-        .recipe-calc li {
-            padding-left: 13%;
-        }
-
-        .served-recipes {
-            display: flex;
-            flex-flow: row wrap;
-        }
-    }
-
-    .list-orders {
-        z-index: 2;
-        top: 125px;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-
-    }
+﻿.menu-background {
+    background-image: url("../img/cheffin.png");
+    background-color: darkgrey;
 
     .menu-display {
-        h2, h3, h4 {
+        h2, h3, h4, h5 {
             color: lightgray;
             text-shadow: 2px 2px 2px black;
         }

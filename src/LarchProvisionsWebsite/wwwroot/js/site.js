@@ -1,6 +1,6 @@
 ﻿// Write your Javascript code.
 $(document).ready(function () {
-    $(".slider").slider({
+    $('.slider').slider({
         full_width: true,
         transition: 1000,
         interval: 9999

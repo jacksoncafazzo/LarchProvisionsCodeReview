@@ -1,11 +1,14 @@
 ﻿@import "base/variables";
+@import "base/buttons";
+@import "base/inputs";
+
 @import "layout/navbar";
 @import "layout/menu";
 @import "layout/about";
 @import "layout/menu-display";
 @import "layout/contact";
 @import "layout/provisions";
-@import "base/buttons";
+@import "layout/recipe";
 
 @font-face {
     font-family: orator;

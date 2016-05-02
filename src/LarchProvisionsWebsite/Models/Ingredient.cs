@@ -25,18 +25,5 @@ namespace LarchProvisionsWebsite.Models
 
         [ForeignKey("PrepId")]
         public int PrepId { get; set; }
-
-        public double SingleServing(int count, int servingSize)
-        {
-            double singleServing = Amount / servingSize;
-            return singleServing;
-        }
-
-        /*Truncate the ingredient return amounts */
-
-        public string ChopNumbers(double n)
-        {
-            return n.ToString("0.##");
-        }
     }
 }

@@ -1,12 +1,13 @@
-﻿<div class="col l3 m3 s3">
-    <ul>
-        <li>User: @Model.UserName</li>
-        <li> Order Size @Model.OrderSize</li>
-        <li>Recipe @Model.RecipeName</li>
-        @using (Html.BeginForm())
-        {
-            <li> <button name="orderId" value="@Model.OrderId" validate>Remove</button></li>
+﻿<div class="collapsible-header"><i class="material-icons">star</i>@Model.UserName - @Model.RecipeName</div>
+<div class="collapsible-body">
+    <p>
+        Order Size @Model.OrderSize<br />
+        Recipe @Model.RecipeName
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        <button name="orderId" value="@Model.OrderId" validate>Remove</button>
             @Html.AntiForgeryToken()
-        }
-    </ul>
+    }
 </div>

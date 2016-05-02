@@ -3,106 +3,106 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<div class="container">
-    <div class="row">
-        <div class="col l6 m6 s6">
-            @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
+
+<div class="edit-recipe">
+    <div class="container">
+        <div class="row">
+            <br />
+            <h4>Edit Recipe</h4>
+            <h4>@Model.Name</h4>
+            <div class="col l6 m6 s6">
+                @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
             {
-                @Html.HiddenFor(m => m.RecipeId)
-                <h5>Recipe Ingredients</h5>
+                    @Html.HiddenFor(m => m.RecipeId)
+                    <h5>Recipe Ingredients</h5>
+                    <ul>
+                        @foreach (var ingredient in Model.Ingredients)
+                        {
+                            @Html.DisplayFor(i => ingredient, "list-ingredients-admin")
+                        }
+                    </ul>
+                }
+            </div>
+            <div class="col l6 m6 s6">
                 <ul>
-                    @foreach (var ingredient in Model.Ingredients)
+                    @using (Html.BeginForm("PrepIngredient", "Recipes", FormMethod.Post))
                     {
-                        @Html.DisplayFor(i => ingredient, "list-ingredients-admin")
+
+                        @Html.HiddenFor(m => m.RecipeId)
+                        <li><h4>Add Ingredients</h4></li>
+                        @foreach (var ingredient in ViewBag.Ingredients)
+                        {
+                            @Html.DisplayFor(model => ingredient, "add-ingredients")
+                        }
                     }
                 </ul>
-            }
+                <h3>
+                    @Html.ActionLink("Create New Ingredient", "Create", "Ingredients", new { returnUrl = ViewData["ReturnUrl"] })
+                </h3>
+            </div>
         </div>
-        <div class="col l6 m6 s6">
-            <ul>
-                @using (Html.BeginForm("PrepIngredient", "Recipes", FormMethod.Post))
-                {
+        <div class="row">
+            <img src="@Model.Image" style="width:300px;" />
 
-                    @Html.HiddenFor(m => m.RecipeId)
-                    <li><h4>Add Ingredients</h4></li>
-                    @foreach (var ingredient in ViewBag.Ingredients)
-                    {
-                        @Html.DisplayFor(model => ingredient, "add-ingredients")
-                    }
-                }
-            </ul>
-            @Html.ActionLink("Create New Ingredient", "Create", "Ingredients", new { returnUrl = ViewData["ReturnUrl"] })
-        </div>
-    </div>
-    <div class="row">
-        <h4>Edit Recipe</h4>
-
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div class="form-horizontal">
-                <h4>@Model.Name</h4>
-                <img src="@Model.Image" style="width:300px;"/>
+            <form class="col s12" asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="RecipeId" />
-                <div class="form-group">
-                    <label asp-for="Name" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
+                <div class="row">
+                    <div class="input-field col s12">
                         <input asp-for="Name" class="form-control" />
+                        <label asp-for="Name" class="col-md-2 control-label"></label>
                         <span asp-validation-for="Name" class="text-danger" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
+
+                    <div class="input-field col s12">
+                        <label asp-for="Description" class="col-md-2 control-label"></label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger" />
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label asp-for="Notes" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
+                    <div class="input-field col s12">
+                        <label asp-for="Notes" class="col-md-2 control-label"></label>
+
                         <input asp-for="Notes" class="form-control" />
                         <span asp-validation-for="Notes" class="text-danger" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CustPrice" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="CustPrice" class="form-control" />
+                    <div class="input-field col s12">
+                        <label asp-for="CustPrice" class="col-md-2 control-label"></label>
+
+                        <input asp-for="CustPrice" type="number" class="form-control" />
                         <span asp-validation-for="CustPrice" class="text-danger" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ServingSize" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="ServingSize" class="form-control" />
+                    <div class="input-field col s12">
+                        <label asp-for="ServingSize" class="col-md-2 control-label"></label>
+
+                        <input asp-for="ServingSize" type="number" class="form-control" />
                         <span asp-validation-for="ServingSize" class="text-danger" />
                     </div>
-                </div>
 
-                <div class="form-group file-field">
-                    <div class="btn">
-                        <span>Add Photo</span>
-                        <input type="file" name="file" />
+                    <div class="input-field file-field col s12">
+                        <div class="btn waves-effect waves-ripple">
+                            <span>add photo</span>
+                            <input type="file" name="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" />
+                        </div>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" />
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="input-field col s12">
+
                         <input type="submit" value="Save" class="btn btn-default" />
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
-        <div>
-            <a asp-action="Index">Back to List</a>
+            <div>
+                <a asp-action="Index">list of all menus</a>
+            </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

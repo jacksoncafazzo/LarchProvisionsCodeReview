@@ -11,15 +11,17 @@
                 <h5>Menu #@Model.MenuId</h5>
                 <h5 style="text-decoration: underline">@Model.Title</h5>
                 <div class="col m6 l6 s12 served-recipes">
-                    <ul>
+                            <h4>recipes served</h4>
+                    <ul class="collapsible" data-collapsible="accordian">
                         @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
                         {
                             @Html.HiddenFor(m => m.MenuId)
-                            <li><h4>recipes served</h4></li>
 
-                            @foreach (var recipe in Model.Recipes)
+                            foreach (var recipe in Model.Recipes)
                             {
-                                @Html.DisplayFor(e => recipe, "list-recipes-admin")
+                                <li>
+                                    @Html.DisplayFor(e => recipe, "list-recipes-admin")
+                                </li>
 
                             }
                         }
@@ -31,7 +33,7 @@
                         @foreach (var recipe in Model.Recipes)
                         {
                             var currentOrders = recipe.Orders.Count;
-                            @foreach (var ingredient in recipe.Ingredients)
+                            foreach (var ingredient in recipe.Ingredients)
                             {
                                 <li>@(ingredient.Amount * currentOrders) @ingredient.Unit @ingredient.Name</li>
 
@@ -49,9 +51,9 @@
 
                             @Html.HiddenFor(m => m.MenuId)
                             <li><h3>add recipes</h3></li>
-                            @if (ViewBag.AllRecipes != null)
+                            if (ViewBag.AllRecipes != null)
                             {
-                                @foreach (var recipe in ViewBag.AllRecipes)
+                                foreach (var recipe in ViewBag.AllRecipes)
                                 {
                                     @Html.DisplayFor(model => recipe, "add-recipe")
                                 }
@@ -63,29 +65,36 @@
             </div>
         </div>
         <div class="col m12 l6 s12">
-            <div class="list-orders">
-                <div class="row">
-
-                    @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
-                    {
-                        @Html.HiddenFor(m => m.MenuId)
-                        <h4>orders placed</h4>
-                        @foreach (var recipe in Model.Recipes)
+            <div class="row">
+                <a class="btn waves-effect waves-ripple" onclick="Materialize.showStaggeredList('#orders-list')">show placed orders</a>
+                <div class="list-orders">
+                    <ul class="collapsible" data-collapsible="accordian" id="orders-list">
+                        @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
                         {
-                            @foreach (var order in recipe.Orders)
+                            @Html.HiddenFor(m => m.MenuId)
+                            if (Model.Recipes != null)
                             {
-
-                                @Html.DisplayFor(e => order, "list-order-admin")
-
+                                foreach (var recipe in Model.Recipes)
+                                {
+                                    if (recipe.Orders != null)
+                                    {
+                                        foreach (var order in recipe.Orders)
+                                        {
+                                            <li class="list-order">
+                                                @Html.DisplayFor(e => order, "list-order-admin")
+                                            </li>
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
+                    </ul>
                 </div>
             </div>
 
             <form asp-action="Edit">
                 <div class="form-horizontal">
-                    <h4>@Model.Title</h4>
+                    <h4 class="center">Edit @Model.Title</h4>
                     <hr />
                     <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
                     <div class="form-group">

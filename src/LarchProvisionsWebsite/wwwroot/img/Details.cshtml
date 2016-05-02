@@ -1,0 +1,168 @@
+@model LarchProvisionsWebsite.Models.Menu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="menu-background">
+    <div class="container menu-display">
+        <br />
+        <h4 class="center">THIS WEEK'S MENU</h4>
+
+        <h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
+        @if (User.IsInRole("Chef"))
+        {
+            <h3 class="center">@Html.ActionLink("Edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
+        }
+
+        <div class="row">
+            @if (Model.Recipes != null)
+            {
+
+                @foreach (var recipe in Model.Recipes)
+                {
+                    <div class="col m6 l6 s6">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-ripple">
+                                <img class="activator" src="@recipe.Image" alt="@recipe.Name" />
+                            </div>
+                            <div class="card-content">
+                                <span class"card-title activator"><b>@recipe.Name</b><i class="material-icons right">more_vert</i></span>
+                                <p>$@recipe.CustPrice per serving</p>
+                                @if (User.IsInRole("Authorized"))
+                                {
+
+                                    @if (recipe.Orders != null)
+                                    {
+
+                                        @foreach (var o in recipe.Orders)
+                                        {
+                                            <i class="material-icons">redeem</i>
+                                        }
+                                    }
+                                    <div class="row">
+                                        <div class="col l12 m12 s12 center">
+
+                                            @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
+                                            {
+                                                @Html.HiddenFor(m => m.MenuId);
+                                                <input hidden name="recipeId" value="@recipe.RecipeId" />
+                                                <button class="btn waves-effect waves-ripple" type="submit">
+                                                    add order
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="container recipe-description">
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title">@recipe.Name<i class="material-icons right">close</i></span>
+                                <div class="container reveal-text">
+                                    <h5>@recipe.Description</h5>
+                                    <h5>@recipe.Notes</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="row container orders-display">
+                <div class="col l12 m12 s12">
+
+                    <h4>your current orders total $@ViewData["CustTotal"]</h4>
+                    <ul>
+                        @if (Model.Recipes != null)
+                        {
+                            @foreach (var recipe in Model.Recipes)
+                            {
+                                @if (recipe.Orders != null)
+                                {
+
+                                    @foreach (var order in recipe.Orders)
+                                    {
+                                        <li>
+                                            <h5>@order.RecipeName: $@recipe.CustPrice</h5>
+                                            @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
+                                            {
+                                                @Html.HiddenFor(m => m.MenuId);
+                                                <input hidden name="recipeId" value="@recipe.RecipeId" />
+                                                <button class="btn waves-effect waves-ripple" type="submit">
+                                                    remove order
+                                                </button>
+                                            }
+                                        </li>
+
+                                    }
+                                }
+
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col l6 m6 s12">
+                <h4>order by noon sunday</h4>
+                <h4> @Model.OrderBy.Month/@Model.OrderBy.Day/@Model.OrderBy.Year</h4>
+            </div>
+            <div class="col l6 m6 s12">
+
+                <h4>
+                    pickup 3-7pm tuesday
+                </h4>
+                <h4>
+                    @Model.PickupTime.Month/@Model.PickupTime.Day/@Model.PickupTime.Year
+                </h4>
+            </div>
+        </div>
+        <div class="menu-content-main">
+            <h2 class="center">emily cafazzo<br /> &amp;<br /> ryan domingo</h2>
+        </div>
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-ripple">
+                <img class="activator" src="~/img/menu-cover3.jpg">
+                <h4 class="balanced-meals">we cook healthy, balanced meals<br /> using local, organic &amp; seasonal ingredients <br />showcasing the bounty<br /> of the pacific northwest.</h4>
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">ORDERING INFORMATION<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal order-info">
+
+                <span class="card-title grey-text text-darken-2">more info<i class="material-icons right">close</i></span>
+                <div class="row container">
+
+                    <div class="col l12 m12 s12">
+                        <ul>
+                            <li><h5>orders must be placed by noon on sunday for pickup the following tuesday</h5></li>
+                            <li>
+                                pickup of pre-ordered meals is from 3-7pm on tuesday at
+                                36333 E historic columbia river hwy corbett, or 97019
+                            </li>
+                            <li>We accept Cash &amp; Check &amp; now Paypal! </li>
+                            <li>Weekly emails with weekly menu options will be sent the previous thursday</li>
+                        </ul>
+                    </div>
+                    <div class="col l6 m6 s6 left">
+
+                        <ul>
+                            <li>please let us know all dietary restrictions in advance</li>
+                            <li>meals come prepackaged in microwaveable (reusable) containers packaged per serving</li>
+                            <li>consider bringing a bag if you order more than 3 servings for ease of transport</li>
+                        </ul>
+                    </div>
+                    <div class="col l6 m6 s6">
+                        <ul class="left">
+                            <li>we love to reuse clean containers! just remove stickers from lids BEFORE washing or microwaving or after the dry again. </li>
+                            <li>*prices below are a suggested donation. Everyone deserves access to good food</li>
+                            <li>- - - </li>
+                            <li>Enjoy! </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

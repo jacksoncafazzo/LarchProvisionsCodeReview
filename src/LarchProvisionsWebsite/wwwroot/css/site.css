@@ -4,7 +4,7 @@
 
 .btn:hover {
   background-color: #c9c9c9;
-  color: color(#892517);
+  color: #892517;
   text-shadow: -2px -2px 2px white; }
 
 .btn:focus {
@@ -16,12 +16,15 @@
   background-color: transparent;
   width: 20px;
   margin: 0px;
-  border: none; }
-  .delete-button :hover :focus {
-    background-color: #892517; }
+  border: none;
+  box-shadow: none; }
   .delete-button .delete-icon {
     opacity: 1 !important;
     margin-left: 0px; }
+
+.delete-button:hover {
+  box-shadow: none;
+  background-color: transparent; }
 
 /* label color */
 .input-field label {
@@ -37,9 +40,38 @@
   color: #892517;
   opacity: 1 !important; }
 
+.input-field input[type=text] {
+  color: lightgrey;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.3em;
+  border-bottom: 1px solid #892517;
+  box-shadow: 0 1px 0 0 #000; }
+
+.input-field input[type=number] {
+  color: lightgrey;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.3em;
+  border-bottom: 1px solid #892517;
+  box-shadow: 0 1px 0 0 #000; }
+
+.input-field input[type=date] {
+  color: lightgrey;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.3em;
+  border-bottom: 1px solid #892517;
+  box-shadow: 0 1px 0 0 #000; }
+
+.input-field input[type=date]:focus {
+  border-bottom: 1px solid #892517;
+  box-shadow: 0 1px 0 0 #000; }
+
 /* input underline focus color */
 .input-field input[type=text]:focus {
-  border-bottom: 1px solid #892517;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 0 1px 0 0 #000; }
+
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid lightgray;
   box-shadow: 0 1px 0 0 #000; }
 
 /* valid color */
@@ -76,7 +108,7 @@
   background-image: url(../img/dinner.png);
   width: 100%;
   background-size: cover; }
-  .menu-edit-wrapper h2, .menu-edit-wrapper h3, .menu-edit-wrapper h4, .menu-edit-wrapper h5 {
+  .menu-edit-wrapper h2, .menu-edit-wrapper h3, .menu-edit-wrapper h4, .menu-edit-wrapper h5, .menu-edit-wrapper li, .menu-edit-wrapper a {
     color: lightgray;
     text-shadow: 2px 2px 2px black; }
   .menu-edit-wrapper .edit-menu {
@@ -232,6 +264,16 @@
       color: #892517; }
   .edit-recipe li {
     font-size: 1.3em; }
+
+.create-ingredient-wrapper {
+  background-image: url("../img/ingredients.png");
+  background-size: cover;
+  width: 100%; }
+  .create-ingredient-wrapper .input-field label {
+    opacity: 1; }
+  .create-ingredient-wrapper h2 {
+    color: lightgrey;
+    text-shadow: 2px 2px 2px black; }
 
 @font-face {
   font-family: orator;

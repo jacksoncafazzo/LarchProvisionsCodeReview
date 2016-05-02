@@ -1,0 +1,12 @@
+﻿.create-ingredient-wrapper {
+    background-image: url("../img/ingredients.png");
+    background-size: cover;
+    width: 100%;
+    .input-field label {
+        opacity: 1;
+    }
+    h2 {
+        color: lightgrey;
+        text-shadow: 2px 2px 2px black;
+    }
+}

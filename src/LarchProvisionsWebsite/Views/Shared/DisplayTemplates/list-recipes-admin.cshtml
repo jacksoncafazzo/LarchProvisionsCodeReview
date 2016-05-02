@@ -1,9 +1,10 @@
-﻿<div class="collapsible-header">@Model.Name<a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId"><i class="material-icons">mode_edit</i></a> <button class="btn delete-button waves-effect waves-ripple  right" name="recipeId" value="@Model.RecipeId"><i class="material-icons">delete</i></button>
-</div>
-<div class="collapsible-body">
-    <p>
-        Customer Price: $@Model.CustPrice
-        
+﻿<h5>
+    <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">
+    <i class="material-icons">mode_edit</i>
+    @Model.Name $@Model.CustPrice
+    </a>
+    <button class="btn delete-button waves-effect waves-ripple  right" name="recipeId" value="@Model.RecipeId"><i class="material-icons">delete</i></button>
+</h5> 
         <ul>
             @foreach (var ingredient in Model.Ingredients)
             {
@@ -11,6 +12,4 @@
 
             }
         </ul>
-    </p>
-
-</div>
+    

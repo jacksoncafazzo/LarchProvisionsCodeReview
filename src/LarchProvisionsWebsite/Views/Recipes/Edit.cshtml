@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="row">
-            <img src="@Model.Image" style="width:300px;" />
+            <img src="@Model.Image" class="center" style="width:80%;" />
 
             <form class="col s12" asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
@@ -97,7 +97,7 @@
             </form>
 
             <div>
-                <a asp-action="Index">list of all menus</a>
+                <h5><a asp-action="Index">list of all menus</a></h5>
             </div>
         </div>
     </div>

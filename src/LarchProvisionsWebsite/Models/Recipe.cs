@@ -12,7 +12,7 @@ namespace LarchProvisionsWebsite.Models
 
         public ICollection<Serving> Servings { get; set; }
 
-        public string Name { get; set; }
+        public string RecipeName { get; set; }
 
         public string Description { get; set; }
 

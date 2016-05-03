@@ -15,7 +15,7 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int IngredientId { get; set; }
 
-        public string Name { get; set; }
+        public string IngredientName { get; set; }
 
         public string Source { get; set; }
 
@@ -25,5 +25,13 @@ namespace LarchProvisionsWebsite.Models
 
         [ForeignKey("PrepId")]
         public int PrepId { get; set; }
+
+        //public Ingredient(double amount, string unit, string name, string source)
+        //{
+        //    Amount = Amount;
+        //    Name = name;
+        //    Unit = unit;
+        //    Source = source;
+        //}
     }
 }

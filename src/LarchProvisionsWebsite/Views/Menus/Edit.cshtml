@@ -35,7 +35,7 @@
                             var currentOrders = recipe.Orders.Count;
                             foreach (var ingredient in recipe.Ingredients)
                             {
-                                <li>@(ingredient.Amount * currentOrders) @ingredient.Unit @ingredient.Name</li>
+                                <li>@(ingredient.Amount * currentOrders) @ingredient.Unit @ingredient.IngredientName</li>
 
                             }
 
@@ -114,7 +114,7 @@
                             <span asp-validation-for="OrderBy" class="text-danger" />
                         </div>
                         <div class="input-field col s12">
-                            <label datepicker type="date" asp-for="PickupTime" class="col m2 control-label"></label>
+                            <label datepicker type="date" asp-for="PickupTime"></label>
 
                             <input type="date" asp-for="PickupTime" class="validate datepicker" />
                             <span asp-validation-for="PickupTime" class="text-danger" />

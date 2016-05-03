@@ -9,7 +9,7 @@
         <div class="row">
             <br />
             <h4>Edit Recipe</h4>
-            <h4>@Model.Name</h4>
+            <h4>@Model.RecipeName</h4>
             <div class="col l6 m6 s6">
                 @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
             {
@@ -41,70 +41,73 @@
                 </h3>
             </div>
         </div>
-        <div class="row">
-            <img src="@Model.Image" class="center" style="width:80%;" />
+        @Html.Partial("CreateIngredient")
+    </div>
+    <div class="row">
+        <img src="@Model.Image" class="center" style="width:80%;" />
 
-            <form class="col s12" asp-action="Edit" enctype="multipart/form-data">
-                <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="RecipeId" />
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input asp-for="Name" class="form-control" />
-                        <label asp-for="Name" class="col-md-2 control-label"></label>
-                        <span asp-validation-for="Name" class="text-danger" />
+        <form class="col s12" asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RecipeId" />s
+            <input type="hidden" value="/Recipes/Edit/@Model.RecipeId" name="returnUrl"/>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="RecipeName" class="form-control" />
+                    <label asp-for="RecipeName" class="col-md-2 active"></label>
+                    <span asp-validation-for="RecipeName" class="text-danger" />
+                </div>
+
+                <div class="input-field col s12">
+                    <label asp-for="Description" class="col-md-2 active"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger" />
+                </div>
+
+                <div class="input-field col s12">
+                    <label asp-for="Notes" class="col-md-2 active"></label>
+
+                    <input asp-for="Notes" class="form-control" />
+                    <span asp-validation-for="Notes" class="text-danger" />
+                </div>
+                <div class="input-field col s12">
+                    <label asp-for="Image" class="col-md-2 active"></label>
+
+                    <input asp-for="Image" type="text" class="form-control" />
+                    <span asp-validation-for="Image" class="text-danger" />
+                </div>
+                <div class="input-field col s12">
+                    <label asp-for="CustPrice" class="col-md-2 active"></label>
+
+                    <input asp-for="CustPrice" type="number" class="form-control" />
+                    <span asp-validation-for="CustPrice" class="text-danger" />
+                </div>
+                <div class="input-field col s12">
+                    <label asp-for="ServingSize" class="col-md-2 active"></label>
+
+                    <input asp-for="ServingSize" type="number" class="form-control" />
+                    <span asp-validation-for="ServingSize" class="text-danger" />
+                </div>
+
+                <div class="input-field file-field col s12">
+                    <div class="btn waves-effect waves-ripple">
+                        <span>add photo</span>
+                        <input type="file" name="file" />
                     </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="Description" class="col-md-2 control-label"></label>
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger" />
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="Notes" class="col-md-2 control-label"></label>
-
-                        <input asp-for="Notes" class="form-control" />
-                        <span asp-validation-for="Notes" class="text-danger" />
-                    </div>
-                    <div class="input-field col s12">
-                        <label asp-for="CustPrice" class="col-md-2 control-label"></label>
-
-                        <input asp-for="CustPrice" type="number" class="form-control" />
-                        <span asp-validation-for="CustPrice" class="text-danger" />
-                    </div>
-                    <div class="input-field col s12">
-                        <label asp-for="ServingSize" class="col-md-2 control-label"></label>
-
-                        <input asp-for="ServingSize" type="number" class="form-control" />
-                        <span asp-validation-for="ServingSize" class="text-danger" />
-                    </div>
-
-                    <div class="input-field file-field col s12">
-                        <div class="btn waves-effect waves-ripple">
-                            <span>add photo</span>
-                            <input type="file" name="file" />
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" />
-                        </div>
-                    </div>
-
-                    <div class="input-field col s12">
-
-                        <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" />
                     </div>
                 </div>
-            </form>
 
-            <div>
-                <h5><a asp-action="Index">list of all menus</a></h5>
+                <div class="input-field col s12">
+
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
+        </form>
+
+        <div>
+            <h5><a asp-action="Index">list of all recipes</a></h5>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
+</div>

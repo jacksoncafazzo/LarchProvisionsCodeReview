@@ -18,10 +18,10 @@
             @Html.DisplayFor(model => model.Amount)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.IngredientName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.IngredientName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Source)
@@ -36,7 +36,7 @@
             @Html.DisplayFor(model => model.Unit)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |

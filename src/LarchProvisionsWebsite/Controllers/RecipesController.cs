@@ -7,6 +7,7 @@ using Microsoft.Data.Entity;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -76,7 +77,7 @@ namespace LarchProvisionsWebsite.Controllers
                 }
                 if (file != null)
                 {
-                    recipe = this.savePhoto(recipe, file);
+                    recipe = this.SavePhoto(recipe, file);
                 }
                 _context.Recipes.Add(recipe);
                 _context.SaveChanges();
@@ -123,22 +124,27 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 returnUrl = "/Recipes/";
             }
-            ViewBag.returnUrl = returnUrl;
+            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                if (file == null)
-                {
-                    recipe.Image = "~/img/larch-id.png";
-                }
                 if (file != null)
                 {
-                    recipe = this.savePhoto(recipe, file);
+                    recipe = this.SavePhoto(recipe, file);
                 }
                 _context.Update(recipe);
                 _context.SaveChanges();
                 return RedirectToAction("Edit", recipe);
             }
             return View(recipe);
+        }
+
+        [NonAction]
+        public Recipe SavePhoto(Recipe recipe, IFormFile file)
+        {
+            recipe.Image = Path.Combine("img/recipes/", Regex.Replace(recipe.RecipeName, " ", "") + recipe.RecipeId + ".jpg");
+            file.SaveAs(recipe.Image);
+            recipe.Image = "~/" + recipe.Image;
+            return recipe;
         }
 
         //Post: Recipes/PrepIngredient
@@ -162,6 +168,27 @@ namespace LarchProvisionsWebsite.Controllers
             ViewBag.Ingredients = _context.Ingredients.ToList();
 
             return RedirectToAction("Edit", "Recipes", new { id = recipe.RecipeId });
+        }
+
+        // POST: Recipes/Edit/CreateIngredient
+
+        [HttpPost, ActionName("CreateIngredient")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateIngredient(int recipeId, double amount, string unit, string name, string source)
+        {
+            Ingredient newIngredient = new Ingredient();
+            newIngredient.Amount = amount;
+            newIngredient.Unit = unit;
+            newIngredient.IngredientName = name;
+            newIngredient.Source = source;
+            _context.Ingredients.Add(newIngredient);
+            _context.SaveChanges();
+            var newPrep = new Prep();
+            newPrep.RecipeId = recipeId;
+            newPrep.IngredientId = newIngredient.IngredientId;
+            _context.Preps.Add(newPrep);
+            _context.SaveChanges();
+            return Json(newIngredient);
         }
 
         // GET: Recipes/Delete/5
@@ -191,15 +218,6 @@ namespace LarchProvisionsWebsite.Controllers
             _context.Recipes.Remove(recipe);
             _context.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        [NonAction]
-        public Recipe savePhoto(Recipe recipe, IFormFile file)
-        {
-            recipe.Image = Path.Combine("img/recipes", recipe.Name + recipe.RecipeId + ".jpg");
-            file.SaveAs(recipe.Image);
-            recipe.Image = "~/" + recipe.Image;
-            return recipe;
         }
     }
 }

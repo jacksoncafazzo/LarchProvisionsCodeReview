@@ -12,7 +12,7 @@
         <h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
         @if (User.IsInRole("Chef"))
         {
-            <h3 class="center">@Html.ActionLink("Edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
+            <h3 class="center">@Html.ActionLink("edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
         }
 
         <div class="row">
@@ -24,14 +24,14 @@
                     <div class="col m6 l6 s6">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-ripple">
-                                <img class="activator" src="@recipe.Image" alt="@recipe.Name" />
+                                <img class="activator" src="@recipe.Image" alt="@recipe.RecipeName" />
                             </div>
                             <div class="card-content">
-                                <span class"card-title activator"><b>@recipe.Name</b><i class="material-icons right">more_vert</i></span>
+                                <span class"card-title activator"><b>@recipe.RecipeName</b><i class="material-icons right">more_vert</i></span>
                                 <p>$@recipe.CustPrice per serving</p>
                                 @if (User.IsInRole("Customer"))
                                 {
-
+                                    <div id="cust-orders"></div>
                                     @if (recipe.Orders != null)
                                     {
 
@@ -58,7 +58,7 @@
                             <div class="container recipe-description">
                             </div>
                             <div class="card-reveal">
-                                <span class="card-title">@recipe.Name<i class="material-icons right">close</i></span>
+                                <span class="card-title">@recipe.RecipeName<i class="material-icons right">close</i></span>
                                 <div class="container reveal-text">
                                     <h5>@recipe.Description</h5>
                                     <h5>@recipe.Notes</h5>

@@ -1,0 +1,45 @@
+﻿@model LarchProvisionsWebsite.Models.Recipe
+
+<!-- Modal Trigger -->
+<button data-target="ingredientModal" class="waves-effect waves-light btn modal-trigger">create a new ingredient</button>
+
+<!-- Modal Structure -->
+<div id="ingredientModal" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="new-ingredient col s12">
+                <div class="row">
+                    <input type="hidden" name="recipeId" value="@Model.RecipeId" />
+                    <div class="input-field col s2">
+                        <label for="Amount">amount (number)</label>
+
+                        <input name="Amount" autofocus class="validate" type="number" />
+                    </div>
+                    <div class="input-field col s3">
+                        <label for="Unit">unit of measurement</label>
+
+                        <input name="Unit" class="validate" type="text" />
+                    </div>
+                    <div class="input-field col s7">
+                        <label for="IngredientName">ingredient name</label>
+
+                        <input name="IngredientName" class="validate" type="text" />
+                    </div>
+
+                    <div class="input-field col s12">
+                        <label for="Source">source, notes, etc.</label>
+
+                        <input name="Source" class="validate" type="text" />
+                    </div>
+
+                    <div class="input-field col s12 center">
+                        <button type="submit" class="modal-action modal-close btn btn-large waves-effect waves-light">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+        here is your new ingredient:<br />
+<div id="ingredient-result">
+</div>

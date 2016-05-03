@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../gulpfile.js" />
+/// <reference path="js/current_menu.js" />
 /// <reference path="js/fb-sdk.js" />
 /// <reference path="js/materialize.es5.js" />
 /// <reference path="js/site.js" />

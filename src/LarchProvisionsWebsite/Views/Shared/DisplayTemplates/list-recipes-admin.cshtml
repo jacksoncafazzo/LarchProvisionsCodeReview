@@ -1,15 +1,14 @@
 ﻿<h5>
     <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">
-    <i class="material-icons">mode_edit</i>
-    @Model.Name $@Model.CustPrice
+        <i class="material-icons">mode_edit</i>
+        @Model.RecipeName $@Model.CustPrice
     </a>
     <button class="btn delete-button waves-effect waves-ripple  right" name="recipeId" value="@Model.RecipeId"><i class="material-icons">delete</i></button>
-</h5> 
-        <ul>
-            @foreach (var ingredient in Model.Ingredients)
+</h5>
+<ul>
+    @foreach (var ingredient in Model.Ingredients)
             {
-                <li>@ingredient.Amount @ingredient.Unit @ingredient.Name</li>
+        <li>@ingredient.Amount @ingredient.Unit @ingredient.IngredientName</li>
 
-            }
-        </ul>
-    
+    }
+</ul>

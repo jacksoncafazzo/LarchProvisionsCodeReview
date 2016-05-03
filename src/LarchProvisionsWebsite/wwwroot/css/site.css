@@ -105,6 +105,8 @@
     background-color: transparent; }
   .nav-wrapper .button-collapse {
     display: block !important; }
+  .nav-wrapper .menu-button {
+    margin-right: 10px; }
 
 .menu-edit-wrapper {
   background-image: url(../img/dinner.png);
@@ -191,7 +193,7 @@
       color: lightgray;
       text-shadow: 2px 2px 2px black; }
   .menu-background .menu-display .card .order-info {
-    background-color: rgba(5, 0, 0, 0.7); }
+    background-color: rgba(5, 0, 0, 0.9); }
 
 @media (maxwidth: 600) {
   .contact .address, .contact .email, .contact .order-form {

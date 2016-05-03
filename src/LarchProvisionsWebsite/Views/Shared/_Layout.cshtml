@@ -26,19 +26,13 @@
                 <a href="/" class="brand-logo waves-effect waves-ripple left">
                     <img src="~/img/lil-larch.png" />
                 </a>
+              
 
-                <ul id="nav-mobile" class="right hide-on-small-only waves-effect waves-ripple">
-                    <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
-                    <li>@Html.ActionLink("menu", "CurrentMenu", "Menus")</li>
-                    <li>@Html.ActionLink("about", "About", "Home")</li>
-                    <li>@Html.ActionLink("contact", "Contact", "Home")</li>
-                    <li><a href="#" data-activates="collapse-menu" class="button-collapse" materialize="sidenav"><i class="material-icons">menu</i></a></li>
-                </ul>
-
+                <a href="#" data-activates="collapse-menu" class="button-collapse right menu-button" materialize="sidenav"><i class="material-icons">menu</i></a>
                 <ul class="side-nav right-align" id="collapse-menu">
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
-                    <li>@Html.ActionLink("menu", "CurrentMenu", "Menus")</li>
+                    <li>@Html.ActionLink("current menu", "CurrentMenu", "Menus")</li>
                     <li>@Html.ActionLink("about", "About", "Home")</li>
                     <li>@Html.ActionLink("contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Admin"))
@@ -53,8 +47,16 @@
 
                     }
 
-                 
+
                 </ul>
+
+                <ul id="nav-mobile" class="right hide-on-small-only waves-effect waves-ripple">
+                    <li>@Html.ActionLink("larch provisions", "Provisions", "Home")</li>
+                    <li>@Html.ActionLink("current menu", "CurrentMenu", "Menus")</li>
+                   
+                </ul>
+
+                
             </div>
         </nav>
     </div>

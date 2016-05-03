@@ -12,7 +12,9 @@
     
         
     .brand-logo img {
-        height: 75px;
+        min-height: 60px;
+        max-height: 65px;
+        margin:0px;
     }
 
     .brand-logo:hover {

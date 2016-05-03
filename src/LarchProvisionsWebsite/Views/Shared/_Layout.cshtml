@@ -27,7 +27,7 @@
                     <img src="~/img/lil-larch.png" />
                 </a>
 
-                <ul id="nav-mobile" class="right hide-on-small-and-down waves-effect waves-ripple">
+                <ul id="nav-mobile" class="right hide-on-small-only waves-effect waves-ripple">
                     <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
                     <li>@Html.ActionLink("menu", "CurrentMenu", "Menus")</li>
                     <li>@Html.ActionLink("about", "About", "Home")</li>
@@ -37,6 +37,7 @@
 
                 <ul class="side-nav right-align" id="collapse-menu">
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
+                    <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
                     <li>@Html.ActionLink("menu", "CurrentMenu", "Menus")</li>
                     <li>@Html.ActionLink("about", "About", "Home")</li>
                     <li>@Html.ActionLink("contact", "Contact", "Home")</li>
@@ -52,12 +53,7 @@
 
                     }
 
-                    @{
-                        if (User.IsInRole("chef"))
-                        {
-                            <li>@Html.ActionLink("Recipes", "Index", "Recipes")</li>
-                        }
-                    }
+                 
                 </ul>
             </div>
         </nav>

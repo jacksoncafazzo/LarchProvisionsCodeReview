@@ -98,7 +98,9 @@
     text-shadow: 0px -1px 2px lightgray;
     background-color: #F6F6F6; }
   .nav-wrapper .brand-logo img {
-    height: 75px; }
+    min-height: 60px;
+    max-height: 65px;
+    margin: 0px; }
   .nav-wrapper .brand-logo:hover {
     background-color: transparent; }
   .nav-wrapper .button-collapse {
@@ -190,6 +192,10 @@
       text-shadow: 2px 2px 2px black; }
   .menu-background .menu-display .card .order-info {
     background-color: rgba(5, 0, 0, 0.7); }
+
+@media (maxwidth: 600) {
+  .contact .address, .contact .email, .contact .order-form {
+    font-size: small; } }
 
 .contact .contact-photo img {
   width: 100%; }
@@ -291,4 +297,11 @@ body, html {
   display: inline;
   line-height: 1.5em;
   opacity: .75; }
+
+@media (max-width: 600px) {
+  .caption h4, .caption h5 {
+    background-color: rgba(7, 0, 0, 0.7);
+    display: inline;
+    font-size: small;
+    opacity: .75; } }
 

@@ -32,3 +32,12 @@ body, html {
     line-height: 1.5em;
     opacity: .75;
 }
+
+@media (max-width:600px) {
+    .caption h4, .caption h5 {
+    background-color: rgba(7,0,0,0.7);
+    display: inline;
+    font-size: small;
+    opacity: .75;
+}
+}

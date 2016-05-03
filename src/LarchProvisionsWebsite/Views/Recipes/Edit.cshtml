@@ -43,8 +43,8 @@
         </div>
         @Html.Partial("CreateIngredient")
     </div>
-    <div class="row">
-        <img src="@Model.Image" class="center" style="width:80%;" />
+    <div class="row center">
+        <img src="@Model.Image" style="width:80%;" />
 
         <form class="col s12" asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>

@@ -3,76 +3,74 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="create-recipe-wrapper">
+    <div class="container">
 
-<h2>Create</h2>
-<div class="row">
-    <form asp-action="Create" enctype="multipart/form-data">
-        <div class="form-horizontal">
-            <h4>Recipe</h4>
-            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-                <label asp-for="Name" class="col l4 m4 s4 control-label"></label>
-                <div class="col l8 m8">
-                    <input asp-for="Name" class="form-control waves-input-wrapper" />
-                    <span asp-validation-for="Name" class="text-danger" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="col l4 m4 s4 control-label"></label>
-                <div class="col l8 m8 s8">
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="col l4 m4 s4 control-label"></label>
-                <div class="col l8 m8 s8">
-                    <input asp-for="Notes" class="form-control" />
-                    <span asp-validation-for="Notes" class="text-danger" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustPrice" class="col l3 m3 s3 control-label"></label>
-                <div class="col l3 m3 s3">
-                    <input asp-for="CustPrice" class="form-control" />
-                    <span asp-validation-for="CustPrice" class="text-danger" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServingSize" class="col l3 m3 s3"></label>
-                <div class="col l3 m3 s3">
-                    <input asp-for="ServingSize" class="form-control" />
-                    <span asp-validation-for="ServingSize" class="text-danger" />
-                </div>
-            </div>
-            @*<div class="form-group">
-                    <div class="file-field">
-                        <div class="btn">
-                            <span>Add Photo</span>
-                            <input type="file" name="file" />
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" />
+        <br />
+        <h2>create a new recipe</h2>
+        <div class="row">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div class="row">
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    <div class="input-field">
+                        <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+                        <label asp-for="RecipeName" class="col s12"></label>
+                        
+                            <input asp-for="RecipeName" class="validate waves-input-wrapper" />
+                            <span asp-validation-for="RecipeName" class="text-danger" />
+                   
+                    </div>
+                    <div class="input-field">
+                        <label asp-for="Description" class="col s12"></label>
+                        
+                            <input asp-for="Description" class="validate" />
+                            <span asp-validation-for="Description" class="text-danger" />
+                      
+                    </div>
+                    <div class="input-field">
+                        <label asp-for="Notes" class="col s12"></label>
+                    
+                            <input asp-for="Notes" class="validate" />
+                            <span asp-validation-for="Notes" class="text-danger" />
+                       
+                    </div>
+                    </div>
+                <div class="row">
+                    <div class="input-field">
+                        <label asp-for="CustPrice" class="col s6"></label>
+             
+                            <input asp-for="CustPrice" class="validate" type="number"/>
+                            <span asp-validation-for="CustPrice" class="text-danger" />
+         
+                    </div>
+                    <div class="input-field">
+                        <label asp-for="ServingSize" class="col s6"></label>
+        
+                            <input asp-for="ServingSize" class="validate" type="number" />
+                            <span asp-validation-for="ServingSize" class="text-danger" />
+         
+                    </div>
+                    @*<div class="input-field">
+                            <div class="file-field">
+                                <div class="btn">
+                                    <span>Add Photo</span>
+                                    <input type="file" name="file" />
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text" />
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="input-field">
+                        <div class="col l12 m12 s12 center">
+                            <input type="submit" value="create" class="btn btn-default" />
+                            <br />
+                            <br />
+                            <a class="btn waves-effect waves-ripple" asp-action="Index">recipe list</a>
                         </div>
                     </div>
-                </div>*@
-            <div class="form-group">
-                <div class="col l12 m12 s12 center">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                    <br />
-                    <br />
-                    <a class="btn waves-effect waves-ripple" asp-action="Index">Recipe List</a>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
-<div>
-</div>
-
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}

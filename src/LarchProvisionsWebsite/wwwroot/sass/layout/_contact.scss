@@ -1,61 +1,51 @@
-﻿.contact {
-    @media (maxwidth: 600) {
-        .address, .email, .order-form {
-            font-size: small;
-        }
-    }
-
-    .contact-photo img {
+﻿.contact-wrapper {
+    .contact {
+        background-image: url("../img/in-the-kitchen.png");
         width: 100%;
-    }
-
-    .address {
-        position: absolute;
-        top: 80px;
-        right: 25px;
-        text-align: right;
+        height: 100%;
+        min-height: 300px;
+        background-repeat: no-repeat;
+        background-size: cover;
         color: lightgray;
-        text-shadow: 1px 1px 1px black;
-        font-size: 1.5em;
-    }
-
-    .email {
-        position: absolute;
-        top: 300px;
-        right: 25px;
+        text-shadow: 2px 2px 2px black;
+        font-size: 1em;
         text-align: right;
-        color: lightgray;
-        text-shadow: 1px 1px 1px black;
-        font-size: 1.5em;
 
         a {
             color: lightgray;
-            text-shadow: #892517;
+            text-shadow: 2px 2px 2px black;
         }
 
-        a:hover {
-            color: #892517;
-            text-shadow: 1px 1px 1px white;
+        display: flex;
+        align-items: flex-start;
+        flex-flow: row wrap;
+
+        .address {
         }
-    }
 
-    .order-form {
-        position: absolute;
-        top: 500px;
-        right: 25px;
-        text-align: right;
-        color: lightgray;
-        text-shadow: 1px 1px 1px black;
-        font-size: 2.5em;
+        .email {
+            text-align: right;
 
-        a {
+            a:hover {
+                color: $strawberry;
+            }
+        }
+
+        .order-form {
+            align-self: flex-end;
+            text-align: center;
             color: lightgray;
-            text-shadow: #892517;
-        }
+            text-shadow: 1px 1px 1px black;
+            font-size: 2.5em;
 
-        a:hover {
-            color: #892517;
-            text-shadow: 1px 1px 1px white;
+            a {
+                color: lightgray;
+            }
+
+            a:hover {
+                color: $strawberry;
+                text-shadow: 2px 2px 2px white;
+            }
         }
     }
 }

@@ -4,46 +4,69 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<div class="recipe-details-wrapper">
+    <div class="container">
 
-<div>
-    <h4>Recipe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RecipeName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RecipeName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+        <br />
+        <h2>Details</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CustPrice)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CustPrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ServingSize)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ServingSize)
-        </dd>
-    </dl>
+        <div>
+            <h4>@Model.RecipeName</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+
+                    @Html.DisplayNameFor(model => model.RecipeName)
+                </dt>
+                <dd>
+
+                    @Html.DisplayFor(model => model.RecipeName)
+                </dd>
+                <dt>
+
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+
+                    @Html.DisplayNameFor(model => model.Notes)
+                </dt>
+                <dd>
+
+                    @Html.DisplayFor(model => model.Notes)
+                </dd>
+                <dt>
+
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+                <dd>
+
+                    @Html.DisplayFor(model => model.Image)
+
+                    <img src="@Model.Image" style="width:100px;" alt="@Model.RecipeName" />
+                </dd>
+                <dt>
+
+                    @Html.DisplayNameFor(model => model.CustPrice)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CustPrice)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ServingSize)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ServingSize)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            <a asp-action="Edit" asp-route-id="@Model.RecipeId"><i class="material-icons">edit</i></a>
+            <a asp-action="Index">Back to List</a>
+        </p>
+    </div>
 </div>
-<p>
-    <a asp-action="Edit" asp-route-id="@Model.RecipeId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</p>

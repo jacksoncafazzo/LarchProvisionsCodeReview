@@ -35,19 +35,18 @@ $(document).ready(function () {
         selectMonths: true, // Creates a dropdown to control month
     });
 
-    ////AJAX new ingredient
-    //$('.new-ingredient').submit(function (event) {
-    //    event.preventDefault();
-    //    $.ajax({
-    //        url: '@Url.Action("CreateIngredient")',
-    //        type: 'POST',
-    //        dataType: 'json',
-    //        data: $(this).serialize(),
-    //        success: function (result) {
-    //            var stringResult = "You rock bro! This is your new ingredient: #" + result.IngredientId + " " + result.Amount + " " + result.Unit + " " + result.Name;
-
-    //            $('#ingredient-result').html(stringResult);
-    //        }
-    //    });
-    //});
+    //AJAX new ingredient
+    $('.delete-recipe-ajax').on("click", function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("DeleteRecipeAjax", "Recipes")',
+            data: { id : $('input#recipeId').val() },
+            ajaxasync: true,
+            dataType: 'json',
+            success: function (result) {
+                alert("You rock bro!");
+                window.location.replace("@Url.Action('Index', 'Recipes')");
+            }
+        });
+    });
 });

@@ -10,6 +10,7 @@
 @import "layout/provisions";
 @import "layout/recipe";
 @import "layout/ingredient";
+@import "layout/footer";
 
 @font-face {
     font-family: orator;
@@ -24,6 +25,19 @@ body, html {
     a {
         color: $primary-link-color;
     }
+
+    a:hover {
+        color: $strawberry;
+    }
+
+    h1, h2, h3, h4, h5, li {
+        color: lightgray;
+        text-shadow: 2px 2px 2px black;
+
+        button {
+            color: $strawberry;
+        }
+    }
 }
 
 .caption h4, .caption h5 {
@@ -35,9 +49,21 @@ body, html {
 
 @media (max-width:600px) {
     .caption h4, .caption h5 {
-    background-color: rgba(7,0,0,0.7);
-    display: inline;
-    font-size: small;
-    opacity: .75;
+        background-color: rgba(7,0,0,0.7);
+        display: inline;
+        font-size: small;
+        opacity: .75;
+    }
 }
+
+@media (max-width:600px) {
+    .contact {
+        font-size: small;
+    }
+}
+
+@media (max-width:800px) {
+    .contact-wrapper {
+        min-height: 1600px;
+    }
 }

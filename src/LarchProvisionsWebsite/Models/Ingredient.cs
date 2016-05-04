@@ -23,8 +23,7 @@ namespace LarchProvisionsWebsite.Models
 
         public string Unit { get; set; }
 
-        [ForeignKey("PrepId")]
-        public int PrepId { get; set; }
+        public virtual ICollection<Prep> Preps { get; set; }
 
         //public Ingredient(double amount, string unit, string name, string source)
         //{

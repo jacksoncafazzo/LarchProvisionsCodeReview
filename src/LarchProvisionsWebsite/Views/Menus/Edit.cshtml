@@ -101,23 +101,21 @@
                     <div class="row">
                         <hr />
                         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                        <div class="input-field col s12">
-                            <label asp-for="Title"></label>
+                        <div class="input-field">
+                            <label asp-for="Title" class="col s12"></label>
 
                             <input asp-for="Title" class="validate" />
                             <span asp-validation-for="Title" class="text-danger" />
                         </div>
-                        <div class="input-field col s12">
-                            <label asp-for="OrderBy"></label>
-
-                            <input datepicker type="date" asp-for="OrderBy" class="validate" />
+                        <div class="input-field">
+                            <label asp-for="OrderBy" class="col s12"></label>
+                            <input asp-for="OrderBy" asp-format="/d/" value="@Model.OrderBy.ToString("d")" class="validate datepicker" type="date"  />
                             <span asp-validation-for="OrderBy" class="text-danger" />
                         </div>
-                        <div class="input-field col s12">
-                            <label datepicker type="date" asp-for="PickupTime"></label>
-
-                            <input type="date" asp-for="PickupTime" class="validate datepicker" />
-                            <span asp-validation-for="PickupTime" class="text-danger" />
+                        <div class="input-field">
+                            <label type="date" asp-for="PickupBy" class="col s12"></label>
+                            <input asp-for="PickupBy" asp-format="/d/" value="@Model.PickupBy.ToString("d")" class="validate datepicker" type="date" />
+                            <span asp-validation-for="PickupBy" class="text-danger" />
                         </div>
 
                         <div class="input-field col s12">
@@ -133,8 +131,3 @@
         </div>
     </div>
 </div>
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}

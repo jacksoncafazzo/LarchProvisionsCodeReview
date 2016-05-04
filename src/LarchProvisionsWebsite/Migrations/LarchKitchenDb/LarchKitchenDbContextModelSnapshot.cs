@@ -25,8 +25,6 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
 
                     b.Property<string>("IngredientName");
 
-                    b.Property<int>("PrepId");
-
                     b.Property<int?>("RecipeRecipeId");
 
                     b.Property<string>("Source");
@@ -45,7 +43,7 @@ namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
 
                     b.Property<DateTime>("OrderBy");
 
-                    b.Property<DateTime>("PickupTime");
+                    b.Property<DateTime>("PickupBy");
 
                     b.Property<string>("Title");
 

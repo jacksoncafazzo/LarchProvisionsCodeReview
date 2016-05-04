@@ -11,7 +11,7 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int MenuId { get; set; }
 
-        public DateTime PickupTime { get; set; }
+        public DateTime PickupBy { get; set; }
         public DateTime OrderBy { get; set; }
         public string Title { get; set; }
 

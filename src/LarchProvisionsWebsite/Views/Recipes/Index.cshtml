@@ -4,66 +4,73 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="recipe-list-wrapper">
+    <div class="container">
+        <br />
+        <h3>
+            <a asp-action="Create">create new recipe</a>
+        </h3>
+        <table class="table">
+            <tr>
+                <th>
+                    id
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecipeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ServingSize)
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            id
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RecipeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ServingSize)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipeId)
-            </td>
-            <td>
-                <img src="@Html.DisplayFor(modelItem => item.Image)" alt="@Html.DisplayFor(model => item.RecipeName)" style="width:100px;" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServingSize)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RecipeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RecipeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RecipeId">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RecipeId)
+                    </td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.Image)" alt="@Html.DisplayFor(model => item.RecipeName)" style="width:100px;" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RecipeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServingSize)
+                    </td>
+                    <td>
+                     
+                            <a asp-action="Edit" asp-route-id="@item.RecipeId"><i class="material-icons">edit</i></a><a asp-action="Details" asp-route-id="@item.RecipeId"><i class="material-icons">toc</i></a>
+                            <form action="DeleteRecipeAjax" class="delete-recipe-ajax">
+                                <input type="hidden" value="@item.RecipeId" name="recipeId" />
+                                <button type="submit" class="delete-button"><i class="material-icons">delete</i></button>
+                            </form>
+              
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

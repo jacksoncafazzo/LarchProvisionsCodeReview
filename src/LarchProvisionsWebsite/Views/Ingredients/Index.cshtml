@@ -4,48 +4,66 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="ingredient-list-wrapper">
+    <div class="container">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IngredientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Source)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Unit)
-        </th>
-        <th></th>
-    </tr>
+        <br />
+        <h3>all the ingredients</h3>
+        
+        <table class="table">
+            <tr>
+                <th>
+                    rID
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IngredientName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Source)
+                </th>
+                
+                <th></th>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Source)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unit)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IngredientId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IngredientId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IngredientId">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                        <td>
+                    @foreach (var prep in item.Preps)
+                    {
+                        <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@prep.RecipeId">@prep.RecipeId</a>
+
+                    }
+                        </td>
+                 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IngredientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Source)
+                    </td>
+                   
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IngredientId"><i class="material-icons">edit</i></a> |
+                        <a asp-action="Details" asp-route-id="@item.IngredientId"><i class="material-icons">toc</i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IngredientId" class="delete-button"><i class="material-icons">delete</i></a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <h3><a asp-action="Create">create new ingredient</a></h3>
+        <h3><a asp-action="Index" asp-controller="Recipes">list all recipes</a></h3>
+    </div>
+</div>

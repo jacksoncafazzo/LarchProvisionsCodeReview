@@ -2,14 +2,42 @@
     background-image: url("../img/cook-pasta.png");
     background-size: contain;
     width: 100%;
-    h2, h3, h4, h5, li {
-            color: lightgray;
-            text-shadow: 2px 2px 2px black;
-            button {
-                color: #892517;
-            }
-        }
+
     li {
         font-size: 1.3em;
+    }
+}
+
+.recipe-list-wrapper {
+    background-image: url("../img/cheffin.png");
+    background-size: cover;
+    width: 100%;
+    color: lightgray;
+
+    a {
+        color: lightgray;
+    }
+
+    i:hover {
+        color: $strawberry;
+    }
+}
+
+.create-recipe-wrapper {
+    background-image: url("../img/cutting-board.png");
+    background-size: cover;
+    width: 100%;
+}
+
+.recipe-details-wrapper {
+    background-image: url("../img/cutting-board.png");
+    background-size: cover;
+    width: 100%;
+    color: lightgray;
+    text-shadow: 2px 2px 2px black;
+    background-color: dimgray;
+
+    dd {
+        font-size: 1.5em;
     }
 }

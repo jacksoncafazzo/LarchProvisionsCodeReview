@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LarchProvisionsWebsite</title>
+    <meta description="Larch Provisions provides fresh-prepared meal service weekly" />
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+    <title>Larch Provisions</title>
 
     <environment names="Development">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,9 +29,11 @@
                 <a href="/" class="brand-logo waves-effect waves-ripple left">
                     <img src="~/img/lil-larch.png" />
                 </a>
-              
-
-                <a href="#" data-activates="collapse-menu" class="button-collapse right menu-button" materialize="sidenav"><i class="material-icons">menu</i></a>
+                <a data-activates="collapse-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-small-only">
+                    <li>@Html.ActionLink("larch provisions", "Provisions", "Home")</li>
+                    <li>@Html.ActionLink("current menu", "CurrentMenu", "Menus")</li>
+                </ul>
                 <ul class="side-nav right-align" id="collapse-menu">
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
@@ -46,31 +51,22 @@
                         <li>@Html.ActionLink("ingredient list", "Index", "Ingredients")</li>
 
                     }
-
-
                 </ul>
-
-                <ul id="nav-mobile" class="right hide-on-small-only waves-effect waves-ripple">
-                    <li>@Html.ActionLink("larch provisions", "Provisions", "Home")</li>
-                    <li>@Html.ActionLink("current menu", "CurrentMenu", "Menus")</li>
-                   
-                </ul>
-
-                
             </div>
         </nav>
     </div>
     <div class="container-fluid body-content">
         @RenderBody()
-        <footer class="right">
-            <h5>&copy; 2016 - doctorjuno for larch provisions</h5>
+        <footer>
+            <h5>&copy; 2016 larch provisions - </h5>
+            <h5 class="dr_juno right">website made by doctorjuno</h5>
         </footer>
     </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="false"></script>
         <script src="~/lib/Materialize/dist/js/materialize.js" asp-append-version="false"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="false"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"

@@ -49,6 +49,9 @@ namespace LarchProvisionsWebsite.Controllers
             s => s.MenuId,
             (o, i) => o).ToList();
             ViewBag.Preps = _context.Preps.Where(p => p.RecipeId == id);
+            //ViewData["recipeImgUrl"] = Regex.Replace(recipe.Image, "~", "..");
+            ViewData["recipeImgUrl"] = recipe.Image;
+
             return View(recipe);
         }
 
@@ -207,6 +210,14 @@ namespace LarchProvisionsWebsite.Controllers
             }
 
             return View(recipe);
+        }
+
+        [HttpPost, ActionName("DeleteRecipeAjax")]
+        public void DeleteRecipeAjax(int recipeId)
+        {
+            Recipe recipe = _context.Recipes.Single(r => r.RecipeId == recipeId);
+            _context.Recipes.Remove(recipe);
+            _context.SaveChanges();
         }
 
         // POST: Recipes/Delete/5

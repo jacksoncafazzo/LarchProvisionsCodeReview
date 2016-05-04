@@ -4,57 +4,52 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<div class="edit-ingredient-wrapper">
+    <div class="container">
+        <div class="row">
+            <form asp-action="Edit" class="col s12">
+                <div class="row">
+                    <h4>edit ingredient</h4>
+                    <hr />
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="IngredientId" />
+                    <div class="input-field">
+                        <label asp-for="Amount" class="col s2 active"></label>
 
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>Ingredient</h4>
-        <hr />
-        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="IngredientId" />
-        <div class="form-group">
-            <label asp-for="Amount" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Amount" class="form-control" />
-                <span asp-validation-for="Amount" class="text-danger" />
+                        <input asp-for="Amount" type="number" class="validate" />
+                        <span asp-validation-for="Amount" class="text-danger" />
+                    </div>
+                    <div class="input-field">
+                        <label asp-for="Unit" class="col s4 active"></label>
+                        <input asp-for="Unit" class="validate" type="text" />
+                        <span asp-validation-for="Unit" class="text-danger" />
+                    </div>
+                    <div class="input-field">
+                        <label asp-for="IngredientName" class="col s4 active"></label>
+
+                        <input asp-for="IngredientName" class="validate" type="text" />
+                        <span asp-validation-for="IngredientName" class="text-danger" />
+
+                    </div>
+
+                    <div class="input-field">
+                        <label asp-for="Source" class="col m2 active"></label>
+                        <input asp-for="Source" class="validate" type="text" />
+                        <span asp-validation-for="Source" class="text-danger" />
+                    </div>
+
+                    <div class="input-field">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                 </div>
+            </form>
+            <div>
+                <a asp-action="Index">Back to List</a>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger" />
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label asp-for="Source" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Source" class="form-control" />
-                <span asp-validation-for="Source" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Unit" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Unit" class="form-control" />
-                <span asp-validation-for="Unit" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
-
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}

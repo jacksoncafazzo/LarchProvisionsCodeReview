@@ -20,7 +20,12 @@ namespace LarchProvisionsWebsite.Controllers
         // GET: Ingredients
         public IActionResult Index()
         {
-            return View(_context.Ingredients.ToList());
+            var ingredients = _context.Ingredients.ToList();
+            foreach (var ingredient in ingredients)
+            {
+                ingredient.Preps = _context.Preps.Where(p => p.IngredientId == ingredient.IngredientId).ToList();
+            }
+            return View(ingredients);
         }
 
         // GET: Ingredients/Details/5

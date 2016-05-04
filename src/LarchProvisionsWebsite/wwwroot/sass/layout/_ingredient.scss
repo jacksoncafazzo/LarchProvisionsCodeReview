@@ -2,11 +2,41 @@
     background-image: url("../img/ingredients.png");
     background-size: cover;
     width: 100%;
+    min-height: 800px;
+    background-repeat: no-repeat;
     .input-field label {
         opacity: 1;
     }
     h2 {
         color: lightgrey;
+        text-shadow: 2px 2px 2px black;
+    }
+}
+
+.edit-ingredient-wrapper {
+    background-image: url(../img/dinner.png);
+    width: 100%;
+    min-height: 800px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    h2, h3, h4, h5, li, a {
+        color: lightgray;
+        text-shadow: 2px 2px 2px black;
+    }
+    .input-field label {
+    opacity: 1;
+    }
+}
+
+.ingredient-list-wrapper {
+    background-image: url(../img/big-ingredients.png);
+    width: 100%;
+    min-height: 800px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: lightgray;
+    td {
+        font-size: 1.3em;
         text-shadow: 2px 2px 2px black;
     }
 }

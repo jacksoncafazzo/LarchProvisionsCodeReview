@@ -31,7 +31,6 @@
                                 <p>$@recipe.CustPrice per serving</p>
                                 @if (User.IsInRole("Customer"))
                                 {
-                                    <div id="cust-orders"></div>
                                     @if (recipe.Orders != null)
                                     {
 
@@ -41,7 +40,7 @@
                                         }
                                     }
                                     <div class="row">
-                                        <div class="col l12 m12 s12 center">
+                                        <div class="col s12 center">
 
                                             @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
                                             {
@@ -106,7 +105,7 @@
         <div class="row center">
             <div class="col l6 m6 s12">
                 <h4>order by noon sunday</h4>
-                <h4> @Model.OrderBy.Month/@Model.OrderBy.Day/@Model.OrderBy.Year</h4>
+                <h4> @Model.OrderBy.ToString("d")</h4>
             </div>
             <div class="col l6 m6 s12">
 
@@ -114,7 +113,7 @@
                     pickup 3-7pm tuesday
                 </h4>
                 <h4>
-                    @Model.PickupTime.Month/@Model.PickupTime.Day/@Model.PickupTime.Year
+                    @Model.PickupBy.ToString("d")
                 </h4>
             </div>
         </div>

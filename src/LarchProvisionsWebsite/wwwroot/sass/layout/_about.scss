@@ -29,6 +29,11 @@
         text-align: left;
         width: 50%;
         padding-left: 0px;
+        .card {
+            .card-reveal {
+                text-align: justify;
+            }
+        }
     }
 
     .about-column1 {

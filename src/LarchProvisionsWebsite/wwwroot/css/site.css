@@ -28,7 +28,7 @@
 
 /* label color */
 .input-field label {
-  opacity: 0; }
+  opacity: 1; }
 
 /* label focus color */
 .input-field input[type=text]:focus + label {
@@ -96,7 +96,10 @@
   .nav-wrapper a:hover {
     color: #892517;
     text-shadow: 0px -1px 2px lightgray;
-    background-color: #F6F6F6; }
+    background-color: #F6F6F6;
+    cursor: pointer; }
+  .nav-wrapper i:hover {
+    cursor: pointer; }
   .nav-wrapper .brand-logo img {
     min-height: 60px;
     max-height: 65px;
@@ -133,6 +136,17 @@
     .menu-edit-wrapper .list-orders .list-order {
       opacity: 0; }
 
+.menu-list-wrapper {
+  background-image: url("../img/cheffin.png");
+  background-size: cover;
+  width: 100%;
+  color: lightgrey; }
+
+.menu-create-wrapper {
+  background-image: url("../img/big-ingredients.png");
+  background-size: cover;
+  width: 100%; }
+
 .about-content {
   display: flex;
   flex-flow: column nowrap;
@@ -151,6 +165,8 @@
     text-align: left;
     width: 50%;
     padding-left: 0px; }
+    .about-content .about-column2 .card .card-reveal {
+      text-align: justify; }
   .about-content .about-column1 {
     text-align: left;
     padding-right: 0px;
@@ -195,51 +211,38 @@
   .menu-background .menu-display .card .order-info {
     background-color: rgba(5, 0, 0, 0.9); }
 
-@media (maxwidth: 600) {
-  .contact .address, .contact .email, .contact .order-form {
-    font-size: small; } }
-
-.contact .contact-photo img {
-  width: 100%; }
-
-.contact .address {
-  position: absolute;
-  top: 80px;
-  right: 25px;
-  text-align: right;
+.contact-wrapper .contact {
+  background-image: url("../img/in-the-kitchen.png");
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: lightgray;
-  text-shadow: 1px 1px 1px black;
-  font-size: 1.5em; }
-
-.contact .email {
-  position: absolute;
-  top: 300px;
-  right: 25px;
+  text-shadow: 2px 2px 2px black;
+  font-size: 1em;
   text-align: right;
-  color: lightgray;
-  text-shadow: 1px 1px 1px black;
-  font-size: 1.5em; }
-  .contact .email a {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: row wrap; }
+  .contact-wrapper .contact a {
     color: lightgray;
-    text-shadow: #892517; }
-  .contact .email a:hover {
-    color: #892517;
-    text-shadow: 1px 1px 1px white; }
-
-.contact .order-form {
-  position: absolute;
-  top: 500px;
-  right: 25px;
-  text-align: right;
-  color: lightgray;
-  text-shadow: 1px 1px 1px black;
-  font-size: 2.5em; }
-  .contact .order-form a {
+    text-shadow: 2px 2px 2px black; }
+  .contact-wrapper .contact .email {
+    text-align: right; }
+    .contact-wrapper .contact .email a:hover {
+      color: #892517; }
+  .contact-wrapper .contact .order-form {
+    align-self: flex-end;
+    text-align: center;
     color: lightgray;
-    text-shadow: #892517; }
-  .contact .order-form a:hover {
-    color: #892517;
-    text-shadow: 1px 1px 1px white; }
+    text-shadow: 1px 1px 1px black;
+    font-size: 2.5em; }
+    .contact-wrapper .contact .order-form a {
+      color: lightgray; }
+    .contact-wrapper .contact .order-form a:hover {
+      color: #892517;
+      text-shadow: 2px 2px 2px white; }
 
 .provisions-display {
   background-image: url(../img/couple-mountain.png);
@@ -265,23 +268,89 @@
   background-image: url("../img/cook-pasta.png");
   background-size: contain;
   width: 100%; }
-  .edit-recipe h2, .edit-recipe h3, .edit-recipe h4, .edit-recipe h5, .edit-recipe li {
-    color: lightgray;
-    text-shadow: 2px 2px 2px black; }
-    .edit-recipe h2 button, .edit-recipe h3 button, .edit-recipe h4 button, .edit-recipe h5 button, .edit-recipe li button {
-      color: #892517; }
   .edit-recipe li {
     font-size: 1.3em; }
+
+.recipe-list-wrapper {
+  background-image: url("../img/cheffin.png");
+  background-size: cover;
+  width: 100%;
+  color: lightgray; }
+  .recipe-list-wrapper a {
+    color: lightgray; }
+  .recipe-list-wrapper i:hover {
+    color: #892517; }
+
+.create-recipe-wrapper {
+  background-image: url("../img/cutting-board.png");
+  background-size: cover;
+  width: 100%; }
+
+.recipe-details-wrapper {
+  background-image: url("../img/cutting-board.png");
+  background-size: cover;
+  width: 100%;
+  color: lightgray;
+  text-shadow: 2px 2px 2px black;
+  background-color: dimgray; }
+  .recipe-details-wrapper dd {
+    font-size: 1.5em; }
 
 .create-ingredient-wrapper {
   background-image: url("../img/ingredients.png");
   background-size: cover;
-  width: 100%; }
+  width: 100%;
+  min-height: 800px;
+  background-repeat: no-repeat; }
   .create-ingredient-wrapper .input-field label {
     opacity: 1; }
   .create-ingredient-wrapper h2 {
     color: lightgrey;
     text-shadow: 2px 2px 2px black; }
+
+.edit-ingredient-wrapper {
+  background-image: url(../img/dinner.png);
+  width: 100%;
+  min-height: 800px;
+  background-size: cover;
+  background-repeat: no-repeat; }
+  .edit-ingredient-wrapper h2, .edit-ingredient-wrapper h3, .edit-ingredient-wrapper h4, .edit-ingredient-wrapper h5, .edit-ingredient-wrapper li, .edit-ingredient-wrapper a {
+    color: lightgray;
+    text-shadow: 2px 2px 2px black; }
+  .edit-ingredient-wrapper .input-field label {
+    opacity: 1; }
+
+.ingredient-list-wrapper {
+  background-image: url(../img/big-ingredients.png);
+  width: 100%;
+  min-height: 800px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: lightgray; }
+  .ingredient-list-wrapper td {
+    font-size: 1.3em;
+    text-shadow: 2px 2px 2px black; }
+
+footer {
+  width: 100%;
+  height: 100%;
+  margin-top: -20px;
+  padding-right: 15px;
+  background: lightgray;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(lightgray, #f6f6f6, #6e6e6e);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(lightgray, #f6f6f6, #6e6e6e);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(lightgray, #f6f6f6, #6e6e6e);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(lightgray, #f6f6f6, #6e6e6e);
+  /* Standard syntax */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+  footer .dr_juno {
+    align-self: flex-end; }
 
 @font-face {
   font-family: orator;
@@ -293,6 +362,13 @@ body, html {
   font-family: orator; }
   body a, html a {
     color: slategrey; }
+  body a:hover, html a:hover {
+    color: #892517; }
+  body h1, body h2, body h3, body h4, body h5, body li, html h1, html h2, html h3, html h4, html h5, html li {
+    color: lightgray;
+    text-shadow: 2px 2px 2px black; }
+    body h1 button, body h2 button, body h3 button, body h4 button, body h5 button, body li button, html h1 button, html h2 button, html h3 button, html h4 button, html h5 button, html li button {
+      color: #892517; }
 
 .caption h4, .caption h5 {
   background-color: rgba(7, 0, 0, 0.7);
@@ -306,4 +382,12 @@ body, html {
     display: inline;
     font-size: small;
     opacity: .75; } }
+
+@media (max-width: 600px) {
+  .contact {
+    font-size: small; } }
+
+@media (max-width: 800px) {
+  .contact-wrapper {
+    min-height: 1600px; } }
 

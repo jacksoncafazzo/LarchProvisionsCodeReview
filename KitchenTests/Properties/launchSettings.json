@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "test": {
-      "commandName": "test",
-      "launchBrowser": true
-    }
-  }
-}

@@ -35,18 +35,43 @@ $(document).ready(function () {
         selectMonths: true, // Creates a dropdown to control month
     });
 
-    //AJAX new ingredient
-    $('.delete-recipe-ajax').on("click", function (event) {
+    $('#remove_order').click(function (event) {
         event.preventDefault();
         $.ajax({
-            url: '@Url.Action("DeleteRecipeAjax", "Recipes")',
-            data: { id : $('input#recipeId').val() },
-            ajaxasync: true,
+            url: '/Recipes/RemoveOrderAjax',
+            data: { menuId: $('input#MenuId').val(), recipeId: $('input#RecipeId').val() },
+            ajaxsync: true,
             dataType: 'json',
             success: function (result) {
-                alert("You rock bro!");
-                window.location.replace("@Url.Action('Index', 'Recipes')");
+                alert('booyaka');
+                window.location.replace("/Menus/Edit/" + MenuId)
             }
         });
     });
+
+    $('.show-recipes').click(function () {
+        $.ajax({
+            type: 'GET',
+            dataType: 'html',
+            url: '/Menus/RecipesDisplay',
+            success: function (result) {
+                $('#menuRecipesDisplay').html(result);
+            }
+        });
+    });
+
+    //AJAX new ingredient
+    //$('.delete-recipe-ajax').on("click", function (event) {
+    //    event.preventDefault();
+    //    $.ajax({
+    //        url: '/Recipes/DeleteRecipeAjax',
+    //        data: { id: $('input#recipeId').val() },
+    //        ajaxasync: true,
+    //        dataType: 'json',
+    //        success: function (result) {
+    //            alert("You rock bro!");
+    //            window.location.replace("/Menus/Edit/" + MenuId);
+    //        }
+    //    });
+    //});
 });

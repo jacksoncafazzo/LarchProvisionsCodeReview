@@ -11,6 +11,7 @@
 @import "layout/recipe";
 @import "layout/ingredient";
 @import "layout/footer";
+@import "layout/orders";
 
 @font-face {
     font-family: orator;
@@ -18,6 +19,16 @@
 }
 
 body, html {
+    .body-content {
+        height: 100%;
+        width: 100%;
+    }
+    .footer-copyright a {
+        color: $strawberry;
+        font-weight: bold;
+        font-size: 1.5em;
+        
+    }
     color: $primary-color;
     background-color: $primary-bg-color;
     font-family: orator;

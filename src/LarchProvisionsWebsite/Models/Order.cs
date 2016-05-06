@@ -13,6 +13,7 @@ namespace LarchProvisionsWebsite.Models
         public string UserId { get; set; }
 
         public string UserName { get; set; }
+
         [NotMapped]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
@@ -31,6 +32,16 @@ namespace LarchProvisionsWebsite.Models
         [NotMapped]
         public virtual Recipe Recipe { get; set; }
 
-        
+        //public Order(ApplicationUser user, Recipe recipe, Menu menu)
+        //{
+        //    UserName = user.NormalizedUserName;
+        //    UserId = user.Id;
+        //    ApplicationUser = user;
+        //    RecipeId = recipe.RecipeId;
+        //    RecipeName = recipe.RecipeName;
+        //    OrderSize = 1;
+        //    Menu = menu;
+        //    Recipe = recipe;
+        //}
     }
 }

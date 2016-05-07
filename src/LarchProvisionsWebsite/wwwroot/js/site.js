@@ -38,7 +38,7 @@ $(document).ready(function () {
     $('#remove_order').click(function (event) {
         event.preventDefault();
         $.ajax({
-            url: '/Recipes/RemoveOrderAjax',
+            url: '/Menus/RemoveOrder',
             data: { menuId: $('input#MenuId').val(), recipeId: $('input#RecipeId').val() },
             ajaxsync: true,
             dataType: 'json',

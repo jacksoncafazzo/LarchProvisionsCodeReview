@@ -1,45 +1,52 @@
-﻿@model LarchProvisionsWebsite.Models.Recipe
+﻿@model LarchProvisionsWebsite.Models.Ingredient
 
 <!-- Modal Trigger -->
-<button data-target="ingredientModal" class="waves-effect waves-light btn modal-trigger">create a new ingredient</button>
+<button data-target="ingredientModal" class="waves-effect waves-light btn modal-trigger">create new</button>
 
 <!-- Modal Structure -->
-<div id="ingredientModal" class="modal">
+<div id="ingredientModal" class="modal create-ingredient-wrapper">
     <div class="modal-content">
         <div class="row">
-            <form class="new-ingredient col s12">
+            <form asp-action="Create" asp-controller="Ingredients" class="col s12">
                 <div class="row">
-                    <input type="hidden" name="recipeId" value="@Model.RecipeId" />
-                    <div class="input-field col s2">
-                        <label for="Amount">amount (number)</label>
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 
-                        <input name="Amount" autofocus class="validate" type="number" />
+                    <div class="input-field col s2">
+                        <label asp-for="Amount">amount (number)</label>
+
+                        <input asp-for="Amount" autofocus class="validate" type="number" />
+                        <span asp-validation-for="Amount" class="text-danger" />
+
                     </div>
                     <div class="input-field col s3">
-                        <label for="Unit">unit of measurement</label>
+                        <label asp-for="Unit">unit of measurement</label>
 
-                        <input name="Unit" class="validate" type="text" />
+                        <input asp-for="Unit" class="validate" type="text" />
+                        <span asp-validation-for="Unit" class="text-danger" />
+
                     </div>
                     <div class="input-field col s7">
-                        <label for="IngredientName">ingredient name</label>
+                        <label asp-for="IngredientName">ingredient name</label>
 
-                        <input name="IngredientName" class="validate" type="text" />
+                        <input asp-for="IngredientName" class="validate" type="text" />
+                        <span asp-validation-for="IngredientName" class="text-danger" />
+
                     </div>
 
                     <div class="input-field col s12">
-                        <label for="Source">source, notes, etc.</label>
+                        <label asp-for="Source">source, notes, etc.</label>
 
-                        <input name="Source" class="validate" type="text" />
+                        <input asp-for="Source" class="validate" type="text" />
+                        <span asp-validation-for="Source" class="text-danger" />
+
                     </div>
 
                     <div class="input-field col s12 center">
-                        <button type="submit" class="modal-action modal-close btn btn-large waves-effect waves-light">Create</button>
+                        <input type="submit" value="Create" class="btn btn-large waves-effect waves-light" />
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</div>
-        here is your new ingredient:<br />
-<div id="ingredient-result">
 </div>

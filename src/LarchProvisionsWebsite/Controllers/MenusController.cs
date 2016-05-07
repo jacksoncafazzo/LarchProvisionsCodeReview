@@ -46,13 +46,13 @@ namespace LarchProvisionsWebsite.Controllers
             var user = GetUser().Result;
             menu.Recipes = GetRecipes(menu.MenuId);
             var totalPrice = 0;
-            foreach (var recipe in menu.Recipes.ToList())
+            foreach (var lilrecipe in menu.Recipes.ToList())
             {
-                //var thisRecipe = StackRecipeOrders(recipe, menu, user);
-                var monies = recipe.CustPrice * recipe.Orders.Count;
+                var thisRecipe = StackRecipeOrders(lilrecipe, menu, user);
+                var monies = lilrecipe.CustPrice * lilrecipe.Orders.Count;
                 totalPrice = totalPrice + monies;
-                menu.Recipes.Remove(recipe);
-                menu.Recipes.Add(StackRecipeOrders(recipe, menu, user));
+                menu.Recipes.Remove(lilrecipe);
+                menu.Recipes.Add(thisRecipe);
             }
             ViewData["CustTotal"] = totalPrice;
             ViewBag.AllRecipes = _context.Recipes.ToList().Except(menu.Recipes);
@@ -248,12 +248,12 @@ namespace LarchProvisionsWebsite.Controllers
             _context.Orders.Remove(order);
             _context.SaveChanges();
             var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
-            var recipes = GetRecipes(menu.MenuId);
-            foreach (var recipe in recipes)
-            {
-                menu.Recipes.Remove(recipe);
-                menu.Recipes.Add(StackRecipe(recipe, menu, user));
-            }
+            //var recipes = GetRecipes(menu.MenuId);
+            //foreach (var recipe in recipes)
+            //{
+            //    menu.Recipes.Remove(recipe);
+            //    menu.Recipes.Add(StackRecipe(recipe, menu, user));
+            //}
             return Json(menu);
         }
 

@@ -116,6 +116,7 @@ namespace LarchProvisionsWebsite.Controllers
             (o, i) => o).ToList();
             ViewBag.Ingredients = _context.Ingredients.ToList().Except(recipe.Ingredients);
             recipe.Preps = _context.Preps.Where(p => p.RecipeId == id).ToList();
+            ViewData["RecipeId"] = recipe.RecipeId;
             return View(recipe);
         }
 

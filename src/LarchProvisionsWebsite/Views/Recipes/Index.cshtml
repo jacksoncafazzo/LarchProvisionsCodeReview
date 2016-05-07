@@ -63,9 +63,9 @@
                     <td>
                      
                             <a asp-action="Edit" asp-route-id="@item.RecipeId"><i class="material-icons">edit</i></a><a asp-action="Details" asp-route-id="@item.RecipeId"><i class="material-icons">toc</i></a>
-                            <form action="DeleteRecipeAjax" class="delete-recipe-ajax">
+                            <form action="DeleteRecipe">
                                 <input type="hidden" value="@item.RecipeId" name="recipeId" />
-                                <button type="submit" class="delete-button"><i class="material-icons">delete</i></button>
+                                <a asp-action="Delete" asp-route-id="@item.RecipeId" class="delete-button"><i class="material-icons">delete</i></a>
                             </form>
               
                     </td>

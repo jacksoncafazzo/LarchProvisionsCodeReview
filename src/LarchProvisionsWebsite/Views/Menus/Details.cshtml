@@ -44,9 +44,8 @@
                                             @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
                                             {
                                                 <input hidden name="menuId" value="@Model.MenuId" />
-                                                <input hidden name="recipeId" value="@recipe.RecipeId" />
                                                 @recipe.RecipeId
-                                                <button class="btn waves-effect waves-ripple" type="submit">
+                                                <button class="btn waves-effect waves-ripple"  name="recipeId" value="@recipe.RecipeId" onclick="this.form.submit()">
                                                     add order
                                                 </button>
                                             }

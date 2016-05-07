@@ -45,18 +45,14 @@ namespace LarchProvisionsWebsite.Controllers
             }
             var user = GetUser().Result;
             menu.Recipes = GetRecipes(menu.MenuId);
-
-            //foreach (var recipe in recipes)
-            //{
-            //    menu.Recipes.Remove(recipe);
-            //    menu.Recipes.Add(StackRecipe(recipe, menu, user));
-            //}
             var totalPrice = 0;
-
-            foreach (var recipe in menu.Recipes)
+            foreach (var recipe in menu.Recipes.ToList())
             {
+                //var thisRecipe = StackRecipeOrders(recipe, menu, user);
                 var monies = recipe.CustPrice * recipe.Orders.Count;
                 totalPrice = totalPrice + monies;
+                menu.Recipes.Remove(recipe);
+                menu.Recipes.Add(StackRecipeOrders(recipe, menu, user));
             }
             ViewData["CustTotal"] = totalPrice;
             ViewBag.AllRecipes = _context.Recipes.ToList().Except(menu.Recipes);
@@ -102,6 +98,7 @@ namespace LarchProvisionsWebsite.Controllers
         //Post CurrentMenu/Order
         public IActionResult Order(int menuId, int recipeId, ApplicationUser user)
         {
+            user = GetUser().Result;
             var order = new Order();
             var recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == recipeId);
             var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
@@ -110,17 +107,19 @@ namespace LarchProvisionsWebsite.Controllers
             order = StackOrder(order, menuId, recipeId, user);
             _context.Orders.Add(order);
             _context.SaveChanges();
-            foreach (var r in menu.Recipes)
+            var totalPrice = 0;
+            foreach (var lilrecipe in menu.Recipes.ToList())
             {
-                var thisRecipe = StackRecipeOrders(r, menu, user);
-                menu.Recipes.Remove(r);
+                var thisRecipe = StackRecipeOrders(lilrecipe, menu, user);
+                var monies = lilrecipe.CustPrice * lilrecipe.Orders.Count;
+                totalPrice = totalPrice + monies;
+                menu.Recipes.Remove(lilrecipe);
                 menu.Recipes.Add(thisRecipe);
             }
-            var totalPrice = 0;
+            
             foreach (var r in menu.Recipes)
             {
-                var monies = r.CustPrice * r.Orders.Count;
-                totalPrice = totalPrice + monies;
+                
             }
             ViewData["CustTotal"] = totalPrice;
 
@@ -138,7 +137,7 @@ namespace LarchProvisionsWebsite.Controllers
             order.UserId = user.Id;
             order.ApplicationUser = user;
             order.OrderSize = 1;
-            order.UserName = user.NormalizedUserName;
+            order.UserName = user.UserName;
             return order;
         }
 

@@ -7,8 +7,18 @@
             color: lightgray;
             text-shadow: 2px 2px 2px black;
         }
-
+        button {
+            background-color: transparent;
+            box-shadow: none;
+            border: none;
+        }
+        .delete-order {
+            background-color: transparent;
+            box-shadow: none;
+        }
         .card {
+            background-color: rgba(250, 250, 250, 0.7);
+                max-height: 320px;
             .balanced-meals {
                 position: absolute;
                 top: 100px;

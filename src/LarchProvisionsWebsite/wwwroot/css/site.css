@@ -1,11 +1,27 @@
-﻿.btn {
+﻿.material-icons.strawberry {
+  color: #892517; }
+
+h1.strawberry {
+  color: #892517; }
+
+.btn {
   background-color: #cecece;
-  text-shadow: 2px 2px 2px black; }
+  text-shadow: 1px 1px 1px black; }
+  .btn .remove-order-btn {
+    box-shadow: none;
+    background-color: transparent; }
+    .btn .remove-order-btn i {
+      color: #892517; }
+    .btn .remove-order-btn i:hover {
+      cursor: pointer; }
+
+.remove-order-btn:hover {
+  box-shadow: none; }
 
 .btn:hover {
   background-color: #c9c9c9;
   color: #892517;
-  text-shadow: -2px -2px 2px white; }
+  text-shadow: 1px 1px 1px black; }
 
 .btn:focus {
   background-color: #f6f6f6;
@@ -23,6 +39,15 @@
     margin-left: 0px; }
 
 .delete-button:hover {
+  box-shadow: none;
+  background-color: transparent; }
+
+.add-recipe {
+  background-color: transparent;
+  border: none;
+  box-shadow: none; }
+
+.add-recipe:hover {
   box-shadow: none;
   background-color: transparent; }
 
@@ -88,14 +113,34 @@
 .input-field .prefix.active {
   color: #000; }
 
+.picker__box {
+  background-color: rgba(5, 5, 5, 0.1);
+  text-shadow: 1px 1px 1px black;
+  color: lightgrey !important; }
+  .picker__box .picker__weekday-display {
+    background-color: rgba(5, 5, 5, 0.1); }
+  .picker__box .picker__date-display {
+    background-color: rgba(5, 5, 5, 0.1); }
+    .picker__box .picker__date-display .picker__year-display {
+      color: lightgrey; }
+  .picker__box .picker__calender-container .picker__table .picker__day {
+    color: red; }
+  .picker__box .picker__footer {
+    text-shadow: 1px 1px 2px black; }
+    .picker__box .picker__footer .picker__today {
+      color: #892517; }
+    .picker__box .picker__footer .picker__close {
+      background-color: #892517; }
+
 .nav-wrapper {
   background-color: #F6F6F6; }
   .nav-wrapper a {
     font-size: 1.5em;
+    text-shadow: none;
     color: slategrey; }
   .nav-wrapper a:hover {
     color: #892517;
-    text-shadow: 0px -1px 2px lightgray;
+    text-shadow: none;
     background-color: #F6F6F6;
     cursor: pointer; }
   .nav-wrapper i:hover {
@@ -126,7 +171,18 @@
       padding-left: 13%; }
     .menu-edit-wrapper .edit-menu .served-recipes {
       display: flex;
-      flex-flow: row wrap; }
+      flex-flow: row nowrap;
+      justify-content: space-between; }
+    .menu-edit-wrapper .edit-menu .serve-recipes {
+      display: flex;
+      flex-flow: column wrap; }
+      .menu-edit-wrapper .edit-menu .serve-recipes li {
+        width: 200px; }
+      .menu-edit-wrapper .edit-menu .serve-recipes .card {
+        justify-content: center;
+        width: 200px; }
+        .menu-edit-wrapper .edit-menu .serve-recipes .card .card-image img {
+          max-width: 200px; }
   .menu-edit-wrapper .list-orders {
     z-index: 2;
     top: 125px;
@@ -135,6 +191,8 @@
     justify-content: space-between; }
     .menu-edit-wrapper .list-orders .list-order {
       opacity: 0; }
+      .menu-edit-wrapper .list-orders .list-order .collapsible-body {
+        background-color: rgba(250, 250, 250, 0.2); }
 
 .menu-list-wrapper {
   background-image: url("../img/cheffin.png");
@@ -191,31 +249,41 @@
   .menu-background .menu-display h2, .menu-background .menu-display h3, .menu-background .menu-display h4, .menu-background .menu-display h5 {
     color: lightgray;
     text-shadow: 2px 2px 2px black; }
-  .menu-background .menu-display .card .balanced-meals {
-    position: absolute;
-    top: 100px;
-    padding-left: 25px;
-    padding-right: 25px;
-    text-align: center;
-    z-index: 5; }
-  .menu-background .menu-display .card h3, .menu-background .menu-display .card h5 {
-    color: #f6f6f6;
-    text-shadow: 1px 1px 1px black; }
-  .menu-background .menu-display .card .card-reveal {
-    background-color: rgba(5, 0, 0, 0.8);
-    color: lightgray;
-    text-shadow: 1px 1px 1px black; }
-    .menu-background .menu-display .card .card-reveal .card-title {
+  .menu-background .menu-display button {
+    background-color: transparent;
+    box-shadow: none;
+    border: none; }
+  .menu-background .menu-display .delete-order {
+    background-color: transparent;
+    box-shadow: none; }
+  .menu-background .menu-display .card {
+    background-color: rgba(250, 250, 250, 0.7);
+    max-height: 320px; }
+    .menu-background .menu-display .card .balanced-meals {
+      position: absolute;
+      top: 100px;
+      padding-left: 25px;
+      padding-right: 25px;
+      text-align: center;
+      z-index: 5; }
+    .menu-background .menu-display .card h3, .menu-background .menu-display .card h5 {
+      color: #f6f6f6;
+      text-shadow: 1px 1px 1px black; }
+    .menu-background .menu-display .card .card-reveal {
+      background-color: rgba(5, 0, 0, 0.8);
       color: lightgray;
-      text-shadow: 2px 2px 2px black; }
-  .menu-background .menu-display .card .order-info {
-    background-color: rgba(5, 0, 0, 0.9); }
+      text-shadow: 1px 1px 1px black; }
+      .menu-background .menu-display .card .card-reveal .card-title {
+        color: lightgray;
+        text-shadow: 2px 2px 2px black; }
+    .menu-background .menu-display .card .order-info {
+      background-color: rgba(5, 0, 0, 0.9); }
 
 .contact-wrapper .contact {
   background-image: url("../img/in-the-kitchen.png");
   width: 100%;
   height: 100%;
-  min-height: 300px;
+  min-height: 500px;
   background-repeat: no-repeat;
   background-size: cover;
   color: lightgray;
@@ -349,6 +417,11 @@ footer {
 .orders-list {
   background-color: dimgrey; }
 
+.list-orders {
+  background-color: transparent; }
+  .list-orders .collapsible-header {
+    background-color: transparent; }
+
 @font-face {
   font-family: orator;
   src: url(../fonts/orator/ufonts.com_orator-regular.ttf); }
@@ -370,7 +443,7 @@ body, html {
     color: #892517; }
   body h1, body h2, body h3, body h4, body h5, body li, html h1, html h2, html h3, html h4, html h5, html li {
     color: lightgray;
-    text-shadow: 2px 2px 2px black; }
+    text-shadow: 1px 1px 1px black; }
     body h1 button, body h2 button, body h3 button, body h4 button, body h5 button, body li button, html h1 button, html h2 button, html h3 button, html h4 button, html h5 button, html li button {
       color: #892517; }
 

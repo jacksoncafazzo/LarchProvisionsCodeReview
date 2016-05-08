@@ -35,16 +35,41 @@ $(document).ready(function () {
         selectMonths: true, // Creates a dropdown to control month
     });
 
-    $('#remove_order').click(function (event) {
+    $('.update-order').change(function (event) {
         event.preventDefault();
+        console.log($(this).serialize());
         $.ajax({
-            url: '/Menus/RemoveOrder',
-            data: { menuId: $('input#MenuId').val(), recipeId: $('input#RecipeId').val() },
+            url: '/Orders/UpdateOrder',
+            data: $(this).serialize(),
             ajaxsync: true,
             dataType: 'json',
+            type: 'POST',
+            success: function(result) {
+                var returnString = "";
+                for (var i=0 ; i < result.OrderSize; i++) {
+                   returnString = returnString + '<i class="material-icons">redeem</i>';
+                }
+                Materialize.toast('order size updated to ' + result.OrderSize, 4000)
+
+                 $('#orders_recipe_'+ result.RecipeId).html(returnString);
+            }
+        });
+        console.log($(this).serialize());
+    });
+
+    $('.delete-order').submit(function (event) {
+        event.preventDefault();
+        var orderId = $('OrderId').serialize();
+        console.log(orderId);
+        $.ajax({
+            url: '/Orders/Delete/',
+            data: $(this).serialize(),
+            ajaxsync: true,
+            dataType: 'json',
+            type: 'POST',
             success: function (result) {
-                alert('booyaka');
-                window.location.replace("/Menus/Edit/" + MenuId)
+            // Materialize.toast(message, displayLength, className, completeCallback);
+            Materialize.toast('order deleted!', 4000) // 4000 is the duration of the toast            
             }
         });
     });

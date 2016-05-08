@@ -1,3 +1,10 @@
 ﻿.orders-list {
     background-color: dimgrey;
 }
+
+.list-orders {
+    background-color: transparent;
+    .collapsible-header {
+        background-color: transparent;
+    }
+}

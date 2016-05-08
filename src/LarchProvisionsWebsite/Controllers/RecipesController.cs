@@ -76,7 +76,7 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 if (file == null)
                 {
-                    recipe.Image = "~/img/larch-id.png";
+                    recipe.Image = "~/img/white-larch-logo.png";
                 }
                 if (file != null)
                 {

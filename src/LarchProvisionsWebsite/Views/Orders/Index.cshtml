@@ -1,15 +1,24 @@
 ﻿@model IEnumerable<LarchProvisionsWebsite.Models.Order>
 <div class="orders-list">
     <div class="container">
+        <br />
         <ul>
             @foreach (var o in Model)
             {
-                <li>Menu Id: @o.MenuId</li>
-                <li>User: @o.UserName</li>
-                <li>Recipe: @o.RecipeName</li>
-                <li>Order size: @o.OrderSize</li>
+                <li>menu id: @o.MenuId</li>
+                <li>user: @o.UserName</li>
+                <li>recipe: @o.RecipeName</li>
+                <li>order size: @o.OrderSize</li>
                 <li>id: @o.OrderId</li>
-                <li><a asp-action="Edit" asp-route-id="@o.OrderId">Edit</a> |</li>
+                <li>
+                    <a asp-action="Edit" asp-route-id="@o.OrderId">edit</a> |
+                    <form action="Delete" class="btn delete-order delete-button">
+                        <input hidden name="orderId" value="@o.OrderId" />
+                        <button onClick="return confirm('you sure bro?');" type="submit" class="btn delete-button">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </form>
+                </li>
 
             }
         </ul>

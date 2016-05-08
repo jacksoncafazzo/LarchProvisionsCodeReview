@@ -7,7 +7,9 @@
 <div class="menu-background">
     <div class="container menu-display">
         <br />
-        <h4 class="center">THIS WEEK'S MENU</h4>
+        <h5 class="center">orders are not currently tracked while on hiatus</h5>
+        <h5 class="center">larch meals will resume in june</h5>
+        <h5 class="center">click <a href="https://docs.google.com/forms/d/1N1ZXhkgLk6IDEoyabNEUdhfQNJq4SyseoF2_4WVrBIE/viewform?c=0&w=1">here</a> for the current menu order form</h5>
 
         <h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
         @if (User.IsInRole("Chef"))
@@ -26,34 +28,47 @@
                                 <img class="activator" src="@recipe.Image" alt="@recipe.RecipeName" />
                             </div>
                             <div class="card-content">
+                                <div class="row">
+
                                 <span class"card-title activator"><b>@recipe.RecipeName</b><i class="material-icons right">more_vert</i></span>
                                 <p>$@recipe.CustPrice per serving</p>
-                                @if (User.IsInRole("Customer"))
-                                {
-                                    @if (recipe.Orders != null)
-                                    {
+                                </div>
+                                <div class="row">
+                              @if (User.IsInRole("Customer"))
+                              {
 
-                                        @foreach (var o in recipe.Orders)
-                                        {
-                                            <i class="material-icons">redeem</i>
-                                        }
-                                    }
-                                    <div class="row">
+                                    @if (recipe.Orders.Count > 0)
+                                    {
                                         <div class="col s12 center">
 
+                                            @foreach (var o in recipe.Orders)
+                                            {
+                                                @Html.DisplayFor(m => recipe, "update-order", new { menuId = Model.MenuId })
+                                            }
+                                        </div>
+                                    }
+                                    @if (recipe.Orders.Count == 0)
+                                    {
+                                        <div class="col s12 center">
                                             @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
                                             {
                                                 <input hidden name="menuId" value="@Model.MenuId" />
-                                                <button class="btn waves-effect waves-ripple"  name="recipeId" value="@recipe.RecipeId" onclick="this.form.submit()">
-                                                    add order
-                                                </button>
+                                                    <button class="btn waves-effect waves-ripple" name="recipeId" value="@recipe.RecipeId" onclick="this.form.submit()">
+                                                        add order
+                                                    </button>
                                             }
                                         </div>
-                                    </div>
-                                }
-                            </div>
-                            <div class="container recipe-description">
-                            </div>
+                                    }
+                              }
+                                </div>
+
+
+
+
+
+
+
+                            </div>                         
                             <div class="card-reveal">
                                 <span class="card-title">@recipe.RecipeName<i class="material-icons right">close</i></span>
                                 <div class="container reveal-text">
@@ -62,44 +77,17 @@
                                 </div>
                             </div>
                         </div>
+                               
+                     
+                                }
                     </div>
                 }
             }
-            <div class="row container orders-display">
-                <div class="col l12 m12 s12">
-
+            <div class="row orders-display">
+                <div class="col s12 center">
+                    <h4>ordering as @ViewData["UserName"].ToString()</h4>
                     <h4>your current orders total $@ViewData["CustTotal"]</h4>
-                    <ul>
-                        @if (Model.Recipes != null)
-                        {
-                            @foreach (var recipe in Model.Recipes)
-                            {
-                                @if (recipe.Orders != null)
-                                {
-
-                                    @foreach (var order in recipe.Orders)
-                                    {
-                                        <li>
-                                            <h5>@order.RecipeName: $@recipe.CustPrice</h5>
-                                            @using (Html.BeginForm("RemoveOrder", "Menus", FormMethod.Post))
-                                            {
-                                                <input hidden name="menuId" value="@Model.MenuId" />
-                                                <input hidden name="recipeId" value="@recipe.RecipeId" />
-                                                <button class="btn waves-effect waves-ripple" type="submit">
-                                                    remove order
-                                                </button>
-                                            }
-                                        </li>
-                                        <li>
-                                            <div id="remove_order" class="btn waves-effect">remove with ajax</div>
-                                        </li>
-
-                                    }
-                                }
-
-                            }
-                        }
-                    </ul>
+                    @Html.DisplayFor(m => Model, "confirm-orders")
                 </div>
             </div>
         </div>

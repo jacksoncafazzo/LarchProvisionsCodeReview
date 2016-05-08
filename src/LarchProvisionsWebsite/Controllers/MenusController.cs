@@ -60,7 +60,8 @@ namespace LarchProvisionsWebsite.Controllers
             ViewBag.AllOrders = _context.Orders.ToList();
 
             ViewData["ReturnUrl"] = "/Menus/Display/" + menu.MenuId;
-
+            ViewData["UserName"] = user.UserName;
+            ViewData["UserId"] = user.Id;
             return View("Details", menu);
         }
 
@@ -71,14 +72,14 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-
+            var user = GetUser().Result;
             Menu menu = _context.Menus.FirstOrDefault(m => m.MenuId == id);
             if (menu == null)
             {
                 return HttpNotFound();
             }
             menu.Recipes = GetRecipes(id.GetValueOrDefault());
-
+            ViewData["UserName"] = user.UserName;
             return View(menu);
         }
 
@@ -116,12 +117,12 @@ namespace LarchProvisionsWebsite.Controllers
                 menu.Recipes.Remove(lilrecipe);
                 menu.Recipes.Add(thisRecipe);
             }
-            
+
             foreach (var r in menu.Recipes)
             {
-                
             }
             ViewData["CustTotal"] = totalPrice;
+            ViewData["UserName"] = user.UserName;
 
             return View("Details", menu);
         }
@@ -194,6 +195,7 @@ namespace LarchProvisionsWebsite.Controllers
             ViewBag.AllOrders = _context.Orders.ToList().Except(menu.Orders);
 
             ViewData["ReturnUrl"] = "/Menus/Edit/" + id;
+
             return View(menu);
         }
 
@@ -247,14 +249,14 @@ namespace LarchProvisionsWebsite.Controllers
             var order = _context.Orders.FirstOrDefault(o => o.RecipeId == recipeId && o.MenuId == menuId);
             _context.Orders.Remove(order);
             _context.SaveChanges();
-            var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
+            var recipe = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
             //var recipes = GetRecipes(menu.MenuId);
             //foreach (var recipe in recipes)
             //{
             //    menu.Recipes.Remove(recipe);
             //    menu.Recipes.Add(StackRecipe(recipe, menu, user));
             //}
-            return Json(menu);
+            return Json(recipe);
         }
 
         public IActionResult RemoveRecipe(int menuId, int recipeId)

@@ -2,13 +2,27 @@
 
 .btn {
     background-color: darken(lightgray, 2);
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 1px 1px 1px black;
+    .remove-order-btn {
+    box-shadow: none;
+    background-color: transparent;
+    i {
+        color: $strawberry;
+    }
+    i:hover {
+        cursor: pointer;
+    }
+    }
 }
 
+    .remove-order-btn:hover {
+        box-shadow: none;
+
+    }
 .btn:hover {
     background-color: darken(lightgray, 4);
     color: $strawberry;
-    text-shadow: -2px -2px 2px white;
+    text-shadow: 1px 1px 1px black;
 }
 
 .btn:focus {
@@ -36,3 +50,15 @@
         background-color: transparent;
  
 }
+
+.add-recipe {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+
+}
+.add-recipe:hover {
+    box-shadow: none;
+    background-color: transparent;
+}
+

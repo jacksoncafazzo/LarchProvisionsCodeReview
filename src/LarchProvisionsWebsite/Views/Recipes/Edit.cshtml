@@ -18,7 +18,7 @@
                     <ul>
                         @foreach (var ingredient in Model.Ingredients)
                         {
-                            @Html.DisplayFor(i => ingredient, "list-ingredients-admin")
+                            @Html.DisplayFor(i => ingredient, "list-ingredients")
                         }
                     </ul>
                 }
@@ -41,7 +41,6 @@
                 </h3>
             </div>
         </div>
-        
     </div>
     <div class="row center">
         <img src="@Model.Image" style="width:80%;" />
@@ -49,7 +48,7 @@
         <form class="col s12" asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RecipeId" />s
-            <input type="hidden" value="/Recipes/Edit/@Model.RecipeId" name="returnUrl"/>
+            <input type="hidden" value="/Recipes/Edit/@Model.RecipeId" name="returnUrl" />
             <div class="row">
                 <div class="input-field col s12">
                     <input asp-for="RecipeName" class="form-control" />

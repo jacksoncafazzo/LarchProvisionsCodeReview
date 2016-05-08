@@ -11,7 +11,10 @@ namespace LarchProvisionsWebsite.Models
         [Key]
         public int MenuId { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime PickupBy { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime OrderBy { get; set; }
         public string Title { get; set; }
 

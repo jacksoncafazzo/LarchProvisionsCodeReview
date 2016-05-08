@@ -1,4 +1,6 @@
-﻿<h5>
+﻿@if (Model.Ingredients.Count > 0)
+{
+<h5>
     <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">
         <i class="material-icons">mode_edit</i>
         @Model.RecipeName $@Model.CustPrice
@@ -12,3 +14,7 @@
 
     }
 </ul>
+} else if (Model.Ingredients.Count == 0)
+{
+<h5 class="red darken-4 center">!! WARNING !! <br />@Model.RecipeName has orders!!</h5>
+}

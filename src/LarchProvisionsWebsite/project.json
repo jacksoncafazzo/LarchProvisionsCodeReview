@@ -39,7 +39,8 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "Facebook": "7.0.6"
+        "Facebook": "7.0.6",
+        "RestSharp": "105.2.3"
       }
     },
     "dnxcore50": { }

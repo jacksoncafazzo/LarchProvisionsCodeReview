@@ -1,0 +1,68 @@
+﻿@model LarchProvisionsWebsite.Models.Menu
+
+<!-- Modal Trigger -->
+<h5><button data-target="ordersModal" class="waves-effect waves-light btn modal-trigger confirm_orders">confirm your orders</button></h5>
+
+<div id="ordersModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="container">
+            <h4>ordering as @ViewData["UserName"].ToString()</h4>
+
+            <form action="updateOrders" class="update-orders">
+                @if (Model.Recipes != null)
+            {
+                    @foreach (var recipe in Model.Recipes)
+                    {
+                        if (recipe.Orders.Count > 0)
+                        {
+                            <div class="row">
+                                @*<div class="col s2">
+                                        <form action="RemoveOrderAjax" class="remove-order">
+                                            <input hidden name="menuId" value="@Model.MenuId" />
+                                            <input hidden name="recipeId" value="@recipe.RecipeId" />
+                                            <button class="btn order-button  waves-effect waves-light" type="submit">
+                                                <i class="material-icons strawberry">
+                                                    remove_shopping_cart
+                                                </i>
+                                            </button>
+                                        </form>
+                                    </div>*@
+                                <div class="col s12 recipe-orders">
+                                    <p>@recipe.RecipeName - $@recipe.CustPrice</p>
+                                    <div class="row">
+                                        @foreach (var order in recipe.Orders)
+                                        {
+                                            <div class="input-field">
+                                                <img src="@recipe.Image" style="width:40px;" />
+                                                <label for="@order.OrderSize" class="col s4">order size</label>
+                                                <input type="number" asp-for="@order.OrderSize" class="validate" />
+                                            </div>
+                                        }
+                                        Total: $@(recipe.CustPrice * recipe.Orders.Count)
+                                    </div>
+                                </div>
+                                @*<div class="col s2">
+                                        <form action="AddOrder" class="add-order">
+                                            <input hidden name="menuId" value="@Model.MenuId" />
+                                            <input hidden name="recipeId" value="@recipe.RecipeId" />
+                                            <button class="btn order-button  waves-effect waves-light" type="submit">
+                                                <i class="material-icons strawberry">
+                                                    shopping_cart
+                                                </i>
+                                            </button>
+                                        </form>
+                                    </div>*@
+                            </div>
+                        }
+                    }
+                }
+                <button class="btn waves-effect" type="submit">
+                    update
+                </button>
+                <h4>your current orders total $@ViewData["CustTotal"]</h4>
+            </form>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ namespace LarchProvisionsWebsite.Controllers
     public class OrdersController : Controller
     {
         private LarchKitchenDbContext _context;
+
         public OrdersController(LarchKitchenDbContext context)
         {
             _context = context;
@@ -27,6 +28,32 @@ namespace LarchProvisionsWebsite.Controllers
         {
             var order = _context.Orders.FirstOrDefault(o => o.OrderId == id);
             return View(order);
+        }
+
+        
+
+        [HttpPost]
+        public IActionResult UpdateOrder(int orderId, int orderSize)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+            if (orderSize == 0)
+            {
+                _context.Orders.Remove(order);
+            }
+            order.OrderSize = orderSize;
+            _context.Orders.Update(order);
+            _context.SaveChanges();
+            return Json(order);
+        }
+
+        // POST: Order/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public IActionResult Delete(int orderId)
+        {
+            Order order = _context.Orders.Single(m => m.OrderId == orderId);
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+            return Json(order);
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿.picker__box {
+    background-color: rgba(5,5,5,0.1);
+    text-shadow: 1px 1px 1px black;
+    color: lightgrey !important;
+
+    .picker__weekday-display {
+        background-color: rgba(5,5,5,0.1);
+
+    }
+    .picker__date-display {
+        background-color: rgba(5,5,5,0.1);
+        .picker__year-display {
+            color: lightgrey;
+        }
+    }
+    .picker__calender-container {
+        .picker__table {
+            .picker__day {
+            color: red;
+            }
+           
+   
+        }
+    }
+    .picker__footer {
+        text-shadow: 1px 1px 2px black;
+        .picker__today {
+            color: $strawberry;
+        }
+        .picker__close {
+            background-color: $strawberry;
+
+        }
+    }
+}

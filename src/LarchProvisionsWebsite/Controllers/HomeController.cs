@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
@@ -15,9 +14,9 @@ namespace LarchProvisionsWebsite.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+           
+                return View();
+        
         }
 
         public IActionResult Contact()

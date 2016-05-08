@@ -1,1 +1,13 @@
-﻿<button class="btn waves-effect waves-ripple" name="recipeId" value="@Model.RecipeId" onclick="this.form.submit()">@Model.Servings (>OVO<) @Model.RecipeName</button>
+﻿<div class="card">
+    <div class="card-image center">
+        <img src="@Model.Image" />
+    </div>
+    <div class="card-content">
+        <p>@Model.RecipeName</p>
+        <p>@Model.Description</p>
+        <p>@Model.Notes</p>
+    </div>
+    <div class="card-action">
+        <button class="btn waves-effect waves-ripple add-recipe" name="recipeId" value="@Model.RecipeId" onclick="this.form.submit()">add @Model.RecipeName</button>
+    </div>
+</div>

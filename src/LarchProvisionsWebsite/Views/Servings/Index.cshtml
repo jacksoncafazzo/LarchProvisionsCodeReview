@@ -1,0 +1,44 @@
+@model IEnumerable<LarchProvisionsWebsite.Models.Serving>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <p>
+        <h5><a asp-action="Create">Create New</a></h5>
+    </p>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.ServingId)</th>
+            <th>@Html.DisplayNameFor(m => m.Recipe.RecipeName)</th>
+            <th>Menu @Html.DisplayNameFor(m => m.Menu.Title)</th>
+            <th>@Html.DisplayNameFor(m => m.Menu.OrderBy)</th>
+            <th>@Html.DisplayNameFor(m => m.Menu.PickupBy)</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.ServingId)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Recipe.RecipeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Menu.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Menu.OrderBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Menu.PickupBy)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ServingId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ServingId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ServingId">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

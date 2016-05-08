@@ -43,8 +43,13 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            var user = GetUser().Result;
-            menu.Recipes = GetRecipes(menu.MenuId);
+
+            if (User.IsSignedIn())
+            {
+                var user = GetUser().Result;
+            ViewData["UserName"] = user.UserName;
+            ViewData["UserId"] = user.Id;
+
             var totalPrice = 0;
             foreach (var lilrecipe in menu.Recipes.ToList())
             {
@@ -54,14 +59,15 @@ namespace LarchProvisionsWebsite.Controllers
                 menu.Recipes.Remove(lilrecipe);
                 menu.Recipes.Add(thisRecipe);
             }
+
+            menu.Recipes = GetRecipes(menu.MenuId);
             ViewData["CustTotal"] = totalPrice;
+            }
             ViewBag.AllRecipes = _context.Recipes.ToList().Except(menu.Recipes);
 
             ViewBag.AllOrders = _context.Orders.ToList();
 
             ViewData["ReturnUrl"] = "/Menus/Display/" + menu.MenuId;
-            ViewData["UserName"] = user.UserName;
-            ViewData["UserId"] = user.Id;
             return View("Details", menu);
         }
 
@@ -99,7 +105,10 @@ namespace LarchProvisionsWebsite.Controllers
         //Post CurrentMenu/Order
         public IActionResult Order(int menuId, int recipeId, ApplicationUser user)
         {
-            user = GetUser().Result;
+            if (User.IsSignedIn())
+            {
+                user = GetUser().Result;
+            }
             var order = new Order();
             var recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == recipeId);
             var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
@@ -117,14 +126,12 @@ namespace LarchProvisionsWebsite.Controllers
                 menu.Recipes.Remove(lilrecipe);
                 menu.Recipes.Add(thisRecipe);
             }
-
-            foreach (var r in menu.Recipes)
-            {
-            }
             ViewData["CustTotal"] = totalPrice;
             ViewData["UserName"] = user.UserName;
 
             return View("Details", menu);
+            
+            
         }
 
         // get that info on there

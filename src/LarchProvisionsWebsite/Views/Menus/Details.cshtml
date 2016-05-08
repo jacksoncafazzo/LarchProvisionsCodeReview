@@ -83,13 +83,18 @@
                     </div>
                 }
             }
+                    @if (User.IsInRole("Customer"))
+                    {
             <div class="row orders-display">
                 <div class="col s12 center">
+
+
                     <h4>ordering as @ViewData["UserName"].ToString()</h4>
                     <h4>your current orders total $@ViewData["CustTotal"]</h4>
                     @Html.DisplayFor(m => Model, "confirm-orders")
                 </div>
             </div>
+                    }
         </div>
         <div class="row center">
             <div class="col l6 m6 s12">

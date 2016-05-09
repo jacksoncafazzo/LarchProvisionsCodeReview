@@ -9,12 +9,12 @@
 </h5>
 <ul>
     @foreach (var ingredient in Model.Ingredients)
-            {
+    {
         <li>@ingredient.Amount @ingredient.Unit @ingredient.IngredientName</li>
 
     }
 </ul>
 } else if (Model.Ingredients.Count == 0)
 {
-<h5 class="red darken-4 center">!! WARNING !! <br />@Model.RecipeName has orders!!</h5>
+<h5 class="red darken-4 center">!! WARNING !! <br />@Model.RecipeName has orders<br />or needs ingredients!!</h5>
 }

@@ -94,12 +94,17 @@ namespace LarchProvisionsWebsite.Controllers
         }
 
         // GET: Recipes/Edit/5
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? id, string returnUrl = null)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
+            if (returnUrl == null)
+            {
+                returnUrl = "/Recipes/";
+            }
+            ViewData["ReturnUrl"] = returnUrl;
 
             Recipe recipe = _context.Recipes.FirstOrDefault(m => m.RecipeId == id);
             if (recipe == null)
@@ -168,6 +173,7 @@ namespace LarchProvisionsWebsite.Controllers
         {
             Prep prep = _context.Preps.FirstOrDefault(p => p.IngredientId == ingredientId);
             _context.Preps.Remove(prep);
+          
             _context.SaveChanges();
             ViewBag.Ingredients = _context.Ingredients.ToList();
 

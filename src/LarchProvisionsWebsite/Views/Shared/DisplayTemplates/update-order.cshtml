@@ -1,14 +1,13 @@
 ﻿@model LarchProvisionsWebsite.Models.Recipe
 
-@if (Model.Orders.Count > 0)
-{
-
     <div class="row update-order">
+        
+            <p>ohai</p>
         @foreach (var order in Model.Orders)
         {
             if (order.RecipeId == Model.RecipeId)
             {
-                <form action="UpdateOrder" class="update-order col s9">
+                <form action="UpdateOrder" class="update-order col s12">
                     <div class="row">
                         <div class="col s8">
                             <div id="orders_recipe_@Model.RecipeId">
@@ -29,15 +28,14 @@
                     </div>
                 </form>
                
-                    <form action="Delete" class="btn delete-order col s3">
+                    @*<form action="Delete" class="btn delete-order col s3">
                         <input hidden name="orderId" value="@order.OrderId" />
                         <btn onClick="return confirm('you sure bro?');" type="submit" class="remove-order-btn">
                             <i class="material-icons large">delete</i>
                         </btn>
-                    </form>
+                    </form>*@
 
 
             }
         }
     </div>
-}

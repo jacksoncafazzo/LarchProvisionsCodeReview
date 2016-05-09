@@ -74,16 +74,16 @@ $(document).ready(function () {
         });
     });
 
-    $('.show-recipes').click(function () {
-        $.ajax({
-            type: 'GET',
-            dataType: 'html',
-            url: '/Menus/RecipesDisplay',
-            success: function (result) {
-                $('#menuRecipesDisplay').html(result);
-            }
-        });
-    });
+    // $('.show-recipes').click(function () {
+    //     $.ajax({
+    //         type: 'GET',
+    //         dataType: 'html',
+    //         url: '/Menus/RecipesDisplay',
+    //         success: function (result) {
+    //             $('#menuRecipesDisplay').html(result);
+    //         }
+    //     });
+    // });
 
     //AJAX new ingredient
     //$('.delete-recipe-ajax').on("click", function (event) {

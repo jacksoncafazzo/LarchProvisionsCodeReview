@@ -22,79 +22,21 @@
 
                 @foreach (var recipe in Model.Recipes)
                 {
-                    <div class="col m6 l6 s6">
-                        <div class="card">
-                            <div class="card-image waves-effect waves-block waves-ripple">
-                                <img class="activator" src="@recipe.Image" alt="@recipe.RecipeName" />
-                            </div>
-                            <div class="card-content">
-                                <div class="row">
-
-                                <span class"card-title activator"><b>@recipe.RecipeName</b><i class="material-icons right">more_vert</i></span>
-                                <p>$@recipe.CustPrice per serving</p>
-                                </div>
-                                <div class="row">
-                              @if (User.IsInRole("Customer"))
-                              {
-
-                                    @if (recipe.Orders.Count > 0)
-                                    {
-                                        <div class="col s12 center">
-
-                                            @foreach (var o in recipe.Orders)
-                                            {
-                                                @Html.DisplayFor(m => recipe, "update-order", new { menuId = Model.MenuId })
-                                            }
-                                        </div>
-                                    }
-                                    @if (recipe.Orders.Count == 0)
-                                    {
-                                        <div class="col s12 center">
-                                            @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
-                                            {
-                                                <input hidden name="menuId" value="@Model.MenuId" />
-                                                    <button class="btn waves-effect waves-ripple" name="recipeId" value="@recipe.RecipeId" onclick="this.form.submit()">
-                                                        add order
-                                                    </button>
-                                            }
-                                        </div>
-                                    }
-                              }
-                                </div>
-
-
-
-
-
-
-
-                            </div>                         
-                            <div class="card-reveal">
-                                <span class="card-title">@recipe.RecipeName<i class="material-icons right">close</i></span>
-                                <div class="container reveal-text">
-                                    <h5>@recipe.Description</h5>
-                                    <h5>@recipe.Notes</h5>
-                                </div>
-                            </div>
-                        </div>
-                               
-                     
-                                }
-                    </div>
+                    @Html.DisplayFor(m=>recipe, "current-menu-recipes", new { menuId = Model.MenuId })
                 }
+
             }
-                    @if (User.IsInRole("Customer"))
-                    {
-            <div class="row orders-display">
-                <div class="col s12 center">
+            @if (User.IsInRole("Customer"))
+            {
+                <div class="row orders-display">
+                    <div class="col s12 center">
 
-
-                    <h4>ordering as @ViewData["UserName"].ToString()</h4>
-                    <h4>your current orders total $@ViewData["CustTotal"]</h4>
-                    @Html.DisplayFor(m => Model, "confirm-orders")
+                        <h4>ordering as @ViewData["UserName"].ToString()</h4>
+                        <h4>your current orders total $@ViewData["CustTotal"]</h4>
+                        @Html.DisplayFor(m => Model, "confirm-orders")
+                    </div>
                 </div>
-            </div>
-                    }
+            }
         </div>
         <div class="row center">
             <div class="col l6 m6 s12">

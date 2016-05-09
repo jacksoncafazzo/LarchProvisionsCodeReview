@@ -64,6 +64,9 @@ body, html {
 }
 
 @media (max-width:600px) {
+    h3, h2, h4, h5 {
+        font-size: small;
+    }
     .caption h4, .caption h5 {
         background-color: rgba(7,0,0,0.7);
         display: inline;

@@ -17,11 +17,16 @@
             .served-recipes {
                 display: flex;
                 flex-flow: row nowrap;
-                justify-content: space-between;
+                align-content: space-between;
             }
         .serve-recipes {
+            .serve-recipe-cards {
                 display: flex;
                 flex-flow: column wrap;
+                justify-content: space-between;
+                align-content: space-between;
+
+            }
             li {
                 width: 200px;
             }
@@ -32,7 +37,7 @@
 
                     img {
                     max-width: 200px;
-                }
+                    }
                 } 
             }
         }
@@ -60,10 +65,13 @@
     background-size: cover;
     width: 100%;
     color: lightgrey;
+    min-height: 500px;
+
 }
 
 .menu-create-wrapper {
     background-image: url("../img/big-ingredients.png");
     background-size: cover;
     width: 100%;
+    min-height: 500px;
 }

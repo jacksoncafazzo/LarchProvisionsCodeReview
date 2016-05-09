@@ -23,8 +23,8 @@ namespace LarchProvisionsWebsite.Models
 
         public int ServingSize { get; set; }
 
-        public virtual ICollection<Prep> Preps {get;set;}
-        
+        public virtual ICollection<Prep> Preps { get; set; }
+
         public virtual ICollection<Ingredient> Ingredients { get; set; }
 
         [NotMapped]

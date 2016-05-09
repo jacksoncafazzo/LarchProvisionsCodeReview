@@ -11,23 +11,24 @@
                 <h5>Menu #@Model.MenuId</h5>
                 <h4>recipes served</h4>
                 <h5 style="text-decoration: underline">@Model.Title</h5>
+                @if (Model.Recipes.Count > 0)
+                {
                 <div class="col m6 l6 s12 served-recipes">
-                        <ul>
-                            @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
+                    <ul>
+                        @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(m => m.MenuId)
+                            foreach (var recipe in Model.Recipes)
                             {
-                                @Html.HiddenFor(m => m.MenuId)
-
-                                foreach (var recipe in Model.Recipes)
+                                if (recipe.Servings.Count > 0)
                                 {
-                                    if (recipe.Orders.Count > 0)
-                                    {
-                                        <li>
-                                            @Html.DisplayFor(e => recipe, "list-recipes-admin")
-                                        </li>
-                                    }
+                                    <li>
+                                        @Html.DisplayFor(e => recipe, "list-recipes-admin")
+                                    </li>
                                 }
                             }
-                        </ul>
+                        }
+                    </ul>
                 </div>
                 <div class="col m6 l6 s12 recipe-calc">
                     <h4>this week's requirements</h4>
@@ -52,31 +53,25 @@
                         }
                     </ul>
                 </div>
+                }
             </div>
             <div class="row">
                 <div class="col s12 serve-recipes">
                     @if (ViewBag.AllRecipes != null)
                     {
+                        <h4>serve up recipes</h4>
+                        <div class="row">
 
-
-                    <h4>serve up recipes</h4>
-                    <div class="row">
-                        @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
-                        {
-
-                            @Html.HiddenFor(m => m.MenuId)
-
-                            if (ViewBag.AllRecipes != null)
+                            @if (ViewBag.AllRecipes != null)
                             {
                                 foreach (var recipe in ViewBag.AllRecipes)
                                 {
-                                    <div class="col s4">
-                                        @Html.DisplayFor(model => recipe, "add-recipe")
+                                    <div class="col l4 m4 s12 serve-recipe-cards">
+                                        @Html.DisplayFor(model => recipe, "add-recipe", new { MenuId = Model.MenuId })
                                     </div>
                                 }
                             }
-                        }
-                    </div>
+                        </div>
                     }
                     @*<h4>@Html.ActionLink("Create New Recipe", "Create", "Recipes", new { returnUrl = ViewData["ReturnUrl"] })</h4>*@
                     @Html.Partial("CreateRecipe", new Recipe(), ViewData)
@@ -109,26 +104,26 @@
                                                                     number of orders: @order.OrderSize
                                                                 </p>
 
-                                                    @using (Html.BeginForm())
-                                                    {
-                                                        <button name="orderId" value="@order.OrderId" validate>Remove</button>
-                                                        @Html.AntiForgeryToken()
-                                                    }
+                                                                @using (Html.BeginForm())
+                                                                {
+                                                                    <button name="orderId" value="@order.OrderId" validate>Remove</button>
+                                                                    @Html.AntiForgeryToken()
+                                                                }
                                                             </div>
                                                             <div class="col s6">
 
                                                                 <p>Requirements:</p>
-                                                        <ul>
-                                                            <li>
-                                                                @if (recipe.Ingredients.Count > 0)
-                                                                {
-                                                                    foreach (var ingredient in recipe.Ingredients)
-                                                                    {
-                                                                        @Html.DisplayFor(e => ingredient, "list-ingredients")
-                                                                    }
-                                                                }
-                                                            </li>
-                                                        </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @if (recipe.Ingredients.Count > 0)
+                                                                        {
+                                                                            foreach (var ingredient in recipe.Ingredients)
+                                                                            {
+                                                                                @Html.DisplayFor(e => ingredient, "list-ingredients")
+                                                                            }
+                                                                        }
+                                                                    </li>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -177,7 +172,6 @@
         <div class="col s12">
             <h3 class="center"><a asp-action="Index">list of all menus</a></h3>
             <h3 class="center"><a asp-action="Index" asp-controller="Recipes">list of all recipes</a></h3>
-
         </div>
     </div>
 </div>

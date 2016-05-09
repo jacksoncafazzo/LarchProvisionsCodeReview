@@ -1,26 +1,28 @@
-using System.Linq;
+using LarchProvisionsWebsite.Models;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using LarchProvisionsWebsite.Models;
+using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
     public class ServingsController : Controller
     {
-        private ApplicationDbContext _context;
+        private ApplicationDbContext _usercontext;
+        private LarchKitchenDbContext _context;
 
-        public ServingsController(ApplicationDbContext context)
+        public ServingsController(ApplicationDbContext usercontext, LarchKitchenDbContext context)
         {
-            _context = context;    
+            _usercontext = usercontext;
+            _context = context;
         }
 
         // GET: Servings
         public IActionResult Index()
         {
             ViewData["dateTemplate"] = "yyyy-MM-dd";
-            var applicationDbContext = _context.Serving.Include(s => s.Menu).Include(s => s.Recipe);
-            return View(applicationDbContext.ToList());
+            var servings = _context.Servings.Include(s => s.Menu).Include(s => s.Recipe);
+            return View(servings);
         }
 
         // GET: Servings/Details/5
@@ -31,7 +33,7 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Serving serving = _context.Serving.Single(m => m.ServingId == id);
+            Serving serving = _context.Servings.Single(m => m.ServingId == id);
             if (serving == null)
             {
                 return HttpNotFound();
@@ -55,7 +57,7 @@ namespace LarchProvisionsWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Serving.Add(serving);
+                _context.Servings.Add(serving);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -72,7 +74,7 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Serving serving = _context.Serving.Single(m => m.ServingId == id);
+            Serving serving = _context.Servings.Single(m => m.ServingId == id);
             if (serving == null)
             {
                 return HttpNotFound();
@@ -107,7 +109,7 @@ namespace LarchProvisionsWebsite.Controllers
                 return HttpNotFound();
             }
 
-            Serving serving = _context.Serving.Single(m => m.ServingId == id);
+            Serving serving = _context.Servings.Single(m => m.ServingId == id);
             if (serving == null)
             {
                 return HttpNotFound();
@@ -121,8 +123,12 @@ namespace LarchProvisionsWebsite.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            Serving serving = _context.Serving.Single(m => m.ServingId == id);
-            _context.Serving.Remove(serving);
+            var serving = _context.Servings.FirstOrDefault(s => s.ServingId == id);
+            var menu = _context.Menus.FirstOrDefault(m => m.MenuId == serving.MenuId);
+            var recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == serving.RecipeId);
+            recipe.Servings.Remove(serving);
+            menu.Servings.Remove(serving);
+            _context.Servings.Remove(serving);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

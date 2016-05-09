@@ -204,17 +204,19 @@ h1.strawberry {
     .menu-edit-wrapper .edit-menu .served-recipes {
       display: flex;
       flex-flow: row nowrap;
-      justify-content: space-between; }
-    .menu-edit-wrapper .edit-menu .serve-recipes {
+      align-content: space-between; }
+    .menu-edit-wrapper .edit-menu .serve-recipes .serve-recipe-cards {
       display: flex;
-      flex-flow: column wrap; }
-      .menu-edit-wrapper .edit-menu .serve-recipes li {
-        width: 200px; }
-      .menu-edit-wrapper .edit-menu .serve-recipes .card {
-        justify-content: center;
-        width: 200px; }
-        .menu-edit-wrapper .edit-menu .serve-recipes .card .card-image img {
-          max-width: 200px; }
+      flex-flow: column wrap;
+      justify-content: space-between;
+      align-content: space-between; }
+    .menu-edit-wrapper .edit-menu .serve-recipes li {
+      width: 200px; }
+    .menu-edit-wrapper .edit-menu .serve-recipes .card {
+      justify-content: center;
+      width: 200px; }
+      .menu-edit-wrapper .edit-menu .serve-recipes .card .card-image img {
+        max-width: 200px; }
   .menu-edit-wrapper .list-orders {
     z-index: 2;
     top: 125px;
@@ -230,12 +232,14 @@ h1.strawberry {
   background-image: url("../img/cheffin.png");
   background-size: cover;
   width: 100%;
-  color: lightgrey; }
+  color: lightgrey;
+  min-height: 500px; }
 
 .menu-create-wrapper {
   background-image: url("../img/big-ingredients.png");
   background-size: cover;
-  width: 100%; }
+  width: 100%;
+  min-height: 500px; }
 
 .about-content {
   display: flex;
@@ -308,6 +312,8 @@ h1.strawberry {
       .menu-background .menu-display .card .card-reveal .card-title {
         color: lightgray;
         text-shadow: 2px 2px 2px black; }
+    .menu-background .menu-display .card .card-content {
+      /*min-height: 158px;*/ }
     .menu-background .menu-display .card .order-info {
       background-color: rgba(5, 0, 0, 0.9); }
 
@@ -498,6 +504,8 @@ body, html {
   opacity: .75; }
 
 @media (max-width: 600px) {
+  h3, h2, h4, h5 {
+    font-size: small; }
   .caption h4, .caption h5 {
     background-color: rgba(7, 0, 0, 0.7);
     display: inline;

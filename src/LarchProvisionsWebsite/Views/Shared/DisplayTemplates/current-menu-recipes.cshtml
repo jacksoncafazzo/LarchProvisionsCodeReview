@@ -1,0 +1,88 @@
+﻿@model LarchProvisionsWebsite.Models.Recipe
+
+<div class="col m6 l6 s12">
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-ripple">
+            <img class="activator" src="@Model.Image" alt="@Model.RecipeName" />
+        </div>
+        <div class="card-content">
+                <h5><span class="card-title activator">@Model.RecipeName<i class="material-icons right">more_vert</i></span></h5>
+                @if (User.IsInRole("Customer"))
+                {
+                    @if (Model.Orders.Count > 0)
+                    {
+                            @foreach (var o in Model.Orders)
+                            {
+                                <div class="row update-order center">
+                                    @foreach (var order in Model.Orders)
+                                    {
+                                        if (order.RecipeId == Model.RecipeId)
+                                        {
+                                            <form action="UpdateOrder" class="update-order col s12">
+                                                <div class="row">
+                                                    <div class="col s8">
+                                                        <div id="orders_recipe_@Model.RecipeId">
+                                                            @for (var i = 0; i < order.OrderSize; i++)
+                                                            {
+                                                                <i class="material-icons">redeem</i>
+                                                            }
+                                                        </div>
+
+                                                        $@Model.CustPrice per serving<br />
+                                                        Orders total: $@(Model.CustPrice * order.OrderSize)
+
+                                                    </div>
+                                                    <div class="input-field col s4">
+                                                        <input hidden name="orderId" value="@order.OrderId" />
+
+                                                        <label for="@order.OrderSize"># of orders</label>
+                                                        <input type="number" name="OrderSize" value="@order.OrderSize" class="validate" />
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            @*<form action="Delete" class="btn delete-order col s3">
+                                                    <input hidden name="orderId" value="@order.OrderId" />
+                                                    <btn onClick="return confirm('you sure bro?');" type="submit" class="remove-order-btn">
+                                                        <i class="material-icons large">delete</i>
+                                                    </btn>
+                                                </form>*@
+
+
+                                        }
+                                    }
+                                </div>
+                            }
+                  
+                    }
+                    @if (Model.Orders.Count == 0)
+                    {
+                        <div class="row center">
+
+                            @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
+                            {
+                                <input hidden name="menuId" value="@ViewData["MenuId"].ToString()" />
+                                <input hidden name="recipeId" value="@Model.RecipeId" />
+                                <button class="btn waves-effect waves-ripple" onclick="this.form.submit()">
+                                    order @Model.RecipeName
+                                </button>
+                            }
+
+                        </div>
+                    }
+                }
+
+        
+        </div>
+        <div class="card-reveal">
+            <div class="row">
+                <span class="card-title">@Model.RecipeName<i class="material-icons right">close</i></span>
+                <div class="container reveal-text">
+                    <h5>@Model.Description</h5>
+                    <h5>@Model.Notes</h5>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -189,8 +189,8 @@ namespace LarchProvisionsWebsite.Controllers
                 menu.Recipes.Remove(recipe);
                 menu.Recipes.Add(StackRecipe(recipe, menu, user));
             }
-            //            ViewBag.AllRecipes = _context.Recipes.ToList().Except(menu.Recipes);
-            ViewBag.AllRecipes = _context.Recipes.ToList();
+            ViewBag.AllRecipes = _context.Recipes.ToList().Except(menu.Recipes);
+          
 
             //ViewBag.AllOrders = _context.Orders.ToList().Except(menu.Orders);
 

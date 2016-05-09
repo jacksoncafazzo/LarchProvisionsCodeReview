@@ -6,7 +6,7 @@
             <img class="activator" src="@Model.Image" alt="@Model.RecipeName" />
         </div>
         <div class="card-content">
-                <h5><span class="card-title activator">@Model.RecipeName<i class="material-icons right">more_vert</i></span></h5>
+                <span class="card-title activator">@Model.RecipeName<i class="material-icons right">more_vert</i></span>
                 @if (User.IsInRole("Customer"))
                 {
                     @if (Model.Orders.Count > 0)

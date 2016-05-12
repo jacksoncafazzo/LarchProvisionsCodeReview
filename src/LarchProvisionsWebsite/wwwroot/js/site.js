@@ -37,21 +37,30 @@ $(document).ready(function () {
 
     $('.update-order').change(function (event) {
         event.preventDefault();
-        console.log($(this).serialize());
+        theForms = $(this).serialize();
         $.ajax({
             url: '/Orders/UpdateOrder',
-            data: $(this).serialize(),
+            data: theForms,
             ajaxsync: true,
             dataType: 'json',
             type: 'POST',
-            success: function(result) {
+            success: function (result) {
                 var returnString = "";
-                for (var i=0 ; i < result.OrderSize; i++) {
-                   returnString = returnString + '<i class="material-icons">redeem</i>';
+
+                if (result.OrderSize <= 6) {
+                    for (var i = 0 ; i < result.OrderSize; i++) {
+                        returnString = returnString + '<i class="material-icons">redeem</i>';
+                    }
+                }
+                if (result.OrderSize > 6) {
+                    for (var i = 0 ; i < 6; i++) {
+                        returnString = returnString + '<i class="material-icons">redeem</i>';
+                    }
+                    returnString = returnString + '<i class="material-icons">more</i>';
                 }
                 Materialize.toast('order size updated to ' + result.OrderSize, 4000)
-
-                 $('#orders_recipe_'+ result.RecipeId).html(returnString);
+                returnString = returnString + '<p>Orders total: $' + (parseInt(theForms.custPrice, 0) + parseInt(result.OrderSize)) + '</p>'
+                $('#orders_recipe_' + result.RecipeId).html(returnString);
             }
         });
         console.log($(this).serialize());
@@ -68,8 +77,8 @@ $(document).ready(function () {
             dataType: 'json',
             type: 'POST',
             success: function (result) {
-            // Materialize.toast(message, displayLength, className, completeCallback);
-            Materialize.toast('order deleted!', 4000) // 4000 is the duration of the toast            
+                // Materialize.toast(message, displayLength, className, completeCallback);
+                Materialize.toast('order deleted!', 4000) // 4000 is the duration of the toast
             }
         });
     });

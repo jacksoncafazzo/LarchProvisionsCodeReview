@@ -1,8 +1,6 @@
 ﻿@model LarchProvisionsWebsite.Models.Recipe
 
     <div class="row update-order">
-        
-            <p>ohai</p>
         @foreach (var order in Model.Orders)
         {
             if (order.RecipeId == Model.RecipeId)
@@ -15,13 +13,13 @@
                                 {
                                     <i class="material-icons">redeem</i>
                                 }
+                                <p>Orders total: $@(Model.CustPrice * order.OrderSize)</p>
                             </div>
 
-                            Orders total: $@(Model.CustPrice * order.OrderSize)
                         </div>
                         <div class="input-field col s4">
                             <input hidden name="orderId" value="@order.OrderId" />
-
+                            <input hidden name="custPrice" value="@Model.CustPrice" />
                             <label for="@order.OrderSize"># of orders</label>
                             <input type="number" name="OrderSize" value="@order.OrderSize" class="validate" />
                         </div>

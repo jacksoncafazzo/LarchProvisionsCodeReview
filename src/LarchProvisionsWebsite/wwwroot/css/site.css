@@ -281,7 +281,9 @@ h1.strawberry {
 
 .menu-background {
   background-image: url("../img/cheffin.png");
-  background-color: darkgrey; }
+  background-color: darkgrey;
+  height: 100%;
+  width: 100%; }
   .menu-background .menu-display h2, .menu-background .menu-display h3, .menu-background .menu-display h4, .menu-background .menu-display h5 {
     color: lightgray;
     text-shadow: 2px 2px 2px black; }
@@ -293,8 +295,7 @@ h1.strawberry {
     background-color: transparent;
     box-shadow: none; }
   .menu-background .menu-display .card {
-    background-color: rgba(250, 250, 250, 0.7);
-    max-height: 320px; }
+    background-color: rgba(250, 250, 250, 0.7); }
     .menu-background .menu-display .card .balanced-meals {
       position: absolute;
       top: 100px;
@@ -311,9 +312,9 @@ h1.strawberry {
       text-shadow: 1px 1px 1px black; }
       .menu-background .menu-display .card .card-reveal .card-title {
         color: lightgray;
-        text-shadow: 2px 2px 2px black; }
+        text-shadow: 1px 1px 1px black; }
     .menu-background .menu-display .card .card-content {
-      /*min-height: 158px;*/ }
+      background-color: rgba(250, 250, 250, 0.4); }
     .menu-background .menu-display .card .order-info {
       background-color: rgba(5, 0, 0, 0.9); }
 

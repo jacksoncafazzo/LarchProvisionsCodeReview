@@ -37,11 +37,10 @@ $(document).ready(function () {
 
     $('.update-order').change(function (event) {
         event.preventDefault();
-        theForms = $(this).serialize();
+        console.log($(this).serialize());
         $.ajax({
-            url: '/Orders/UpdateOrder',
-            data: theForms,
-            ajaxsync: true,
+            url: '/Menus/UpdateOrder/',
+            data: $(this).serialize(),
             dataType: 'json',
             type: 'POST',
             success: function (result) {
@@ -58,13 +57,12 @@ $(document).ready(function () {
                     }
                     returnString = returnString + '<i class="material-icons">more_horiz</i>';
                 }
-                Materialize.toast('order size updated to ' + result.OrderSize, 4000)
-                console.log(theForms.custPrice, result.OrderSize);
-                returnString = returnString + '<p>Orders total: $' + (parseInt(theForms.custPrice, 0) + result.OrderSize) + '</p>'
+                Materialize.toast(result.RecipeName + ' orders updated to ' + result.OrderSize, 4000, "order-toast")
+                console.log(result.CustPrice * result.OrderSize);
+                returnString = returnString + '<p>Orders total: $' + (result.CustPrice * result.OrderSize) + '</p>'
                 $('#orders_recipe_' + result.RecipeId).html(returnString);
             }
         });
-        console.log($(this).serialize());
     });
 
     $('.delete-order').submit(function (event) {
@@ -72,7 +70,7 @@ $(document).ready(function () {
         var orderId = $('OrderId').serialize();
         console.log(orderId);
         $.ajax({
-            url: '/Orders/Delete/',
+            url: '/Orders/Delete',
             data: $(this).serialize(),
             ajaxsync: true,
             dataType: 'json',
@@ -99,7 +97,7 @@ $(document).ready(function () {
     $('.prep-ingredient-ajax').on("click", function (event) {
         event.preventDefault();
         $.ajax({
-            url: '/Recipes/PrepIngredientAjax/',
+            url: '/Recipes/PrepIngredientAjax',
             data: $(this).serialize(),
             ajaxasync: true,
             dataType: 'json',

@@ -22,4 +22,13 @@
     .provisions-wrapper {
         padding-top: 10px;
     }
+    .card {
+        float: right;
+        width: 375px;
+        background-color: rgba(250, 250, 250, 0.3);
+        .card-content {
+                background-color: rgba(0,0,0,0.3);
+
+        }
+    }
 }

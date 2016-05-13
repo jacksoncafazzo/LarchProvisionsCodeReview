@@ -1,8 +1,12 @@
 ﻿using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,10 +16,12 @@ namespace LarchProvisionsWebsite.Controllers
     public class OrdersController : Controller
     {
         private LarchKitchenDbContext _context;
+        private ApplicationDbContext _usercontext;
 
-        public OrdersController(LarchKitchenDbContext context)
+        public OrdersController(LarchKitchenDbContext context, ApplicationDbContext usercontext)
         {
             _context = context;
+            _usercontext = usercontext;
         }
 
         // GET: /<controller>/
@@ -30,21 +36,7 @@ namespace LarchProvisionsWebsite.Controllers
             return View(order);
         }
 
-        [HttpPost]
-        public IActionResult UpdateOrder(int orderId, int orderSize, int custPrice, int menuId)
-        {
-            var order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
-            if (orderSize == 0)
-            {
-                _context.Orders.Remove(order);
-            }
-            var recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == order.RecipeId);
-            order.CustPrice = recipe.CustPrice;
-            order.OrderSize = orderSize;
-            _context.Orders.Update(order);
-            _context.SaveChanges();
-            return Json(order);
-        }
+        
 
         // POST: Order/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -54,6 +46,13 @@ namespace LarchProvisionsWebsite.Controllers
             _context.Orders.Remove(order);
             _context.SaveChanges();
             return Json(order);
+        }
+
+        // Get User
+        [NonAction]
+        public async Task<ApplicationUser> GetUser()
+        {
+            return await _usercontext.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == User.GetUserId());
         }
     }
 }

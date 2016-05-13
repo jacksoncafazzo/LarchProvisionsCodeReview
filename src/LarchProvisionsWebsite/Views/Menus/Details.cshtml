@@ -4,6 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
+
 <div class="menu-background">
     <div class="container menu-display">
         <br />
@@ -22,7 +23,7 @@
 
                 @foreach (var recipe in Model.Recipes)
                 {
-                    @Html.DisplayFor(m=>recipe, "current-menu-recipes", ViewData)
+                    @Html.DisplayFor(m => recipe, "current-menu-recipes", ViewData)
                 }
 
             }
@@ -59,7 +60,7 @@
         <div class="card">
             <div class="card-image waves-effect waves-block waves-ripple">
                 <img class="activator" src="~/img/menu-cover3.jpg">
-                <h4 class="balanced-meals">we cook healthy, balanced meals<br /> using local, organic &amp; seasonal ingredients <br />showcasing the bounty<br /> of the pacific northwest.</h4>
+                <h5 class="balanced-meals">we cook healthy, balanced meals<br /> using local, organic &amp; seasonal ingredients <br />showcasing the bounty<br /> of the pacific northwest.</h5>
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">ORDERING INFORMATION<i class="material-icons right">more_vert</i></span>
@@ -101,3 +102,4 @@
         </div>
     </div>
 </div>
+

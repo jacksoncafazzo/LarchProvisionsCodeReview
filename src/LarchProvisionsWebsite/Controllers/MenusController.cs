@@ -23,12 +23,6 @@ namespace LarchProvisionsWebsite.Controllers
             _userManager = userManager;
         }
 
-        //GET: Menus/TestPage
-        public IActionResult TestPage()
-        {
-            return View();
-        }
-
         // GET: Menus
         public IActionResult Index()
         {
@@ -88,6 +82,7 @@ namespace LarchProvisionsWebsite.Controllers
 
             return View(menu);
         }
+
 
         //stack orders for display
         [NonAction]
@@ -161,6 +156,23 @@ namespace LarchProvisionsWebsite.Controllers
             order.OrderSize = orderSize;
             order.UserName = user.UserName;
             return order;
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateOrder(int orderId, int orderSize, int custPrice, int menuId)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+            if (orderSize == 0)
+            {
+                _context.Orders.Remove(order);
+            }
+            var recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == order.RecipeId);
+            order.CustPrice = recipe.CustPrice;
+            order.OrderSize = orderSize;
+            _context.Orders.Update(order);
+            _context.SaveChanges();
+            return Json(order);
         }
 
         // GET: Menus/Create
@@ -360,37 +372,41 @@ namespace LarchProvisionsWebsite.Controllers
                 (o, i) => o).ToList();
         }
 
-        // GET: Menus/RecipesDisplay
-        public IActionResult RecipesDisplay()
+        // GET: Menus/GetMenuAjax
+        public IActionResult GetMenuAjax()
         {
             var menu = _context.Menus.Last();
             if (menu == null)
             {
                 return HttpNotFound();
             }
-            var user = GetUser().Result;
-            var recipes = GetRecipes(menu.MenuId);
 
-            foreach (var recipe in recipes)
+            var recipes = GetRecipes(menu.MenuId);
+            
+
+            var user = new ApplicationUser();
+            if (User.IsSignedIn())
             {
-                menu.Recipes.Remove(recipe);
-                menu.Recipes.Add(StackRecipe(recipe, menu, user));
+                user = GetUser().Result;
             }
             var totalPrice = 0;
-
-            foreach (var recipe in menu.Recipes)
+            foreach (var recipe in recipes)
             {
-                var monies = recipe.CustPrice * recipe.Orders.Count;
-                totalPrice = totalPrice + monies;
+                var stackedRecipe = StackRecipeOrders(recipe, menu, user);
+                foreach (var order in stackedRecipe.Orders)
+                {
+                    order.ApplicationUser = user;
+                    order.Recipe = stackedRecipe;
+                    var monies = stackedRecipe.CustPrice * order.OrderSize;
+                    totalPrice = totalPrice + monies;
+                }
+                menu.Recipes.Remove(recipe);
+                menu.Recipes.Add(stackedRecipe);
             }
             ViewData["CustTotal"] = totalPrice;
-            ViewBag.AllRecipes = _context.Recipes.ToList().Except(recipes);
+            ViewData["ReturnUrl"] = "/Menus/CurrentMenu/" + menu.MenuId;
 
-            ViewBag.AllOrders = _context.Orders.ToList().Except(menu.Orders);
-
-            ViewData["ReturnUrl"] = "/Menus/Display/" + menu.MenuId;
-
-            return View(menu);
+            return View("Details", menu);
 
             //var user = GetUser().Result;
             //var recipes = GetRecipes(menu.MenuId);

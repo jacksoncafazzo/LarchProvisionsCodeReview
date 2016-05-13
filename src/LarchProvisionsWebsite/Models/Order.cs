@@ -34,15 +34,18 @@ namespace LarchProvisionsWebsite.Models
         [NotMapped]
         public virtual Recipe Recipe { get; set; }
 
-        //public Order(ApplicationUser user, Recipe recipe, Menu menu)
+        //public Order(ApplicationUser user, Recipe recipe, Menu menu, int orderSize = 1, int orderId = 0)
         //{
-        //    UserName = user.NormalizedUserName;
+        //    OrderId = orderId;
+        //    UserName = user.UserName;
         //    UserId = user.Id;
         //    ApplicationUser = user;
         //    RecipeId = recipe.RecipeId;
         //    RecipeName = recipe.RecipeName;
-        //    OrderSize = 1;
+        //    CustPrice = recipe.CustPrice;
+        //    OrderSize = orderSize;
         //    Menu = menu;
+        //    MenuId = menu.MenuId;
         //    Recipe = recipe;
         //}
     }

@@ -22,6 +22,8 @@ namespace LarchProvisionsWebsite.Models
 
         public string RecipeName { get; set; }
 
+        public int CustPrice { get; set; }
+
         [ForeignKey("MenuId")]
         public int MenuId { get; set; }
 

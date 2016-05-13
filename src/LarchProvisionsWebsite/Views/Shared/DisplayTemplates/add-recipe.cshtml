@@ -10,16 +10,17 @@
         <p>@Model.Notes</p>
     </div>
     <div class="card-action">
-@using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
-{
-    <input hidden name="menuId" value="@ViewData["MenuId"].ToString()"/>
-        <button class="btn waves-effect waves-ripple add-recipe" name="recipeId" value="@Model.RecipeId" onclick="this.form.submit()">serve @Model.RecipeName</button>
-}
+        @using (Html.BeginForm("ServeRecipe", "Menus", FormMethod.Post))
+        {
+            <input hidden name="menuId" value="@ViewData["MenuId"].ToString()" />
+            <button class="btn waves-effect waves-ripple add-recipe" name="recipeId" value="@Model.RecipeId" onclick="this.form.submit()">serve @Model.RecipeName</button>
+        }
         <form asp-action="Edit" asp-controller="Recipes" method="GET" asp-route-id="@Model.RecipeId">
             <input hidden name="returnUrl" value="@ViewData["ReturnUrl"].ToString()" />
-        <button class="btn waves-effect waves-ripple add-recipe" type="submit">
-            <i class="material-icons">mode_edit</i> @Model.RecipeName
-        </button>
+            <input hidden name="menuId" value="@ViewData["MenuId"].ToString()" />
+            <button class="btn waves-effect waves-ripple add-recipe" type="submit">
+                <i class="material-icons">mode_edit</i> @Model.RecipeName
+            </button>
         </form>
     </div>
 </div>

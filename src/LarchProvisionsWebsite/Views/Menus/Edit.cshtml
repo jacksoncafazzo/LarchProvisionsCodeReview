@@ -13,46 +13,46 @@
                 <h5 style="text-decoration: underline">@Model.Title</h5>
                 @if (Model.Recipes.Count > 0)
                 {
-                <div class="col m6 l6 s12 served-recipes">
-                    <ul>
-                        @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
-                        {
-                            @Html.HiddenFor(m => m.MenuId)
-                            foreach (var recipe in Model.Recipes)
+                    <div class="col m6 l6 s12 served-recipes">
+                        <ul>
+                            @using (Html.BeginForm("RemoveRecipe", "Menus", FormMethod.Post))
                             {
-                                if (recipe.Servings.Count > 0)
+                                @Html.HiddenFor(m => m.MenuId)
+                                foreach (var recipe in Model.Recipes)
                                 {
-                                    <li>
-                                        @Html.DisplayFor(e => recipe, "list-recipes-admin")
-                                    </li>
-                                }
-                            }
-                        }
-                    </ul>
-                </div>
-                <div class="col m6 l6 s12 recipe-calc">
-                    <h4>this week's requirements</h4>
-                    <ul>
-                        @foreach (var recipe in Model.Recipes)
-                        {
-                            if (recipe.Orders.Count > 0)
-                            {
-                                foreach (var ingredient in recipe.Ingredients)
-                                {
-                                    var orderSize = 0;
-                                    @foreach (var order in recipe.Orders)
+                                    if (recipe.Servings.Count > 0)
                                     {
-                                        orderSize = +order.OrderSize;
+                                        <li>
+                                            @Html.DisplayFor(e => recipe, "list-recipes-admin")
+                                        </li>
                                     }
-                                    <li>@(ingredient.Amount * orderSize) @ingredient.Unit @ingredient.IngredientName</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="col m6 l6 s12 recipe-calc">
+                        <h4>this week's requirements</h4>
+                        <ul>
+                            @foreach (var recipe in Model.Recipes)
+                            {
+                                if (recipe.Orders.Count > 0)
+                                {
+                                    foreach (var ingredient in recipe.Ingredients)
+                                    {
+                                        var orderSize = 0;
+                                        @foreach (var order in recipe.Orders)
+                                        {
+                                            orderSize = +order.OrderSize;
+                                        }
+                                        <li>@(ingredient.Amount * orderSize) @ingredient.Unit @ingredient.IngredientName</li>
+
+                                    }
 
                                 }
 
                             }
-
-                        }
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
                 }
             </div>
             <div class="row">

@@ -8,16 +8,16 @@
     <div class="container">
         <div class="row">
             <br />
-            <h4>Edit Recipe @ViewData["ReturnUrl"].ToString()</h4>
+            <h4>Edit Recipe </h4>
             <h5><a href="@ViewData["ReturnUrl"].ToString()">return to menu</a></h5>
             <h4>@Model.RecipeName</h4>
             <div class="col l6 m6 s6">
 
                 @using (Html.BeginForm("RemoveIngredient", "Recipes", FormMethod.Post))
-            {
+                {
                     @Html.HiddenFor(m => m.RecipeId)
                     <h5>Recipe Ingredients</h5>
-                    <ul>
+                    <ul id="recipe-ingredients-list">
                         @foreach (var ingredient in Model.Ingredients)
                         {
                             @Html.DisplayFor(i => ingredient, "list-ingredients")
@@ -26,20 +26,19 @@
                 }
             </div>
             <div class="col l6 m6 s6">
-                <ul>
-                    @using (Html.BeginForm("PrepIngredient", "Recipes", FormMethod.Post))
-                    {
+                <h4>Add Ingredients</h4>
 
-                        @Html.HiddenFor(m => m.RecipeId)
-                        <li><h4>Add Ingredients</h4></li>
-                        @foreach (var ingredient in ViewBag.Ingredients)
-                        {
-                            @Html.DisplayFor(model => ingredient, "add-ingredients")
-                        }
-                    }
-                </ul>
+                @foreach (var ingredient in ViewBag.Ingredients)
+                {
+                    <form action="PrepIngredientAjax" class="prep-ingredient-ajax">
+                        @Html.HiddenFor(m => Model.RecipeId)
+                        <input hidden name="ingredientId" value="@ingredient.IngredientId" />
+                        <button class="btn waves-effect waves-light" type="submit">@ingredient.IngredientName</button>
+                    </form>
+                }
+
                 <h3>
-                    @Html.Partial("CreateIngredient", new Ingredient())
+                    @Html.Partial("CreateIngredient", new Ingredient(), ViewData)
                 </h3>
             </div>
         </div>

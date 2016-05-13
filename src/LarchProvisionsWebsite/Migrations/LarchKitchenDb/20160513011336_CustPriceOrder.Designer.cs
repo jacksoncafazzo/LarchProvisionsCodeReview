@@ -8,9 +8,10 @@ using LarchProvisionsWebsite.Models;
 namespace LarchProvisionsWebsite.Migrations.LarchKitchenDb
 {
     [DbContext(typeof(LarchKitchenDbContext))]
-    partial class LarchKitchenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160513011336_CustPriceOrder")]
+    partial class CustPriceOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

@@ -5,58 +5,52 @@
 }
 <div class="create-ingredient-wrapper">
     <div class="container">
-            <br />
-            <h2>Create New Ingredient</h2>
-            <div class="row">
-                <form asp-action="Create" class="col s12">
-                    <div class="row">
-                        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                        <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+        <br />
+        <h2>Create New Ingredient</h2>
+        <div class="row">
+            <form asp-action="Create" class="col s12">
+                <div class="row">
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 
-                        <div class="input-field col s2">
-                            <label asp-for="Amount">amount (number)</label>
+                    <div class="input-field col s2">
+                        <label asp-for="Amount">amount (number)</label>
 
-                            <input asp-for="Amount" autofocus class="validate" type="number" />
-                            <span asp-validation-for="Amount" class="text-danger" />
-
-                        </div>
-                        <div class="input-field col s3">
-                            <label asp-for="Unit">unit of measurement</label>
-
-                            <input asp-for="Unit" class="validate" type="text" />
-                            <span asp-validation-for="Unit" class="text-danger" />
-
-                        </div>
-                        <div class="input-field col s7">
-                            <label asp-for="IngredientName">ingredient name</label>
-
-                            <input asp-for="IngredientName" class="validate" type="text" />
-                            <span asp-validation-for="IngredientName" class="text-danger" />
-
-                        </div>
-
-                        <div class="input-field col s12">
-                            <label asp-for="Source">source, notes, etc.</label>
-
-                            <input asp-for="Source" class="validate" type="text" />
-                            <span asp-validation-for="Source" class="text-danger" />
-
-                        </div>
-
-                        <div class="input-field col s12 center">
-
-
-                            <input type="submit" value="Create" class="btn btn-large waves-effect waves-light" />
-
-                        </div>
+                        <input asp-for="Amount" autofocus class="validate" type="number" step="any" min="0" />
+                        <span asp-validation-for="Amount" class="text-danger" />
                     </div>
-                </form>
-            </div>
-            <div>
-                <a asp-action="Index">Back to List</a>
-            </div>
+                    <div class="input-field col s3">
+                        <label asp-for="Unit">unit of measurement</label>
+
+                        <input asp-for="Unit" class="validate" type="text" />
+                        <span asp-validation-for="Unit" class="text-danger" />
+                    </div>
+                    <div class="input-field col s7">
+                        <label asp-for="IngredientName">ingredient name</label>
+
+                        <input asp-for="IngredientName" class="validate" type="text" />
+                        <span asp-validation-for="IngredientName" class="text-danger" />
+                    </div>
+
+                    <div class="input-field col s12">
+                        <label asp-for="Source">source, notes, etc.</label>
+
+                        <input asp-for="Source" class="validate" type="text" />
+                        <span asp-validation-for="Source" class="text-danger" />
+                    </div>
+
+                    <div class="input-field col s12 center">
+
+                        <input type="submit" value="Create" class="btn btn-large waves-effect waves-light" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
+</div>
 
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -46,7 +46,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (result) {
                 var returnString = "";
-
+                console.log(result);
                 if (result.OrderSize <= 6) {
                     for (var i = 0 ; i < result.OrderSize; i++) {
                         returnString = returnString + '<i class="material-icons">redeem</i>';
@@ -56,10 +56,11 @@ $(document).ready(function () {
                     for (var i = 0 ; i < 6; i++) {
                         returnString = returnString + '<i class="material-icons">redeem</i>';
                     }
-                    returnString = returnString + '<i class="material-icons">more</i>';
+                    returnString = returnString + '<i class="material-icons">more_horiz</i>';
                 }
                 Materialize.toast('order size updated to ' + result.OrderSize, 4000)
-                returnString = returnString + '<p>Orders total: $' + (parseInt(theForms.custPrice, 0) + parseInt(result.OrderSize)) + '</p>'
+                console.log(theForms.custPrice, result.OrderSize);
+                returnString = returnString + '<p>Orders total: $' + (parseInt(theForms.custPrice, 0) + result.OrderSize) + '</p>'
                 $('#orders_recipe_' + result.RecipeId).html(returnString);
             }
         });
@@ -94,18 +95,27 @@ $(document).ready(function () {
     //     });
     // });
 
-    //AJAX new ingredient
-    //$('.delete-recipe-ajax').on("click", function (event) {
-    //    event.preventDefault();
-    //    $.ajax({
-    //        url: '/Recipes/DeleteRecipeAjax',
-    //        data: { id: $('input#recipeId').val() },
-    //        ajaxasync: true,
-    //        dataType: 'json',
-    //        success: function (result) {
-    //            alert("You rock bro!");
-    //            window.location.replace("/Menus/Edit/" + MenuId);
-    //        }
-    //    });
-    //});
+    //AJAX prep new ingredient
+    $('.prep-ingredient-ajax').on("click", function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '/Recipes/PrepIngredientAjax/',
+            data: $(this).serialize(),
+            ajaxasync: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (result) {
+                console.log(result);
+                var returnString = "";
+                result.forEach(function (ingredient) {
+                    returnString = returnString + '<li>' +
+                    ingredient.Amount + ' ' + ingredient.Unit + ' ' + ingredient.IngredientName +
+                    '<button name="ingredientId" value="' + ingredient.IngredientId + '" class="delete-button waves-ripple">' +
+                    '<span class="delete-icon"><i class="material-icons">delete</i></span></button></li>'
+                });
+                $("#recipe-ingredients-list").html(returnString);
+                window.location.update("/Menus/Edit/" + MenuId);
+            }
+        });
+    });
 });

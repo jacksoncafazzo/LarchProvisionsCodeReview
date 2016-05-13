@@ -15,23 +15,20 @@
                     <div class="input-field col s2">
                         <label asp-for="Amount">amount (number)</label>
 
-                        <input asp-for="Amount" autofocus class="validate" type="number" />
+                        <input asp-for="Amount" autofocus class="validate" type="number" step="any" min="0" />
                         <span asp-validation-for="Amount" class="text-danger" />
-
                     </div>
                     <div class="input-field col s3">
                         <label asp-for="Unit">unit of measurement</label>
 
                         <input asp-for="Unit" class="validate" type="text" />
                         <span asp-validation-for="Unit" class="text-danger" />
-
                     </div>
                     <div class="input-field col s7">
                         <label asp-for="IngredientName">ingredient name</label>
 
                         <input asp-for="IngredientName" class="validate" type="text" />
                         <span asp-validation-for="IngredientName" class="text-danger" />
-
                     </div>
 
                     <div class="input-field col s12">
@@ -39,11 +36,10 @@
 
                         <input asp-for="Source" class="validate" type="text" />
                         <span asp-validation-for="Source" class="text-danger" />
-
                     </div>
 
                     <div class="input-field col s12 center">
-                        <input type="submit" value="Create" class="btn btn-large waves-effect waves-light" />
+                        <input type="submit" value="Create" class="btn btn-large waves-effect waves-light modal-action modal-close" />
                     </div>
                 </div>
             </form>

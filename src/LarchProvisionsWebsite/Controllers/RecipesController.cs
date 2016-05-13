@@ -94,7 +94,7 @@ namespace LarchProvisionsWebsite.Controllers
         }
 
         // GET: Recipes/Edit/5
-        public IActionResult Edit(int? id, string returnUrl = null)
+        public IActionResult Edit(int? id, string returnUrl = null, int menuId = 1)
         {
             if (id == null)
             {
@@ -105,7 +105,7 @@ namespace LarchProvisionsWebsite.Controllers
                 returnUrl = "/Recipes/";
             }
             ViewData["ReturnUrl"] = returnUrl;
-
+            ViewData["MenuId"] = menuId;
             Recipe recipe = _context.Recipes.FirstOrDefault(m => m.RecipeId == id);
             if (recipe == null)
             {
@@ -169,11 +169,27 @@ namespace LarchProvisionsWebsite.Controllers
             return RedirectToAction("Edit", "Recipes", new { id = recipe.RecipeId });
         }
 
+        //Post: Recipes/PrepIngredientAjax
+        [HttpPost]
+        public IActionResult PrepIngredientAjax(int recipeId, int ingredientId)
+        {
+            Prep prep = new Prep();
+            prep.IngredientId = ingredientId;
+            prep.RecipeId = recipeId;
+            _context.Preps.Add(prep);
+            _context.SaveChanges();
+            return Json(_context.Ingredients.Join(_context.Preps.Where(
+                p => p.RecipeId == recipeId).ToList(),
+                i => i.IngredientId,
+                p => p.IngredientId,
+                (o, i) => o).ToList());
+        }
+
         public IActionResult RemoveIngredient(Recipe recipe, int ingredientId)
         {
             Prep prep = _context.Preps.FirstOrDefault(p => p.IngredientId == ingredientId);
             _context.Preps.Remove(prep);
-          
+
             _context.SaveChanges();
             ViewBag.Ingredients = _context.Ingredients.ToList();
 

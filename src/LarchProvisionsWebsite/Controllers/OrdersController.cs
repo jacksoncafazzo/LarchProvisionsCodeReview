@@ -30,16 +30,16 @@ namespace LarchProvisionsWebsite.Controllers
             return View(order);
         }
 
-        
-
         [HttpPost]
-        public IActionResult UpdateOrder(int orderId, int orderSize)
+        public IActionResult UpdateOrder(int orderId, int orderSize, int custPrice, int menuId)
         {
             var order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
             if (orderSize == 0)
             {
                 _context.Orders.Remove(order);
             }
+            var recipe = _context.Recipes.FirstOrDefault(r => r.RecipeId == order.RecipeId);
+            order.CustPrice = recipe.CustPrice;
             order.OrderSize = orderSize;
             _context.Orders.Update(order);
             _context.SaveChanges();

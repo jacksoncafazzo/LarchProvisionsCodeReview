@@ -22,7 +22,7 @@
 
                 @foreach (var recipe in Model.Recipes)
                 {
-                    @Html.DisplayFor(m=>recipe, "current-menu-recipes", new { menuId = Model.MenuId })
+                    @Html.DisplayFor(m=>recipe, "current-menu-recipes", ViewData)
                 }
 
             }

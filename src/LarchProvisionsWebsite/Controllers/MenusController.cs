@@ -59,29 +59,33 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 return HttpNotFound();
             }
+            ViewData["MenuId"] = menu.MenuId;
+
             var recipes = GetRecipes(menu.MenuId);
+            var user = new ApplicationUser();
             if (User.IsSignedIn())
             {
-                var user = GetUser().Result;
-                ViewData["UserName"] = user.UserName;
-                ViewData["UserId"] = user.Id;
-
-                var totalPrice = 0;
-                foreach (var recipe in recipes)
-                {
-                    var stackedRecipe = StackRecipeOrders(recipe, menu, user);
-                    foreach (var order in stackedRecipe.Orders)
-                    {
-                        order.ApplicationUser = user;
-                        order.Recipe = stackedRecipe;
-                        var monies = stackedRecipe.CustPrice * order.OrderSize;
-                        totalPrice = totalPrice + monies;
-                    }
-                    menu.Recipes.Remove(recipe);
-                    menu.Recipes.Add(stackedRecipe);
-                }
-                ViewData["CustTotal"] = totalPrice;
+                user = GetUser().Result;
             }
+            ViewData["UserName"] = user.UserName;
+            ViewData["UserId"] = user.Id;
+
+            var totalPrice = 0;
+            foreach (var recipe in recipes)
+            {
+                var stackedRecipe = StackRecipeOrders(recipe, menu, user);
+                foreach (var order in stackedRecipe.Orders)
+                {
+                    order.ApplicationUser = user;
+                    order.Recipe = stackedRecipe;
+                    var monies = stackedRecipe.CustPrice * order.OrderSize;
+                    totalPrice = totalPrice + monies;
+                }
+                menu.Recipes.Remove(recipe);
+                menu.Recipes.Add(stackedRecipe);
+            }
+            ViewData["CustTotal"] = totalPrice;
+
             return View(menu);
         }
 
@@ -113,12 +117,22 @@ namespace LarchProvisionsWebsite.Controllers
             {
                 user = GetUser().Result;
             }
-            var order = new Order();
             var recipes = GetRecipes(menuId);
             var menu = _context.Menus.FirstOrDefault(m => m.MenuId == menuId);
-            order = StackOrder(order, menuId, recipeId, user);
-
-            _context.Orders.Add(order);
+            var order = new Order();
+            var previousOrder = _context.Orders.FirstOrDefault(o => o.MenuId == menuId && o.RecipeId == recipeId && o.UserId == user.Id);
+            if (previousOrder != null)
+            {
+                previousOrder.OrderSize = +1;
+                order = previousOrder;
+                order = StackOrder(order, menuId, recipeId, user, previousOrder.OrderSize);
+                _context.Orders.Update(order);
+            }
+            else if (previousOrder == null)
+            {
+                order = StackOrder(order, menuId, recipeId, user, 1);
+                _context.Orders.Add(order);
+            }
             _context.SaveChanges();
             var totalPrice = 0;
             foreach (var lilrecipe in recipes.ToList())
@@ -136,7 +150,7 @@ namespace LarchProvisionsWebsite.Controllers
 
         // get that info on there
         [NonAction]
-        public Order StackOrder(Order order, int menuId, int recipeId, ApplicationUser user)
+        public Order StackOrder(Order order, int menuId, int recipeId, ApplicationUser user, int orderSize)
         {
             order.MenuId = menuId;
             order.RecipeId = recipeId;
@@ -144,7 +158,7 @@ namespace LarchProvisionsWebsite.Controllers
             order.RecipeName = order.Recipe.RecipeName;
             order.UserId = user.Id;
             order.ApplicationUser = user;
-            order.OrderSize = 1;
+            order.OrderSize = orderSize;
             order.UserName = user.UserName;
             return order;
         }
@@ -190,7 +204,6 @@ namespace LarchProvisionsWebsite.Controllers
                 menu.Recipes.Add(StackRecipe(recipe, menu, user));
             }
             ViewBag.AllRecipes = _context.Recipes.ToList().Except(menu.Recipes);
-          
 
             //ViewBag.AllOrders = _context.Orders.ToList().Except(menu.Orders);
 

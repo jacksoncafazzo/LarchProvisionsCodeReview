@@ -23,9 +23,19 @@
                                                 <div class="row">
                                                     <div class="col s8">
                                                         <div id="orders_recipe_@Model.RecipeId">
+                                                            @if (order.OrderSize > 6)
+                                                            {
+                                                                for (var i = 0; i < 6; i++)
+                                                                {
+                                                                    <i class="material-icons">redeem</i>
+                                                                }
+                                                                <i class="material-icons">more_horiz</i>
+                                                            } else if (order.OrderSize <= 6)
+                                                            {
                                                             @for (var i = 0; i < order.OrderSize; i++)
                                                             {
                                                                 <i class="material-icons">redeem</i>
+                                                            }
                                                             }
                                                         </div>
 
@@ -37,6 +47,12 @@
                                                     </div>
                                                     <div class="input-field col s4">
                                                         <input hidden name="orderId" value="@order.OrderId" />
+                                                        <input hidden name="custPrice" value="@Model.CustPrice" />
+                                                        @if (ViewData["MenuId"] != null)
+                                                        {
+                                                        <input hidden name="menuId" value="@ViewData["MenuId"].ToString()" />
+                                                        }
+
 
                                                         <label for="@order.OrderSize"># of orders</label>
                                                         <input type="number" name="OrderSize" value="@order.OrderSize" class="validate" />
@@ -64,7 +80,10 @@
 
                             @using (Html.BeginForm("Order", "Menus", FormMethod.Post))
                             {
+                                @if (ViewData["MenuId"] != null)
+                            {
                                 <input hidden name="menuId" value="@ViewData["MenuId"].ToString()" />
+                            }
                                 <input hidden name="recipeId" value="@Model.RecipeId" />
                                 <button class="btn waves-effect waves-ripple" onclick="this.form.submit()">
                                     order @Model.RecipeName

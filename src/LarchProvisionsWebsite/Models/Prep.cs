@@ -19,7 +19,5 @@ namespace LarchProvisionsWebsite.Models
         [ForeignKey("IngredientId")]
         public int IngredientId { get; set; }
 
-        public virtual Recipe Recipe { get; set; }
-        public virtual Ingredient Ingredient { get; set; }
     }
 }

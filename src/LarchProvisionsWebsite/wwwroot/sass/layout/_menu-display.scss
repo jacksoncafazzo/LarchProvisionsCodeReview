@@ -18,8 +18,13 @@
             background-color: transparent;
             box-shadow: none;
         }
+        .recipe-card col {
+            background-color: transparent;
+            padding-bottom: 0px;
+        }
         .card {
             background-color: rgba(250, 250, 250, 0.7);
+
             .balanced-meals {
                 position: absolute;
                 top: 100px;

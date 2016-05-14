@@ -96,14 +96,16 @@ $(document).ready(function () {
     //AJAX prep new ingredient
     $('.prep-ingredient-ajax').on("click", function (event) {
         event.preventDefault();
+        console.log($(this).serialize());
         $.ajax({
-            url: '/Recipes/PrepIngredientAjax',
+            url: '/Recipes/PrepIngredientAjax/',
             data: $(this).serialize(),
-            ajaxasync: true,
             dataType: 'json',
+            ajaxsync: true,
             type: 'POST',
             success: function (result) {
                 console.log(result);
+
                 var returnString = "";
                 result.forEach(function (ingredient) {
                     returnString = returnString + '<li>' +
@@ -112,7 +114,6 @@ $(document).ready(function () {
                     '<span class="delete-icon"><i class="material-icons">delete</i></span></button></li>'
                 });
                 $("#recipe-ingredients-list").html(returnString);
-                window.location.update("/Menus/Edit/" + MenuId);
             }
         });
     });

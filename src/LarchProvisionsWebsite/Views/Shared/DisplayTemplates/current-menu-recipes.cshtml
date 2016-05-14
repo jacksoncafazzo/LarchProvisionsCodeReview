@@ -1,6 +1,6 @@
 ﻿@model LarchProvisionsWebsite.Models.Recipe
 
-<div class="col m6 l6 s12">
+<div class="col m6 l6 s12 recipe-card">
     <div class="card">
         <div class="card-image waves-effect waves-block waves-ripple">
             <img class="activator" src="@Model.Image" alt="@Model.RecipeName" />
@@ -25,12 +25,13 @@
                                                         <div id="orders_recipe_@Model.RecipeId">
                                                             @if (order.OrderSize > 6)
                                                             {
-                                                                for (var i = 0; i < 6; i++)
+                                                                @for (var i = 0; i < 5; i++)
                                                                 {
-                                                                    <i class="material-icons">redeem</i>
+                                                                <i class="material-icons">redeem</i>
                                                                 }
                                                                 <i class="material-icons">more_horiz</i>
-                                                            } else if (order.OrderSize <= 6)
+                                                            }
+                                                            else if (order.OrderSize <= 6)
                                                             {
                                                             @for (var i = 0; i < order.OrderSize; i++)
                                                             {
@@ -59,13 +60,6 @@
                                                     </div>
                                                 </div>
                                             </form>
-
-                                            @*<form action="Delete" class="btn delete-order col s3">
-                                                    <input hidden name="orderId" value="@order.OrderId" />
-                                                    <btn onClick="return confirm('you sure bro?');" type="submit" class="remove-order-btn">
-                                                        <i class="material-icons large">delete</i>
-                                                    </btn>
-                                                </form>*@
 
 
                                         }

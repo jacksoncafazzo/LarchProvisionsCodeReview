@@ -299,6 +299,9 @@ h1.strawberry {
   .menu-background .menu-display .delete-order {
     background-color: transparent;
     box-shadow: none; }
+  .menu-background .menu-display .recipe-card col {
+    background-color: transparent;
+    padding-bottom: 0px; }
   .menu-background .menu-display .card {
     background-color: rgba(250, 250, 250, 0.7); }
     .menu-background .menu-display .card .balanced-meals {

@@ -60,19 +60,19 @@ namespace LarchProvisionsWebsite.Controllers
         // POST: Ingredients/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Ingredient ingredient, string returnUrl = null)
+        public IActionResult Create(Ingredient ingredient, string returnUrl = null, string recipeId = null)
         {
             if (ModelState.IsValid)
             {
                 _context.Ingredients.Add(ingredient);
                 _context.SaveChanges();
                 if (returnUrl == null)
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Edit", "Recipes", new { id = recipeId });
                 else if (Url.IsLocalUrl(returnUrl))
                     return Redirect(returnUrl);
                 return RedirectToAction("Index");
             }
-            return View(ingredient);
+            return View("Index");
         }
 
         // GET: Ingredients/Edit/5

@@ -10,8 +10,7 @@
             <form asp-action="Create" asp-controller="Ingredients" class="col s12">
                 <div class="row">
                     <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-
+                    <input hidden name="recipeId" value="@ViewData["RecipeId"].ToString()" />
                     <div class="input-field col s2">
                         <label asp-for="Amount">amount (number)</label>
 

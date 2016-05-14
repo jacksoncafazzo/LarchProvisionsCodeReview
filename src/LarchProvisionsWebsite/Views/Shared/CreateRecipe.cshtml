@@ -15,7 +15,7 @@
                         <div class="row">
                             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
                             <div class="input-field">
-                                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+                                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"].ToString()" />
                                 <label asp-for="RecipeName" class="col s12"></label>
 
                                 <input asp-for="RecipeName" class="validate waves-input-wrapper" />

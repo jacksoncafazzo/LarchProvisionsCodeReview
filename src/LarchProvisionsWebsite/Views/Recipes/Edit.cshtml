@@ -32,8 +32,8 @@
                 {
                     <form action="PrepIngredientAjax" class="prep-ingredient-ajax">
                         @Html.HiddenFor(m => Model.RecipeId)
-                        <input hidden name="ingredientId" value="@ingredient.IngredientId" />
-                        <button class="btn waves-effect waves-light" type="submit">@ingredient.IngredientName</button>
+                        <input hidden name="IngredientId" value="@ingredient.IngredientId" />
+                        <button class="btn waves-effect waves-light" type="submit">@ingredient.Amount @ingredient.Unit @ingredient.IngredientName</button>
                     </form>
                 }
 

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
@@ -171,18 +172,19 @@ namespace LarchProvisionsWebsite.Controllers
 
         //Post: Recipes/PrepIngredientAjax
         [HttpPost]
-        public IActionResult PrepIngredientAjax(int recipeId, int ingredientId)
+        public async Task<IActionResult> PrepIngredientAjax(int RecipeId, int ingredientId)
         {
             Prep prep = new Prep();
             prep.IngredientId = ingredientId;
-            prep.RecipeId = recipeId;
+            prep.RecipeId = RecipeId;
             _context.Preps.Add(prep);
-            _context.SaveChanges();
-            return Json(_context.Ingredients.Join(_context.Preps.Where(
-                p => p.RecipeId == recipeId).ToList(),
-                i => i.IngredientId,
+            await _context.SaveChangesAsync();
+            var ingredients = await _context.Ingredients.Join(_context.Preps.Where(
+                p => p.RecipeId == RecipeId).ToList(),
+                r => r.IngredientId,
                 p => p.IngredientId,
-                (o, i) => o).ToList());
+               (o, i) => o).ToListAsync() as List<Ingredient>;
+            return Json(ingredients);
         }
 
         public IActionResult RemoveIngredient(Recipe recipe, int ingredientId)

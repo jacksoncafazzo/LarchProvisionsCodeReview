@@ -1,20 +1,25 @@
 ﻿@if (Model.Ingredients.Count > 0)
 {
-<h5>
+    <h5>
+        <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">
+            <i class="material-icons">mode_edit</i>
+            @Model.RecipeName $@Model.CustPrice
+        </a>
+        <button class="btn delete-button waves-effect waves-ripple  right" name="recipeId" value="@Model.RecipeId"><i class="material-icons">delete</i></button>
+    </h5>
+    <ul>
+        @foreach (var ingredient in Model.Ingredients)
+        {
+            <li>@ingredient.Amount @ingredient.Unit @ingredient.IngredientName</li>
+
+        }
+    </ul>
+}
+else if (Model.Ingredients.Count == 0)
+{
+    <h5 class="red darken-4 center">!! WARNING !! <br />@Model.RecipeName has orders<br />or needs ingredients!!</h5>
     <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@Model.RecipeId">
         <i class="material-icons">mode_edit</i>
         @Model.RecipeName $@Model.CustPrice
     </a>
-    <button class="btn delete-button waves-effect waves-ripple  right" name="recipeId" value="@Model.RecipeId"><i class="material-icons">delete</i></button>
-</h5>
-<ul>
-    @foreach (var ingredient in Model.Ingredients)
-    {
-        <li>@ingredient.Amount @ingredient.Unit @ingredient.IngredientName</li>
-
-    }
-</ul>
-} else if (Model.Ingredients.Count == 0)
-{
-<h5 class="red darken-4 center">!! WARNING !! <br />@Model.RecipeName has orders<br />or needs ingredients!!</h5>
 }

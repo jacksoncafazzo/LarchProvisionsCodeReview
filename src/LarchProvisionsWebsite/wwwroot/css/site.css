@@ -42,6 +42,10 @@ h1.strawberry {
   box-shadow: none;
   background-color: transparent; }
 
+.delete-button:focus {
+  box-shadow: none;
+  background-color: transparent; }
+
 .add-recipe {
   background-color: transparent;
   border: none;
@@ -390,6 +394,7 @@ h1.strawberry {
   background-size: contain;
   width: 100%; }
   .edit-recipe li {
+    list-style: none;
     font-size: 1.3em; }
 
 .recipe-list-wrapper {

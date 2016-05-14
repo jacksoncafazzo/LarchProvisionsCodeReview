@@ -1,0 +1,45 @@
+@model LarchProvisionsWebsite.Models.Prep
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Prep</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="PrepId" />
+        <div class="form-group">
+            <label asp-for="IngredientId" class="control-label col-md-2">IngredientId</label>
+            <div class="col-md-10">
+                <select asp-for="IngredientId" class="form-control" />
+                <span asp-validation-for="IngredientId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="RecipeId" class="control-label col-md-2">RecipeId</label>
+            <div class="col-md-10">
+                <select asp-for="RecipeId" class="form-control" />
+                <span asp-validation-for="RecipeId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

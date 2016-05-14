@@ -4,7 +4,11 @@ using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -172,24 +176,68 @@ namespace LarchProvisionsWebsite.Controllers
 
         //Post: Recipes/PrepIngredientAjax
         [HttpPost]
-        public async Task<IActionResult> PrepIngredientAjax(int RecipeId, int ingredientId)
+        public async Task<IActionResult> PrepIngredientAjax(int RecipeId, int IngredientId)
         {
             Prep prep = new Prep();
-            prep.IngredientId = ingredientId;
+            prep.IngredientId = IngredientId;
             prep.RecipeId = RecipeId;
             _context.Preps.Add(prep);
+            int x = await _context.SaveChangesAsync();
+            if (x == 1)
+            {
+                Recipe recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == RecipeId);                
+                return Json(recipe);
+            }
+            return null;
+        }
+
+        //Post: Recipes/RemoveIngredientAjax
+        [HttpPost]
+        public async Task<IActionResult> RemoveIngredientAjax(int RecipeId, int IngredientId)
+        {
+            var prep = await _context.Preps.SingleOrDefaultAsync(p => p.RecipeId == RecipeId && p.IngredientId == IngredientId);
+            prep.IngredientId = IngredientId;
+            prep.RecipeId = RecipeId;
+            _context.Preps.Remove(prep);
             await _context.SaveChangesAsync();
-            var ingredients = await _context.Ingredients.Join(_context.Preps.Where(
+            Recipe recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == RecipeId);
+            recipe.Ingredients = await _context.Ingredients.Join(_context.Preps.Where(
                 p => p.RecipeId == RecipeId).ToList(),
                 r => r.IngredientId,
                 p => p.IngredientId,
-               (o, i) => o).ToListAsync() as List<Ingredient>;
-            return Json(ingredients);
+               (o, i) => o).ToListAsync();
+            return Json(recipe);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> IngredientsDisplay(int recipeId)
+        {
+            Recipe recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == recipeId);
+            recipe.Ingredients = await _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == recipe.RecipeId).ToList(),
+                p => p.IngredientId,
+                i => i.IngredientId,
+                (o, i) => o
+                ).ToListAsync();
+            var ingredients = _context.Ingredients.ToList().Except(recipe.Ingredients);
+            recipe.Ingredients = ingredients.ToList();
+            return Json(recipe);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveIngredientsDisplay(int RecipeId)
+        {
+            Recipe recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == RecipeId);
+            recipe.Ingredients = await _context.Ingredients.Join(_context.Preps.Where(p => p.RecipeId == RecipeId).ToList(),
+                p => p.IngredientId,
+                i => i.IngredientId,
+                (o, i) => o
+                ).ToListAsync();
+            return Json(recipe);
         }
 
         public IActionResult RemoveIngredient(Recipe recipe, int ingredientId)
         {
-            Prep prep = _context.Preps.FirstOrDefault(p => p.IngredientId == ingredientId);
+            Prep prep = _context.Preps.FirstOrDefault(p => p.IngredientId == ingredientId && p.RecipeId == recipe.RecipeId);
             _context.Preps.Remove(prep);
 
             _context.SaveChanges();

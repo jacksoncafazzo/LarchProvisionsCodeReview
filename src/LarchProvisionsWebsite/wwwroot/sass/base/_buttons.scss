@@ -51,6 +51,12 @@
  
 }
 
+.delete-button:focus {
+        box-shadow: none;
+        background-color: transparent;
+ 
+}
+
 .add-recipe {
     background-color: transparent;
     border: none;

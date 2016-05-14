@@ -23,5 +23,7 @@ namespace LarchProvisionsWebsite.Models
         }
 
         public DbSet<Serving> Serving { get; set; }
+
+        public DbSet<Prep> Prep { get; set; }
     }
 }

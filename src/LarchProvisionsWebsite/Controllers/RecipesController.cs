@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [RequireHttps]
     [Authorize(Roles = "Chef")]
     public class RecipesController : Controller
     {
@@ -185,7 +186,7 @@ namespace LarchProvisionsWebsite.Controllers
             int x = await _context.SaveChangesAsync();
             if (x == 1)
             {
-                Recipe recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == RecipeId);                
+                Recipe recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == RecipeId);
                 return Json(recipe);
             }
             return null;

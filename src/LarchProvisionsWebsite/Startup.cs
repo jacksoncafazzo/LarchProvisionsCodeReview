@@ -62,14 +62,18 @@ namespace LarchProvisionsWebsite
 
             services.AddMvc();
 
+            // Add application services.
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 options.Lockout.MaxFailedAccessAttempts = 10;
             });
-            // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            //configure Instagram, Twilio API
+            services.Configure<InstagramAPI>(Configuration);
             services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
@@ -81,12 +85,11 @@ namespace LarchProvisionsWebsite
 
             app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseFacebookAuthentication(options =>
-            {
-                options.AppId = Configuration["Authentication:Facebook:AppId"];
-                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
-
+            //app.UseFacebookAuthentication(options =>
+            //{
+            //    options.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //});
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();

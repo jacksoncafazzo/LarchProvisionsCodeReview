@@ -1,6 +1,5 @@
 {
-  "name": "ASP.NET",
-  "private": true,
+  "name": "larchprovisions",
   "dependencies": {
     "Materialize": "materialize#^0.97.6",
     "jquery": "2.1.4",
@@ -9,5 +8,21 @@
   },
   "devDependencies": {
     "Materialize": "materialize#^0.97.6"
-  }
+  },
+  "homepage": "https://github.com/jacksoncafazzo/LarchProvisionsCodeReview",
+  "authors": [
+    "Jackson Cafazzo <doctorjuno@gmail.com>"
+  ],
+  "description": "Larch Provisions Website",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "wwwroot/lib",
+    "test",
+    "tests"
+  ],
+  "private": true
 }

@@ -1,18 +1,21 @@
-using System.Linq;
+using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using LarchProvisionsWebsite.Models;
+using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [RequireHttps]
+    [Authorize(Roles = "Chef")]
     public class PrepsController : Controller
     {
         private ApplicationDbContext _context;
 
         public PrepsController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Preps

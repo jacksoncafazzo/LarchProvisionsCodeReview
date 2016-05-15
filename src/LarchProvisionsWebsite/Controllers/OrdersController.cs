@@ -1,4 +1,5 @@
 ﻿using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
@@ -13,6 +14,8 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [RequireHttps]
+    [Authorize(Roles = "Chef")]
     public class OrdersController : Controller
     {
         private LarchKitchenDbContext _context;
@@ -35,8 +38,6 @@ namespace LarchProvisionsWebsite.Controllers
             var order = _context.Orders.FirstOrDefault(o => o.OrderId == id);
             return View(order);
         }
-
-        
 
         // POST: Order/Delete/5
         [HttpPost, ActionName("Delete")]

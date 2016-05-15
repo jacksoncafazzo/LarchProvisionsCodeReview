@@ -59,24 +59,23 @@
         @RenderBody()
         <footer class="footer-copyright">
             @*<div class="container">
-                <div class="row">
-                    <div class="col s12">
-                        <a href="/">larch provisions</a><a class="right" href="https://docs.google.com/forms/d/1N1ZXhkgLk6IDEoyabNEUdhfQNJq4SyseoF2_4WVrBIE/viewform?c=0&w=1">place an order</a>
+                    <div class="row">
+                        <div class="col s12">
+                            <a href="/">larch provisions</a><a class="right" href="https://docs.google.com/forms/d/1N1ZXhkgLk6IDEoyabNEUdhfQNJq4SyseoF2_4WVrBIE/viewform?c=0&w=1">place an order</a>
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="container">
                 <a href="/">&copy; 2016 larch provisions</a>
                 <a class="dr_juno right" href="http://larchprovisions.com">website made by doctorjuno</a>
-           </div>
+            </div>
         </footer>
     </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="false"></script>
         <script src="~/lib/Materialize/dist/js/materialize.js" asp-append-version="false"></script>
-        <script src="~/js/site.js" asp-append-version="false"></script>
-
+        <script src="~/js/site.es5.js" asp-append-version="false"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
@@ -87,7 +86,7 @@
                 asp-fallback-src="~/js/materialize.es5.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.es5.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("scripts", required: false)

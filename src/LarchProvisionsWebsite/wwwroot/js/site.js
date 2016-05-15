@@ -11,23 +11,23 @@ $(document).ready(function () {
         in_duration: 300,
         out_duration: 200,
         complete: function () {
-            $.ajax({
-                url: '@Url.Action("CreateIngredient")',
-                type: 'POST',
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function (result) {
-                    var stringResult = "You rock bro! This is your new ingredient: #" + result.IngredientId + " " + result.Amount + " " + result.Unit + " " + result.Name;
+            //$.ajax({
+            //    url: '@Url.Action("CreateIngredient")',
+            //    type: 'POST',
+            //    dataType: 'json',
+            //    data: $(this).serialize(),
+            //    success: function (result) {
+            //        var stringResult = "You rock bro! This is your new ingredient: #" + result.IngredientId + " " + result.Amount + " " + result.Unit + " " + result.Name;
 
-                    $('#ingredient-result').html(stringResult);
-                }
-            });
+            //        $('#ingredient-result').html(stringResult);
+            //    }
+            //});
         }
     });
     $(".button-collapse").sideNav({
-        menuWidth: 300, // Default is 240
-        edge: 'right', // Choose the horizontal origin
-        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        menuWidth: 300,
+        edge: 'right',
+        closeOnClick: true
     });
     $(".carousel").carousel();
     $('select').material_select();
@@ -45,20 +45,19 @@ $(document).ready(function () {
             success: function (result) {
                 var returnString = "";
                 console.log(result);
-                if (result.OrderSize <= 6) {
+                if (result.OrderSize < 6) {
                     for (var i = 0 ; i < result.OrderSize; i++) {
                         returnString = returnString + '<i class="material-icons">redeem</i>';
                     }
                 }
-                if (result.OrderSize > 6) {
-                    for (var i = 0 ; i < 6; i++) {
+                if (result.OrderSize >= 6) {
+                    for (var i = 0 ; i <= 6; i++) {
                         returnString = returnString + '<i class="material-icons">redeem</i>';
                     }
                     returnString = returnString + '<i class="material-icons">more_horiz</i>';
                 }
-                Materialize.toast(result.RecipeName + ' orders updated to ' + result.OrderSize, 4000, "order-toast")
-                console.log(result.CustPrice * result.OrderSize);
-                returnString = returnString + '<p>Orders total: $' + (result.CustPrice * result.OrderSize) + '</p>'
+                Materialize.toast(result.RecipeName + ' orders updated to ' + result.OrderSize, 4000, "order-toast");
+                returnString = returnString + '<p>Orders total: $' + (result.CustPrice * result.OrderSize) + '</p>';
                 $('#orders_recipe_' + result.RecipeId).html(returnString);
             }
         });
@@ -75,16 +74,13 @@ $(document).ready(function () {
             dataType: 'json',
             type: 'POST',
             success: function (result) {
-                // Materialize.toast(message, displayLength, className, completeCallback);
-                Materialize.toast('order deleted!', 4000) // 4000 is the duration of the toast
+                Materialize.toast('order deleted!', 4000);
             }
         });
     });
 
-    //AJAX prep new ingredient
     $('#prep-ingredients-list').on('submit', 'form.prep-ingredient-ajax', function (event) {
         event.preventDefault();
-
         $.ajax({
             url: '/Recipes/PrepIngredientAjax/',
             data: $(this).serialize(),
@@ -92,10 +88,9 @@ $(document).ready(function () {
             ajaxsync: true,
             type: 'POST',
             success: function (result) {
-                var returnString = "";
                 var params = {
                     RecipeId: result.RecipeId,
-                }
+                };
                 updatePrepIngredients(params);
                 updateRemoveIngredients(params);
             }
@@ -104,7 +99,6 @@ $(document).ready(function () {
 
     $('#recipe-ingredients-list').on('submit', 'form.remove-ingredient-ajax', function (event) {
         event.preventDefault();
-        //        console.log($(this).serialize());
         $.ajax({
             url: '/Recipes/RemoveIngredientAjax/',
             data: $(this).serialize(),
@@ -112,13 +106,11 @@ $(document).ready(function () {
             ajaxsync: true,
             type: 'POST',
             success: function (result) {
-                var returnString = "";
-                console.log(result);
-                    var params = {
-                        RecipeId: result.RecipeId,
-                    }
-                    updateRemoveIngredients(params);
-                    updatePrepIngredients(params);
+                var params = {
+                    RecipeId: result.RecipeId,
+                };
+                updateRemoveIngredients(params);
+                updatePrepIngredients(params);
             }
         });
     });
@@ -135,16 +127,16 @@ const updatePrepIngredients = params => {
             result.Ingredients.forEach(function (ingredient) {
                 prepIngredientsReturn = prepIngredientsReturn + '<li>' +
                         '<form action="PrepIngredientAjax" class="prep-ingredient-ajax">' +
-                            '<input hidden name="RecipeId" value="' + result.RecipeId + '" />' +
-                            '<input hidden name="IngredientId" value="' + ingredient.IngredientId + '" />' +
+                            '<input hidden name="RecipeId" value="' + result.RecipeId + '">' +
+                            '<input hidden name="IngredientId" value="' + ingredient.IngredientId + '">' +
                             ingredient.Amount + ' ' + ingredient.Unit + ' ' + ingredient.IngredientName +
-                            '<button class="btn waves-effect waves-light delete-button" type="submit"><i class="material-icons">assignment_return</i></button>'+
+                            '<button class="btn waves-effect waves-light delete-button" type="submit"><i class="material-icons">assignment_return</i></button>' +
                         '</form>' +
                         '</li>';
             });
             $('#prep-ingredients-list').html(prepIngredientsReturn);
         }
-    })
+    });
 }
 
 const updateRemoveIngredients = params => {
@@ -157,19 +149,17 @@ const updateRemoveIngredients = params => {
             var returnString = "";
             console.log(result);
             result.Ingredients.forEach(function (ingredient) {
-                
-                    returnString = returnString + '<li>' +
-                                '<form action="RemoveIngredientAjax" class="remove-ingredient-ajax">' +
-                                    '<input hidden name="RecipeId" value="' + result.RecipeId + '" />' +
-                                    '<input hidden name="IngredientId" value="' + ingredient.IngredientId + '" />' +
-                                    ingredient.Amount + ' ' + ingredient.Unit + ' ' + ingredient.IngredientName +
-                                    '<button type="submit" class="delete-button waves-ripple"><span class="delete-icon">' +
-                                    '<i class="material-icons">delete</i></span></button>' +
-                                '</form>' +
-                                '</li>';
-                });
-      
+                returnString = returnString + '<li>' +
+                            '<form action="RemoveIngredientAjax" class="remove-ingredient-ajax">' +
+                                '<input hidden name="RecipeId" value="' + result.RecipeId + '">' +
+                                '<input hidden name="IngredientId" value="' + ingredient.IngredientId + '">' +
+                                ingredient.Amount + ' ' + ingredient.Unit + ' ' + ingredient.IngredientName +
+                                '<button type="submit" class="delete-button waves-ripple"><span class="delete-icon">' +
+                                '<i class="material-icons">delete</i></span></button>' +
+                            '</form>' +
+                            '</li>';
+            });
             $("#recipe-ingredients-list").html(returnString);
         }
-    })
+    });
 }

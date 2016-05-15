@@ -8,6 +8,7 @@ using System.Linq;
 namespace LarchProvisionsWebsite.Controllers
 {
     [Authorize(Roles = "Chef")]
+    [RequireHttps]
     public class IngredientsController : Controller
     {
         private LarchKitchenDbContext _context;

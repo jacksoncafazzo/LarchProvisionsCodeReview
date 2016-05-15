@@ -1,4 +1,5 @@
 using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
@@ -6,6 +7,8 @@ using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [RequireHttps]
+    [Authorize(Roles = "Chef")]
     public class ServingsController : Controller
     {
         private ApplicationDbContext _usercontext;

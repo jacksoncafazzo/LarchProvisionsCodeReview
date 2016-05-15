@@ -13,23 +13,22 @@
             <h4>@Model.RecipeName</h4>
             <div class="col l6 m6 s6">
 
-                    @Html.HiddenFor(m => m.RecipeId)
-                    <h5>Recipe Ingredients</h5>
-                    
-                        <ul id="recipe-ingredients-list">
-                            @foreach (var ingredient in Model.Ingredients)
-                            {
-                                <li>
-                                <form action="RemoveIngredientAjax" class="remove-ingredient-ajax">
-                                    <input hidden name="RecipeId" value="@Model.RecipeId" />
-                                    <input hidden name="IngredientId" value="@ingredient.IngredientId" />
-                                    @ingredient.Amount @ingredient.Unit @ingredient.IngredientName
-                                    <button type="submit" class="delete-button waves-ripple"><span class="delete-icon"><i class="material-icons">delete</i></span></button>
-                                </form>
-                                </li>
-                            }
-                        </ul>
-                   
+                @Html.HiddenFor(m => m.RecipeId)
+                <h5>Recipe Ingredients</h5>
+
+                <ul id="recipe-ingredients-list">
+                    @foreach (var ingredient in Model.Ingredients)
+                    {
+                        <li>
+                            <form action="RemoveIngredientAjax" class="remove-ingredient-ajax">
+                                <input hidden name="RecipeId" value="@Model.RecipeId">
+                                <input hidden name="IngredientId" value="@ingredient.IngredientId">
+                                @ingredient.Amount @ingredient.Unit @ingredient.IngredientName
+                                <button type="submit" class="delete-button waves-ripple"><span class="delete-icon"><i class="material-icons">delete</i></span></button>
+                            </form>
+                        </li>
+                    }
+                </ul>
             </div>
             <div class="col l6 m6 s6">
                 <h4>Add Ingredients</h4>
@@ -39,16 +38,15 @@
                         {
                             <li>
                                 <form action="PrepIngredientAjax" class="prep-ingredient-ajax">
-                                    <input hidden name="RecipeId" value="@Model.RecipeId" />
-                                    <input hidden name="IngredientId" value="@ingredient.IngredientId" />
-                                 
-                                        @ingredient.Amount @ingredient.Unit @ingredient.IngredientName<button class="btn waves-effect waves-light delete-button" type="submit"><i class="material-icons">assignment_return</i></button>
-                                
+                                    <input hidden name="RecipeId" value="@Model.RecipeId">
+                                    <input hidden name="IngredientId" value="@ingredient.IngredientId">
+
+                                    @ingredient.Amount @ingredient.Unit @ingredient.IngredientName<button class="btn waves-effect waves-light delete-button" type="submit"><i class="material-icons">assignment_return</i></button>
                                 </form>
                             </li>
                         }
                     </ul>
-                    </div>
+                </div>
                 <h3>
                     @Html.Partial("CreateIngredient", new Ingredient(), ViewData)
                 </h3>

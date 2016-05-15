@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Security.Claims;
+﻿using LarchProvisionsWebsite.Models;
+using LarchProvisionsWebsite.Services;
+using LarchProvisionsWebsite.ViewModels.Manage;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
-using LarchProvisionsWebsite.Models;
-using LarchProvisionsWebsite.Services;
-using LarchProvisionsWebsite.ViewModels.Manage;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -343,6 +344,6 @@ namespace LarchProvisionsWebsite.Controllers
             return await _userManager.FindByIdAsync(HttpContext.User.GetUserId());
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

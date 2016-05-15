@@ -15,9 +15,7 @@ namespace LarchProvisionsWebsite.Controllers
 
         public IActionResult About()
         {
-           
-                return View();
-        
+            return View();
         }
 
         public IActionResult Contact()
@@ -36,5 +34,26 @@ namespace LarchProvisionsWebsite.Controllers
         {
             return View();
         }
+
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
+        public IActionResult OAuth()
+        {
+            return View();
+        }
+
+        public IActionResult Instagram()
+        {
+            return View();
+        }
+
+        //public IActionResult InstaLogin()
+        //{
+        //    href = "https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code"
+        //        return View("Instagram");
+        //}
     }
 }

@@ -18,6 +18,7 @@
 @import "layout/login";
 @import "layout/register";
 @import "layout/menu-loader";
+@import "layout/manage-account";
 
 @font-face {
     font-family: orator;
@@ -50,7 +51,7 @@ body, html {
 
     h1, h2, h3, h4, h5, li {
         color: lightgray;
-        text-shadow: 1px 1px 1px black;
+        text-shadow: 2px 2px 3px lighten(black, 4);
 
         button {
             color: $strawberry;

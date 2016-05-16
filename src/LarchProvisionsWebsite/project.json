@@ -32,7 +32,9 @@
     "Microsoft.Extensions.SecretManager": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
     "Rx-Main": "2.2.5",
-    "System.Text.RegularExpressions": "4.0.11-beta-23516"
+    "Sendgrid": "6.3.4",
+    "System.Text.RegularExpressions": "4.0.11-beta-23516",
+    "Twilio": "4.7.1"
   },
 
   "commands": {
@@ -46,8 +48,7 @@
         "Facebook": "7.0.6",
         "RestSharp": "105.2.3"
       }
-    },
-    "dnxcore50": { }
+    }
   },
 
   "exclude": [

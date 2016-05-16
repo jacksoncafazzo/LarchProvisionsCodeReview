@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 namespace LarchProvisionsWebsite.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -275,7 +276,7 @@ namespace LarchProvisionsWebsite.Controllers
                 //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
                 //   "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
-                //return View("ForgotPasswordConfirmation");
+                return View("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form

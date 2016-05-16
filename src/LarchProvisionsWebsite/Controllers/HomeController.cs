@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public IActionResult Index()

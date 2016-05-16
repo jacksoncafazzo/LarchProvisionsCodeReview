@@ -4,12 +4,14 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:54754/",
-      "sslPort": 0
+      "sslPort": 44384
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44384/",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       }

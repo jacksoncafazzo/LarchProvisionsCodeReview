@@ -71,10 +71,10 @@ namespace LarchProvisionsWebsite
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 options.Lockout.MaxFailedAccessAttempts = 10;
             });
-
             //configure Instagram, Twilio API
-            services.Configure<InstagramAPI>(Configuration);
+            services.Configure<InstagramApiOptions>(Configuration);
             services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddOptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

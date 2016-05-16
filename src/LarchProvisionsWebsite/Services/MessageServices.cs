@@ -20,27 +20,27 @@ namespace LarchProvisionsWebsite.Services
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            // Plug in your email service here to send an email.
-            //var myMessage = new SendGrid.SendGridMessage();
-            //myMessage.AddTo(email);
-            //myMessage.From = new System.Net.Mail.MailAddress("larch_catering@gmail.com", "Larch Provisions");
-            //myMessage.Subject = subject;
-            //myMessage.Text = message;
-            //myMessage.Html = message;
-            //var credentials = new System.Net.NetworkCredential(
-            //    Options.SendGridUser,
-            //    Options.SendGridKey);
-            //// Create a Web transport for sending email.
-            //var transportWeb = new SendGrid.Web(credentials);
-            //// Send the email.
-            //if (transportWeb != null)
-            //{
-            //    return transportWeb.DeliverAsync(myMessage);
-            //}
-            //else
-            //{
-            return Task.FromResult(0);
-            //}
+            //Plug in your email service here to send an email.
+            var myMessage = new SendGrid.SendGridMessage();
+            myMessage.AddTo(email);
+            myMessage.From = new System.Net.Mail.MailAddress("larch_catering@gmail.com", "Larch Provisions");
+            myMessage.Subject = subject;
+            myMessage.Text = message;
+            myMessage.Html = message;
+            var credentials = new System.Net.NetworkCredential(
+                Options.SendGridUser,
+                Options.SendGridKey);
+            // Create a Web transport for sending email.
+            var transportWeb = new SendGrid.Web(credentials);
+            // Send the email.
+            if (transportWeb != null)
+            {
+                return transportWeb.DeliverAsync(myMessage);
+            }
+            else
+            {
+                return Task.FromResult(0);
+            }
         }
 
         public Task SendSmsAsync(string number, string message)

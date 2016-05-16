@@ -116,6 +116,28 @@ $(document).ready(function () {
             }
         });
     });
+    $('.get-details').on('submit', 'form.getdetails', function (event) {
+        console.log(params);
+        $.ajax({
+            type: "GET",
+            async: true,
+            data: $(this).serialize(),
+            contentType: "application/json; charset=utf-8",
+            url: '/Home/GetInstDetails/',
+            dataType: "json",
+            cache: false,
+            beforeSend: function beforeSend() {
+                $("#loading").show();
+            },
+            success: function success(data) {
+                console.log(data);
+                $('#usernameLabel').text(data.data.username);
+                $('#nameLabel').text(data.data.full_name);
+                $('#bioLabel').text(data.data.bio);
+                document.getElementById("imgProfilePic").src = data.data.profile_picture;
+            }
+        });
+    });
 });
 
 var updatePrepIngredients = function updatePrepIngredients(params) {

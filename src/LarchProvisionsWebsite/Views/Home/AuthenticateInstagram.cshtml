@@ -1,0 +1,66 @@
+﻿@if (ViewData["AccessToken"] != null)
+{
+
+    @ViewData["AccessToken"].ToString();
+
+}
+
+<div class="container get-details">
+    <div class="row">
+        <form action="GetInstDetails" class="col s12 getdetails">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <input hidden name="AccessToken" value="@ViewData["AccessToken"].ToString()" />
+                    <input hidden name="InstId" value="@ViewData["InstId"].ToString()" />
+                    <button class="btn" type="submit">get details</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+
+        <h1>
+
+            About Me
+        </h1>
+
+        <div style="font-size: medium;">
+
+            User Name:
+
+            <label id="usernameLabel">
+
+            </label>
+
+        </div>
+
+        <div style="font-size: medium;">
+
+            Full Name:
+
+            <label id="nameLabel">
+
+            </label>
+
+        </div>
+
+        <div style="font-size: medium;">
+
+            Profile Pic:
+
+            <img id="imgProfilePic" />
+
+        </div>
+
+        <div style="font-size: medium;">
+
+            Bio:
+
+            <label id="bioLabel">
+
+            </label>
+
+        </div>
+
+    </div>
+</div>

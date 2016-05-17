@@ -64,48 +64,49 @@ namespace LarchProvisionsWebsite.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult AuthenticateInstagram(string code = null)
-        {
-            if (code == null)
-            {
-                var urlString = "https://api.instagram.com/oauth/authorize/?client_id=" + Options.instClientId + "&redirect_uri=" + Options.instRedirectUri + "&response_type=code";
-                return Redirect(urlString);
-            }
-            else
-            {
-                try
-                {
-                    NameValueCollection parameters = new NameValueCollection();
+        //[HttpGet]
+        //public IActionResult AuthenticateInstagram(string code = null)
+        //{
+        //if (code == null)
+        //{
+        //    var urlString = "https://api.instagram.com/oauth/authorize/?client_id=" + Options.instClientId + "&redirect_uri=" + Options.instRedirectUri + "&response_type=code";
+        //    return Redirect(urlString);
+        //}
+        //else
+        //{
+        //    try
+        //    {
+        //        NameValueCollection parameters = new NameValueCollection();
 
-                    parameters.Add("client_id", Options.instClientId);
+        //        parameters.Add("client_id", Options.instClientId);
 
-                    parameters.Add("client_secret", Options.instSecret);
+        //        parameters.Add("client_secret", Options.instSecret);
 
-                    parameters.Add("grant_type", "authorization_code");
+        //        parameters.Add("grant_type", "authorization_code");
 
-                    parameters.Add("redirect_uri", Options.instRedirectUri);
+        //        parameters.Add("redirect_uri", Options.instRedirectUri);
 
-                    parameters.Add("code", code);
+        //        parameters.Add("code", code);
 
-                    WebClient client = new WebClient();
-                    var result = client.UploadValues("https://api.instagram.com/oauth/access_token", "POST", parameters);
-                    var response = System.Text.Encoding.Default.GetString(result);
+        //        WebClient client = new WebClient();
+        //        var result = client.UploadValues("https://api.instagram.com/oauth/access_token", "POST", parameters);
+        //        var response = System.Text.Encoding.Default.GetString(result);
 
-                    var jsResult = (JObject)JsonConvert.DeserializeObject(response);
-                    ViewData["AccessToken"] = (string)jsResult["access_token"];
-                    int id = (int)jsResult["user"]["id"];
-                    ViewData["InstId"] = id;
-                    ViewBag.jsResult = jsResult;
-                    return View(jsResult);
-                }
-                catch (Exception ex)
+        //        var jsResult = (JObject)JsonConvert.DeserializeObject(response);
+        //        ViewData["AccessToken"] = (string)jsResult["access_token"];
+        //        int id = (int)jsResult["user"]["id"];
+        //        ViewData["InstId"] = id;
+        //        ViewBag.jsResult = jsResult;
+        //        return View(jsResult);
+        //        }
 
-                {
-                    throw;
-                }
-            }
-        }
+        //                catch (private Exception ex)
+
+        //                {
+        //                    throw;
+        //    }
+        //}
+        //
 
         public IActionResult Instagram()
         {

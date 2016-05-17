@@ -638,9 +638,14 @@ footer {
   src: url(../fonts/orator/ufonts.com_orator-regular.ttf); }
 
 body, html {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   color: color("black", "lighten-2");
   background-color: color("grey", "lighten-4");
   font-family: orator; }
+  body main, html main {
+    flex: 1 0 auto; }
   body .body-content, html .body-content {
     height: 100%;
     width: 100%; }

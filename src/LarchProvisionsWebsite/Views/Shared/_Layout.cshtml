@@ -23,6 +23,7 @@
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
 <body>
+    <header>
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
@@ -55,8 +56,10 @@
             </div>
         </nav>
     </div>
-    <div class="container-fluid body-content">
-        @RenderBody()
+    </header>
+    <main class="container-fluid body-content">
+            @RenderBody()
+    </main>
         <footer class="footer-copyright">
             @*<div class="container">
                     <div class="row">
@@ -70,7 +73,6 @@
                 <a class="dr_juno right" href="http://larchprovisions.com">website made by doctorjuno</a>
             </div>
         </footer>
-    </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="false"></script>

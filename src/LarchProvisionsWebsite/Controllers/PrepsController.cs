@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace LarchProvisionsWebsite.Controllers
 {
-    [RequireHttps]
     [Authorize(Roles = "Chef")]
     public class PrepsController : Controller
     {

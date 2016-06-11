@@ -22,8 +22,8 @@ namespace LarchProvisionsWebsite.Services
         {
             //Plug in your email service here to send an email.
             var myMessage = new SendGrid.SendGridMessage();
+            myMessage.From = new System.Net.Mail.MailAddress("doctorjuno@gmail.com", "Larch Provisions");
             myMessage.AddTo(email);
-            myMessage.From = new System.Net.Mail.MailAddress("larch_catering@gmail.com", "Larch Provisions");
             myMessage.Subject = subject;
             myMessage.Text = message;
             myMessage.Html = message;
@@ -53,7 +53,7 @@ namespace LarchProvisionsWebsite.Services
             var result = twilio.SendMessage(Options.SendNumber, number, message);
             // Use the debug output for testing without receiving a SMS message.
             // Remove the Debug.WriteLine(message) line after debugging.
-            // System.Diagnostics.Debug.WriteLine(message);
+            //System.Diagnostics.Debug.WriteLine(message);
             return Task.FromResult(0);
         }
     }

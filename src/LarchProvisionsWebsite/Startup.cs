@@ -108,6 +108,8 @@ namespace LarchProvisionsWebsite
                     {
                         serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
                              .Database.Migrate();
+                        serviceScope.ServiceProvider.GetService<LarchKitchenDbContext>()
+                             .Database.Migrate();
                     }
                 }
                 catch { }
@@ -120,7 +122,6 @@ namespace LarchProvisionsWebsite
             app.UseStaticFiles();
 
             app.UseIdentity();
-
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>

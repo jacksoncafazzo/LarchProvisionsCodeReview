@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
-    [RequireHttps]
     [Authorize(Roles = "Chef")]
     public class RecipesController : Controller
     {

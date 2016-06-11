@@ -4,7 +4,7 @@
 $(document).ready(function () {
     $('.slider').slider({
         full_width: true,
-        transition: 1000,
+        transition: 500,
         interval: 9999
     });
     $('.modal-trigger').leanModal({
@@ -12,19 +12,7 @@ $(document).ready(function () {
         opacity: 0.9,
         in_duration: 300,
         out_duration: 200,
-        complete: function complete() {
-            //$.ajax({
-            //    url: '@Url.Action("CreateIngredient")',
-            //    type: 'POST',
-            //    dataType: 'json',
-            //    data: $(this).serialize(),
-            //    success: function (result) {
-            //        var stringResult = "You rock bro! This is your new ingredient: #" + result.IngredientId + " " + result.Amount + " " + result.Unit + " " + result.Name;
-
-            //        $('#ingredient-result').html(stringResult);
-            //    }
-            //});
-        }
+        complete: function complete() {}
     });
     $(".button-collapse").sideNav({
         menuWidth: 300,
@@ -37,30 +25,39 @@ $(document).ready(function () {
         selectMonths: true });
 
     // Creates a dropdown to control month
-    $('.update-order').change(function (event) {
+    $('.update-order-input').change(function (event) {
         event.preventDefault();
         $.ajax({
-            url: '/Menus/UpdateOrder/',
-            data: $(this).serialize(),
+            url: '/Orders/UpdateOrder/',
+            data: $(this).closest('form').serialize(),
             dataType: 'json',
             type: 'POST',
             success: function success(result) {
                 var returnString = "";
-                console.log(result);
-                if (result.OrderSize < 6) {
-                    for (var i = 0; i < result.OrderSize; i++) {
+                var order = result.order;
+                var recipe = result.recipe;
+                var orders = result.orders;
+                if (order.OrderSize < 6) {
+                    for (var i = 0; i < order.OrderSize; i++) {
                         returnString = returnString + '<i class="material-icons">redeem</i>';
                     }
                 }
-                if (result.OrderSize >= 6) {
-                    for (var i = 0; i <= 6; i++) {
+                if (order.OrderSize >= 6) {
+                    for (var i = 0; i < 6; i++) {
                         returnString = returnString + '<i class="material-icons">redeem</i>';
                     }
                     returnString = returnString + '<i class="material-icons">more_horiz</i>';
                 }
-                Materialize.toast(result.RecipeName + ' orders updated to ' + result.OrderSize, 4000, "order-toast");
-                returnString = returnString + '<p>Orders total: $' + result.CustPrice * result.OrderSize + '</p>';
-                $('#orders_recipe_' + result.RecipeId).html(returnString);
+                Materialize.toast(recipe.RecipeName + ' orders updated to ' + order.OrderSize, 4000, "order-toast");
+                returnString = returnString + '<p>Orders total: $' + order.CustPrice * order.OrderSize + '</p>';
+                $('#orders_recipe_' + order.RecipeId).html(returnString);
+                var custTotal = 0;
+                console.log(orders);
+                var price = recipe.CustPrice;
+                for (var i = 0; i < orders.length; i++) {
+                    custTotal = custTotal + orders[i].OrderSize * orders[i].CustPrice;
+                }
+                $('#cust_total').html(custTotal);
             }
         });
     });

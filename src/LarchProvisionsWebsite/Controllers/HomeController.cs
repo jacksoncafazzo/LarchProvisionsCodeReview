@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
-    [RequireHttps]
     public class HomeController : Controller
     {
         public HomeController(IOptions<InstagramApiOptions> optionsAccessor)

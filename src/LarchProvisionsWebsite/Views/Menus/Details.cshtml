@@ -4,13 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-
 <div class="menu-background">
     <div class="container menu-display">
         <br />
-        <h5 class="center">orders are not currently tracked while on hiatus</h5>
-        <h5 class="center">larch meals will resume in june</h5>
-        <h5 class="center">click <a href="https://docs.google.com/forms/d/1N1ZXhkgLk6IDEoyabNEUdhfQNJq4SyseoF2_4WVrBIE/viewform?c=0&w=1">here</a> for the current menu order form</h5>
+        <h5 class="center">ordering is done through our online form</h5>
+        <h5 class="center">click <a href="https://docs.google.com/forms/d/16lFMjVS4-d0WtpUfh22a63YGGpvH-5WD2iLzidZSxsg/edit">here</a> for the current menu order form</h5>
 
         <h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
         @if (User.IsInRole("Chef"))
@@ -33,7 +31,7 @@
                     <div class="col s12 center">
 
                         <h4>ordering as @ViewData["UserName"].ToString()</h4>
-                        <h4>your current orders total $@ViewData["CustTotal"]</h4>
+                        <h4>your current orders total $<span id="cust_total">@ViewData["CustTotal"]</span></h4>
                         @*@Html.DisplayFor(m => Model, "confirm-orders")*@
                     </div>
                 </div>
@@ -55,7 +53,7 @@
             </div>
         </div>
         <div class="menu-content-main">
-            <h2 class="center">emily cafazzo<br /> &amp;<br /> ryan domingo</h2>
+            <h2 class="center">emily &amp; ryan domingo</h2>
         </div>
         <div class="card">
             <div class="card-image waves-effect waves-block waves-ripple">
@@ -102,4 +100,3 @@
         </div>
     </div>
 </div>
-

@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace LarchProvisionsWebsite.Controllers
 {
-    [RequireHttps]
     [Authorize(Roles = "Chef")]
     public class OrdersController : Controller
     {
         private LarchKitchenDbContext _context;
         private ApplicationDbContext _usercontext;
+        private UserManager<ApplicationUser> _userMan;
 
         public OrdersController(LarchKitchenDbContext context, ApplicationDbContext usercontext)
         {
@@ -55,5 +55,39 @@ namespace LarchProvisionsWebsite.Controllers
         {
             return await _usercontext.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == User.GetUserId());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateOrder(int orderId, int custPrice, int menuId, int orderSize)
+        {
+            var user = await GetUser();
+            var order = await _context.Orders.SingleOrDefaultAsync(o => o.OrderId == orderId);
+            if (orderSize != 0)
+            {
+                var recipe = await _context.Recipes.Include(r => r.Orders).SingleOrDefaultAsync(r => r.RecipeId == order.RecipeId);
+                order.CustPrice = recipe.CustPrice;
+                order.OrderSize = orderSize;
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+                var orders = await _context.Orders.Where(o => o.MenuId == menuId && o.UserId == user.Id).ToListAsync();
+                return Json(new { recipe = recipe, order = order, orders = orders });
+            }
+            else
+            {
+                _context.Orders.Remove(order);
+                return Json(null);
+            }
+        }
+
+        //[NonAction]
+        //public int CustTotal()
+        //{
+        //    var allOrders = await _context.Orders.Where(o => o.UserId == user.Id && o.MenuId == menuId).ToListAsync();
+        //    var custTotal = 0;
+        //    foreach (var anotherOrder in allOrders)
+        //    {
+        //        custTotal = custTotal + (anotherOrder.OrderSize * anotherOrder.CustPrice);
+        //    }
+        //    return custTotal;
+        //}
     }
 }

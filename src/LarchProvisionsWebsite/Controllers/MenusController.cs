@@ -114,7 +114,7 @@ namespace LarchProvisionsWebsite.Controllers
             var recipes = GetRecipes(menuId).Result;
             var menu = await _context.Menus.FirstOrDefaultAsync(m => m.MenuId == menuId);
             var order = new Order();
-            var previousOrder = await _context.Orders.FirstOrDefaultAsync(o => o.MenuId == menuId && o.RecipeId == recipeId && o.UserId == user.Id);
+            var previousOrder = await _context.Orders.SingleOrDefaultAsync(o => o.MenuId == menuId && o.RecipeId == recipeId && o.UserId == user.Id);
             if (previousOrder != null)
             {
                 previousOrder.OrderSize = +1;
@@ -128,18 +128,18 @@ namespace LarchProvisionsWebsite.Controllers
                 _context.Orders.Add(order);
             }
             await _context.SaveChangesAsync();
-            var totalPrice = 0;
-            foreach (var lilrecipe in recipes.ToList())
-            {
-                var recipe = StackRecipeOrders(lilrecipe, order.Menu, user).Result;
-                var monies = lilrecipe.CustPrice * lilrecipe.Orders.Count;
-                totalPrice = totalPrice + monies;
-                recipes.Remove(lilrecipe);
-                menu.Recipes.Add(recipe);
-            }
-            ViewData["CustTotal"] = totalPrice;
-            ViewData["UserName"] = user.UserName;
-            return View("Details", menu);
+            //var totalPrice = 0;
+            //foreach (var lilrecipe in recipes.ToList())
+            //{
+            //    var recipe = StackRecipeOrders(lilrecipe, order.Menu, user).Result;
+            //    var monies = lilrecipe.CustPrice * lilrecipe.Orders.Count;
+            //    totalPrice = totalPrice + monies;
+            //    recipes.Remove(lilrecipe);
+            //    menu.Recipes.Add(recipe);
+            //}
+            //ViewData["CustTotal"] = totalPrice;
+            //ViewData["UserName"] = user.UserName;
+            return RedirectToAction("Details", new { id = menu.MenuId });
         }
 
         // get that info on there
@@ -157,21 +157,7 @@ namespace LarchProvisionsWebsite.Controllers
             return order;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdateOrder(int orderId, int orderSize, int custPrice, int menuId)
-        {
-            var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
-            if (orderSize == 0)
-            {
-                _context.Orders.Remove(order);
-            }
-            var recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.RecipeId == order.RecipeId);
-            order.CustPrice = recipe.CustPrice;
-            order.OrderSize = orderSize;
-            _context.Orders.Update(order);
-            await _context.SaveChangesAsync();
-            return Json(order);
-        }
+        
 
         // GET: Menus/Create
         public IActionResult Create()

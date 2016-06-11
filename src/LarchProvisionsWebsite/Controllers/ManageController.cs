@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 namespace LarchProvisionsWebsite.Controllers
 {
     [Authorize]
-    [RequireHttps]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

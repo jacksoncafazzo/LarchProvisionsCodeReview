@@ -1,4 +1,5 @@
 ﻿.provisions-display {
+    display: flex;
     background-image: url(../img/couple-mountain.png); 
     background-size: cover;
     background-repeat: no-repeat;
@@ -29,5 +30,8 @@
                 background-color: rgba(0,0,0,0.3);
 
         }
+    }
+    .pdf-preview {
+        justify-content: flex-start;
     }
 }

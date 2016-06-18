@@ -4,8 +4,8 @@
 $(document).ready(function () {
     $('.slider').slider({
         full_width: true,
-        transition: 500,
-        interval: 9999
+        transition: 300,
+        interval: 9000
     });
     $('.modal-trigger').leanModal({
         dismissable: true,

@@ -29,14 +29,16 @@ body, html {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+
     main {
-    flex: 1 0 auto;
-    .body-content {
-        height: 100%;
-        width: 100%;
-        margin-bottom: 0px;
+        flex: 1 0 auto;
+
+        .body-content {
+            height: 100%;
+            width: 100%;
+            margin-bottom: 0px;
+        }
     }
-  }
 
     .footer-copyright a {
         color: $strawberry;
@@ -84,17 +86,22 @@ body, html {
         font-size: small;
         opacity: .75;
     }
+
     iframe.pdf-preview {
         display: none;
     }
 }
 
 @media (max-width:600px) {
+    .provisions-display {
+        background-image: url(../img/couple-mountain-mobile.png);
+        background-size: contain;
+    }
+
     .contact {
         font-size: small;
     }
 }
 
 @media (max-width:800px) {
-    
 }

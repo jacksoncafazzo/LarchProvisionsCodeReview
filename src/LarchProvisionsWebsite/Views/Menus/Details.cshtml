@@ -10,7 +10,7 @@
         <h5 class="center">ordering is done through our online form</h5>
         <h5 class="center">click <a href="https://docs.google.com/forms/d/16lFMjVS4-d0WtpUfh22a63YGGpvH-5WD2iLzidZSxsg/edit">here</a> for the current menu order form</h5>
 
-        <h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
+        <h4 class="center">current larch meals: @Html.DisplayFor(model => model.Title)</h4>
         @if (User.IsInRole("Chef"))
         {
             <h3 class="center">@Html.ActionLink("edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
@@ -58,7 +58,14 @@
         <div class="card">
             <div class="card-image waves-effect waves-block waves-ripple">
                 <img class="activator" src="~/img/menu-cover3.jpg">
-                <h5 class="balanced-meals">we cook healthy, balanced meals<br /> using local, organic &amp; seasonal ingredients <br />showcasing the bounty<br /> of the pacific northwest.</h5>
+                <div class="balanced-meals">
+                    <h5>we cook healthy, balanced meals</h5>
+                    <br />
+                    <h5> using local, organic &amp; seasonal ingredients </h5>
+                    <h5>
+                        <br />showcasing the bounty of the pacific northwest.
+                    </h5>
+                </div>
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">ORDERING INFORMATION<i class="material-icons right">more_vert</i></span>

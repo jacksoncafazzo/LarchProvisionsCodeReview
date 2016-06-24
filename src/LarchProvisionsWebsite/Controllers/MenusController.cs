@@ -1,4 +1,5 @@
 using LarchProvisionsWebsite.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
@@ -157,14 +158,14 @@ namespace LarchProvisionsWebsite.Controllers
             return order;
         }
 
-        
-
+        [Authorize(Roles = "Chef")]
         // GET: Menus/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Chef")]
         // POST: Menus/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -179,6 +180,7 @@ namespace LarchProvisionsWebsite.Controllers
             return View(menu);
         }
 
+        [Authorize(Roles = "Chef")]
         // GET: Menus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -268,6 +270,7 @@ namespace LarchProvisionsWebsite.Controllers
             return RedirectToAction("Edit", new { id = menuId });
         }
 
+        [Authorize(Roles = "Chef")]
         // POST: Menus/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -282,6 +285,7 @@ namespace LarchProvisionsWebsite.Controllers
             return View(menu);
         }
 
+        [Authorize(Roles = "Chef")]
         // GET: Menus/Delete/5
         [ActionName("Delete")]
         public async Task<IActionResult> Delete(int? id)
@@ -300,6 +304,7 @@ namespace LarchProvisionsWebsite.Controllers
             return View(menu);
         }
 
+        [Authorize(Roles = "Chef")]
         // POST: Menus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

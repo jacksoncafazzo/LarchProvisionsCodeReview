@@ -36,9 +36,9 @@
     "Microsoft.Extensions.SecretManager": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
     "Rx-Main": "2.2.5",
-    "Sendgrid": "6.3.4",
+    "Sendgrid": "7.0.2",
     "System.Text.RegularExpressions": "4.0.11-beta-23516",
-    "Twilio": "4.7.1"
+    "Twilio": "4.7.2"
   },
 
   "commands": {

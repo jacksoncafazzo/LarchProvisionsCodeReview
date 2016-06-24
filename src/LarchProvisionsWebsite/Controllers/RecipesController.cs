@@ -155,7 +155,7 @@ namespace LarchProvisionsWebsite.Controllers
         [NonAction]
         public Recipe SavePhoto(Recipe recipe, IFormFile file)
         {
-            recipe.Image = Path.Combine("img/recipes/", Regex.Replace(recipe.RecipeName, " ", "") + recipe.RecipeId + ".jpg");
+            recipe.Image = Path.Combine("img/recipes/", Regex.Replace(recipe.RecipeName, " \"*&@", "") + recipe.RecipeId + ".jpg");
             file.SaveAs(recipe.Image);
             recipe.Image = "~/" + recipe.Image;
             return recipe;

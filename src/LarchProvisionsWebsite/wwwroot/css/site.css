@@ -319,9 +319,8 @@ h1.strawberry {
     .menu-background .menu-display .card .balanced-meals {
       position: absolute;
       top: 100px;
-      padding-left: 25px;
-      padding-right: 25px;
-      text-align: center;
+      right: 5px;
+      text-align: right;
       z-index: 5; }
     .menu-background .menu-display .card h3, .menu-background .menu-display .card h5 {
       color: #f6f6f6;
@@ -466,7 +465,7 @@ h1.strawberry {
     text-shadow: 2px 2px 2px black; }
 
 footer {
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 1px black;
   background: lightgray;
   /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#f6f6f6, lightgray, #6e6e6e);
@@ -480,7 +479,7 @@ footer {
 
 footer.page-footer {
   margin-top: 0px;
-  padding-top: 0px; }
+  padding-top: 10px; }
   footer.page-footer .feet a {
     margin-top: 0px; }
 
@@ -668,7 +667,7 @@ body, html {
     color: #892517; }
   body h1, body h2, body h3, body h4, body h5, body li, html h1, html h2, html h3, html h4, html h5, html li {
     color: lightgray;
-    text-shadow: 2px 2px 3px #0a0a0a; }
+    text-shadow: 1px 1px 1px #0a0a0a; }
     body h1 button, body h2 button, body h3 button, body h4 button, body h5 button, body li button, html h1 button, html h2 button, html h3 button, html h4 button, html h5 button, html li button {
       color: #892517; }
 

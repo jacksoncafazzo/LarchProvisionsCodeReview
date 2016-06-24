@@ -33,13 +33,16 @@
                     <a data-activates="collapse-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
-                        <li><a href="https://docs.google.com/forms/d/1BhouNqEv1ejjYTUU41yzYbvudVlrwFAT5kq7BelMW1s/viewform" target="_blank">meals</a></li>
+                        <li>@Html.ActionLink("meals", "CurrentMenu", "Menus")</li>
+
+                        @*<li><a href="https://docs.google.com/forms/d/1BhouNqEv1ejjYTUU41yzYbvudVlrwFAT5kq7BelMW1s/viewform" target="_blank">meals</a></li>*@
                         <li>@Html.ActionLink("catering", "Contact", "Home")</li>
                     </ul>
                     <ul class="side-nav right-align" id="collapse-menu">
                         <li>@await Html.PartialAsync("_LoginPartial")</li>
                         <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
-                        <li><a href="https://docs.google.com/forms/d/1BhouNqEv1ejjYTUU41yzYbvudVlrwFAT5kq7BelMW1s/viewform" target="_blank">meals</a></li>
+                        <li>@Html.ActionLink("meals", "CurrentMenu", "Menus")</li>
+                        @*<li><a href="https://docs.google.com/forms/d/1BhouNqEv1ejjYTUU41yzYbvudVlrwFAT5kq7BelMW1s/viewform" target="_blank">meals</a></li>*@
                         <li>@Html.ActionLink("catering", "Contact", "Home")</li>
                         <li>@Html.ActionLink("about", "About", "Home")</li>
                         @if (User.IsInRole("Admin"))

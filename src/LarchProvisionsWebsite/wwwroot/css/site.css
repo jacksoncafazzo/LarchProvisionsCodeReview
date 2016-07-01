@@ -338,21 +338,24 @@ h1.strawberry {
       background-color: rgba(5, 0, 0, 0.9); }
 
 .contact-wrapper {
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  background-image: url("../img/cutting-board.png");
+  width: 100%;
+  min-height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover; }
   .contact-wrapper .contact {
-    background-image: url("../img/cutting-board.png");
-    width: 100%;
-    min-height: 500px;
-    background-repeat: no-repeat;
-    background-size: cover;
     color: lightgray;
     text-shadow: 2px 2px 2px black;
+    padding-right: 5px;
     font-size: 1em;
     text-align: right;
     display: flex;
-    align-items: flex-start;
-    flex-flow: row wrap;
+    align-items: flex-end;
+    flex-flow: column wrap;
     justify-content: flex-end; }
+    .contact-wrapper .contact p.address {
+      padding-top: 75px; }
     .contact-wrapper .contact .email {
       text-align: right; }
       .contact-wrapper .contact .email a:hover {
@@ -477,11 +480,12 @@ footer {
   background: linear-gradient(#f6f6f6, lightgray, #6e6e6e);
   /* Standard syntax */ }
 
-footer.page-footer {
+footer.page-footer .row {
   margin-top: 0px;
   padding-top: 10px; }
-  footer.page-footer .feet a {
-    margin-top: 0px; }
+  footer.page-footer .row .feet a {
+    margin-top: 0px;
+    text-shadow: 0px 0px 0px black; }
 
 .orders-list {
   background-color: dimgrey; }
@@ -693,5 +697,6 @@ body, html {
     background-image: url(../img/couple-mountain-mobile.png);
     background-size: contain; }
   .contact {
-    font-size: small; } }
+    font-size: small;
+    min-height: 300px; } }
 

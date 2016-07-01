@@ -1,21 +1,23 @@
 ﻿.contact-wrapper {
     margin-bottom: 0px;
-    .contact {
-        background-image: url("../img/cutting-board.png");
+    background-image: url("../img/cutting-board.png");
         width: 100%;
-        min-height: 500px;
+        min-height: 600px;
         background-repeat: no-repeat;
         background-size: cover;
+    .contact {
         color: lightgray;
         text-shadow: 2px 2px 2px black;
+        padding-right: 5px;
         font-size: 1em;
         text-align: right;
         display: flex;
-        align-items: flex-start;
-        flex-flow: row wrap;
+        align-items: flex-end;
+        flex-flow: column wrap;
         justify-content: flex-end;
       
-        .address {
+        p.address {
+            padding-top: 75px;
         }
 
         .email {

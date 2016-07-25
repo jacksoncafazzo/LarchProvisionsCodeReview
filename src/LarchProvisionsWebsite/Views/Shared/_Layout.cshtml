@@ -33,16 +33,15 @@
                     <a data-activates="collapse-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-small-and-down">
                         <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
-                        @*<li>@Html.ActionLink("meals", "CurrentMenu", "Menus")</li>*@
-
-                        <li><a href="https://docs.google.com/forms/d/1-5Ra7opdC-zKa7s5hYDq2IVNQviSo95mUY7rS6iRcIc" target="_blank">meals</a></li>
+                        <li>@Html.ActionLink("meals", "CurrentMenu", "Menus")</li>
+                        @*<li><a href="https://docs.google.com/forms/d/1-5Ra7opdC-zKa7s5hYDq2IVNQviSo95mUY7rS6iRcIc" target="_blank">meals</a></li>*@
                         <li>@Html.ActionLink("catering", "Contact", "Home")</li>
                     </ul>
                     <ul class="side-nav right-align" id="collapse-menu">
                         <li>@await Html.PartialAsync("_LoginPartial")</li>
                         <li>@Html.ActionLink("provisions", "Provisions", "Home")</li>
-                        @*<li>@Html.ActionLink("meals", "CurrentMenu", "Menus")</li>*@
-                        <li><a href="https://docs.google.com/forms/d/1-5Ra7opdC-zKa7s5hYDq2IVNQviSo95mUY7rS6iRcIc" target="_blank">meals</a></li>
+                        <li>@Html.ActionLink("meals", "CurrentMenu", "Menus")</li>
+                        @*<li><a href="https://docs.google.com/forms/d/1-5Ra7opdC-zKa7s5hYDq2IVNQviSo95mUY7rS6iRcIc" target="_blank">meals</a></li>*@
                         <li>@Html.ActionLink("catering", "Contact", "Home")</li>
                         <li>@Html.ActionLink("about", "About", "Home")</li>
                         @if (User.IsInRole("Admin"))
@@ -69,12 +68,12 @@
             <div class="col s6 m6 l6 feet">
                 <a href="/">larch provisions</a>
                 <br />
-                <a href="https://docs.google.com/forms/d/1-5Ra7opdC-zKa7s5hYDq2IVNQviSo95mUY7rS6iRcIc" target="_blank">place an order</a>
+                <a href="http://mailto:larch.catering@gmail.com">larch.catering@gmail.com</a>
             </div>
             <div class="col s6 m6 l6 right-align feet">
                 <a href="/">&copy; 2016 larch provisions</a>
                 <br />
-                <a href="http://larchprovisions.com">website made by doctorjuno</a>
+                <a href="https://www.linkedin.com/in/jacksoncafazzo" target="_blank">site by jackson cafazzo</a>
             </div>
         </div>
     </footer>

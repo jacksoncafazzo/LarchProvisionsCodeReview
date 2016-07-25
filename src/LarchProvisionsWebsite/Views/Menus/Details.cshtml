@@ -7,53 +7,97 @@
 <div class="menu-background">
     <div class="container menu-display">
         <br />
-        <h5 class="center">ordering is done through our online form</h5>
-        <h5 class="center">click <a href="https://docs.google.com/forms/d/1i7UvPGbQousRKPJyndiC5rnA-VPE55gVg2z7QwwARaQ/">here</a> for the current menu order form</h5>
+        <h5 class="center">summer's weather is finally here. give yourselves a break from your hot kitchens at home and lunch lines away from work, and let <strong>larch cook for you.</strong></h5>
+        <h5 class="center white"><a href="https://drive.google.com/open?id=17G_6w9-YdDbdpErSvZfJAmLagS404LtvVIU_vz4szyc">this week's menu </a>features even more fresh vegetables, fruits & greens from the market. we're excited about ground cherries, figs & amazing corn available; and we're giving you a break from tomatoes this week :) we'll also be visiting with a few flavors from turkey & peru.</h5>
+        <div class="menu-description">
+            <ul>
+                <li>
+                    <p>
+                        our first entree features <strong>aji amarillo -</strong>a yellow, spicy south american staple that's classic to peruvian cuisine, making good use of all the fresh chilies we're finding at the market. we're serving it with <strong>free range chicken thigh that's been brined & stuffed with spiced quinoa & greens,</strong> alongside a <strong>crispy potato salad</strong> with homemade cornnuts & a green tomato & cucumber salsa.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        our second entree is a savory <strong>juniper-brined pork chop & collared greens</strong> cooked with ground cherries and <strong>our own house bacon.</strong>
+                    </p>
+                </li>
+                <li>
 
-        <h4 class="center">current larch meals: @Html.DisplayFor(model => model.Title)</h4>
-        @if (User.IsInRole("Chef"))
-        {
-            <h3 class="center">@Html.ActionLink("edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
-        }
-        <div class="row">
-            @if (Model.Recipes != null)
-            {
+                    <p>
+                        our soup is <strong>red lentil simmered with the turkish spice ufra biber </strong>a sweet, dried & ground chile. served with <strong>gozleme, a savory, handmade & cheese-stuffed pastry</strong> that emily fell in love with in her travels to turkey.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        the salad the week is a base of <strong>endive,</strong> topped with <strong>shaved fennel and herbs,</strong> we bruleed some <strong>fresh figs,</strong> found some delicious <strong>sheep's cheese</strong> and topped it off with a <strong>plum vinaigrette.</strong>
+                    </p>
+                </li>
+                <li>
 
-                @foreach (var recipe in Model.Recipes)
+                    <p>
+                        last but not least flavorful, our dessert is a delightful<strong>dulche de leche with strawberries & chocolate-covered cacao nibs</strong>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        thank you all for your support, as always. we love cooking for you! <strong>please email us with any questions or catering inquiries.</strong>
+                    </p>
+                    <a href="http://mailto:larch.catering@gmail.com">larch.catering@gmail.com</a>
+                </li>
+                <li>
+
+                    <p>
+                        we look forward to seeing you all on Tuesday for meal pickup from 4-7pm.
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        @*<h4 class="center">@Html.DisplayFor(model => model.Title)</h4>
+                @if (User.IsInRole("Chef"))
                 {
-                    @Html.DisplayFor(m => recipe, "current-menu-recipes", ViewData)
+                    <h3 class="center">@Html.ActionLink("edit this menu", "Edit", "Menus", new { id = Model.MenuId })</h3>
                 }
+                <div class="row">
+                    @if (Model.Recipes != null)
+                    {
 
-            }
-            @if (User.IsInRole("Customer"))
-            {
-                <div class="row orders-display">
-                    <div class="col s12 center">
+                        @foreach (var recipe in Model.Recipes)
+                        {
+                            @Html.DisplayFor(m => recipe, "current-menu-recipes", ViewData)
+                        }
 
-                        <h4>ordering as @ViewData["UserName"].ToString()</h4>
-                        <h4>your current orders total $<span id="cust_total">@ViewData["CustTotal"]</span></h4>
-                        @*@Html.DisplayFor(m => Model, "confirm-orders")*@
-                    </div>
+                    }
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <div class="row orders-display">
+                            <div class="col s12 center">
+
+                                <h4>ordering as @ViewData["UserName"].ToString()</h4>
+                                <h4>your current orders total $<span id="cust_total">@ViewData["CustTotal"]</span></h4>
+                            </div>
+                        </div>
+                    }
                 </div>
-            }
-        </div>
-        <div class="row center">
-            <div class="col l6 m6 s12">
-                <h4>order by noon sunday</h4>
-                <h4> @Model.OrderBy.ToString("d")</h4>
-            </div>
-            <div class="col l6 m6 s12">
+            <div class="row center">
+                <div class="col l6 m6 s12">
+                    <p>order by noon sunday</p>
+                    <h4> @Model.OrderBy.ToString("d")</h4>
+                </div>
+                <div class="col l6 m6 s12">
 
-                <h4>
-                    pickup 3-7pm tuesday
-                </h4>
-                <h4>
-                    @Model.PickupBy.ToString("d")
-                </h4>
-            </div>
-        </div>
+                    <h4>
+                        pickup 4-7pm tuesday
+                    </h4>
+                    <h4>
+                        @Model.PickupBy.ToString("d")
+                    </h4>
+                </div>
+            </div>*@
         <div class="menu-content-main">
-            <h2 class="center">emily &amp; ryan domingo</h2>
+
+            <h4 class="center">all the best,</h4>
+            <h4 class="center">emily &amp; ryan domingo</h4>
         </div>
         <div class="card">
             <div class="card-image waves-effect waves-block waves-ripple">
@@ -73,8 +117,8 @@
             <div class="card-reveal order-info">
 
                 <span class="card-title grey-text text-darken-2">more info<i class="material-icons right">close</i></span>
-                <div class="row container">
 
+                <div class="row">
                     <div class="col l12 m12 s12">
                         <ul>
                             <li><h5>orders must be placed by noon on sunday for pickup the following tuesday</h5></li>
@@ -105,5 +149,6 @@
                 </div>
             </div>
         </div>
+        <h4 class="center white"><a href="https://drive.google.com/open?id=17G_6w9-YdDbdpErSvZfJAmLagS404LtvVIU_vz4szyc" target="_blank">place an order</a></h4>
     </div>
 </div>

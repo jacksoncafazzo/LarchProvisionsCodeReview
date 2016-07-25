@@ -90,6 +90,11 @@ body, html {
     iframe.pdf-preview {
         display: none;
     }
+    .menu-description {
+        a {
+            text-shadow: none;
+        }
+    }
 }
 
 @media (max-width:600px) {
